@@ -2,8 +2,6 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   ignorePatterns: ['.eslintrc.js'],
   extends: [
-    'next',
-    'turbo',
     'prettier',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',

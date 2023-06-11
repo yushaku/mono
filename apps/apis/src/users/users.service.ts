@@ -21,7 +21,7 @@ export class UsersService {
     private common: CommonService,
   ) {}
 
-  async login(userDto: UserDto) {
+  async login(userDto: Required<UserDto>) {
     const user = await this.getByEmail(userDto.email);
     if (!user) throw new NotFoundException("User's email does not exist");
 

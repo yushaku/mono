@@ -14,11 +14,11 @@ export class MinioService {
     this.maxUploadSize =
       parseInt(this.config.get('MINIO_MAX_UPLOAD_SIZE', '16')) * 1024 * 1024;
     this.minioClient = new Minio.Client({
-      endPoint: config.get('MINIO_ENDPOINT'),
-      port: parseInt(config.get('MINIO_PORT')),
+      endPoint: config.get('MINIO_ENDPOINT') ?? '',
+      port: parseInt(config.get('MINIO_PORT') ?? ''),
       useSSL: config.get('MINIO_SSL') == 'true',
-      accessKey: config.get('MINIO_ACCESS_KEY'),
-      secretKey: config.get('MINIO_SECRET_KEY'),
+      accessKey: config.get('MINIO_ACCESS_KEY') ?? '',
+      secretKey: config.get('MINIO_SECRET_KEY') ?? '',
     });
     this.initBucket();
   }

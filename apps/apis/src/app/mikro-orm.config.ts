@@ -1,6 +1,6 @@
+import { UserEntity } from '../databases/entities';
 import { Options } from '@mikro-orm/core';
 import { ConfigService } from '@nestjs/config';
-import { UserEntity } from '../databases/entities';
 
 const config = new ConfigService();
 

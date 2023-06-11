@@ -1,9 +1,9 @@
-import { HealthIndicator, HealthIndicatorResult } from '@nestjs/terminus';
 import {
   PrometheusHistogram,
   PrometheusService,
 } from '@/prometheus/prometheus.service';
 import { Logger } from '@nestjs/common';
+import { HealthIndicator, HealthIndicatorResult } from '@nestjs/terminus';
 import { Gauge } from 'prom-client';
 
 /*

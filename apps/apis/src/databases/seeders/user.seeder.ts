@@ -1,6 +1,6 @@
+import { UserEntity } from '../entities';
 import { EntityManager } from '@mikro-orm/core';
 import { faker, Seeder } from '@mikro-orm/seeder';
-import { UserEntity } from '../entities';
 import * as uuid from 'uuid';
 
 export class UserSeeder extends Seeder {

@@ -1,8 +1,8 @@
-import { BaseHealthIndicator } from './base-health.indicator';
 import { HealthIndicator } from '../type/health-indicator.interface';
-import { HealthIndicatorResult } from '@nestjs/terminus';
-import { PrometheusService } from '@/prometheus/prometheus.service';
+import { BaseHealthIndicator } from './base-health.indicator';
 import { FilesService } from '@/files/files.service';
+import { PrometheusService } from '@/prometheus/prometheus.service';
+import { HealthIndicatorResult } from '@nestjs/terminus';
 
 export class FileModuleHealthIndicator
   extends BaseHealthIndicator
