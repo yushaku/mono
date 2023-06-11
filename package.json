@@ -7,18 +7,20 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "dev:apis": "pnpm --filter apis start:dev",
     "dev:web": "pnpm --filter web dev"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@turbo/gen": "^1.9.7",
     "eslint": "^7.32.0",
+    "eslint-config-custom": "workspace:*",
     "prettier": "^2.5.1",
+    "tsconfig": "^7.0.0",
     "turbo": "latest"
   },
   "dependencies": {
     "autoprefixer": "^10.4.14",
-    "eslint-config-custom": "workspace:*",
     "tailwind-config": "workspace:^"
   }
 }
