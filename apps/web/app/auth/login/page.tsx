@@ -2,17 +2,20 @@
 
 import { UserLoginDto } from "types";
 import { useFormik } from "formik";
-import { Button, IconGoogle } from "ui";
+import { Button, FormInput, IconGoogle } from "ui";
 import Link from "next/link";
 import React from "react";
 import * as Yup from "yup";
-import { FormInput } from "@/components";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
   const router = useRouter();
+  const handleGoogleAuth = () => {
+    window.location.href = "https://dev-api.meetstory.ai/auth/google";
+  };
+
   const { handleSubmit, handleChange, isValid, isSubmitting, values, errors } =
     useFormik({
       validateOnChange: false,
@@ -83,13 +86,18 @@ const LoginPage = () => {
         <div className="flex flex-col gap-5">
           <Button
             type="submit"
+            title="Log in"
             disabled={!isValid || isSubmitting}
             className="bg-primaryColor text-white"
             onClick={() => handleSubmit()}
-            title="Log in"
           />
 
-          <Button type="button" title="Sign in with Google" Icon={IconGoogle} />
+          <Button
+            type="button"
+            Icon={IconGoogle}
+            title="Sign in with Google"
+            onClick={() => handleGoogleAuth()}
+          />
 
           <p className="text-grayColor mt-[22px] text-center md:hidden">
             Don&rsquo;t have an account?{" "}

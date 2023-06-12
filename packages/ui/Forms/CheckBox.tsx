@@ -2,7 +2,6 @@ import React from "react";
 
 type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   title: string;
-  Icon?: () => JSX.Element;
 };
 
 export const CheckBox = ({ title, ...props }: Props) => {

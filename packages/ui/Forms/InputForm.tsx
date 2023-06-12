@@ -1,26 +1,19 @@
-import { CSSProperties, useState } from "react";
-import { IconEyeSlash, IconEye } from "..";
+"use client";
 
-type Props<TType> = {
-  errors?: string;
-  type: string;
-  value: string;
-  name: keyof TType;
-  placeholder: string;
+import { IconEyeSlash, IconEye } from "..";
+import { useState } from "react";
+
+type Props<TType> = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
-  labelStyle?: CSSProperties;
-  onChange?: any;
+  errors?: string;
+  name: keyof TType;
 };
 
 export function FormInput<TType>({
   errors,
   type,
-  name,
-  placeholder,
   label,
-  value,
-  labelStyle,
-  onChange,
+  ...props
 }: Props<TType>) {
   const [isShowPassword, setIsShowPassword] = useState(false);
 
@@ -34,21 +27,15 @@ export function FormInput<TType>({
   return (
     <div className="relative">
       {label && (
-        <label
-          style={labelStyle}
-          className="text-grayColor mb-3 text-base font-bold"
-        >
+        <label className="text-grayColor mb-3 text-base font-bold">
           {label}
         </label>
       )}
 
       <input
         type={isShowPassword ? "text" : type}
-        name={name as string}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
         className={className}
+        {...props}
       />
 
       {type === "password" && (
