@@ -2,14 +2,17 @@
 
 import { UserLoginDto } from "types";
 import { useFormik } from "formik";
-import { IconGoogle } from "ui";
+import { Button, IconGoogle } from "ui";
 import Link from "next/link";
 import React from "react";
 import * as Yup from "yup";
 import { FormInput } from "@/components";
-import { login } from "@/services/auth";
+import toast from "react-hot-toast";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
+  const router = useRouter();
   const { handleSubmit, handleChange, isValid, isSubmitting, values, errors } =
     useFormik({
       validateOnChange: false,
@@ -24,13 +27,32 @@ const LoginPage = () => {
         password: Yup.string().required("This field is required"),
       }),
       onSubmit: async (values) => {
-        console.log(values);
-        login(values);
+        const result = await signIn("credentials", {
+          email: values.email,
+          password: values.password,
+          redirect: false,
+        });
+
+        if (result?.error) {
+          toast.error(result?.error);
+        } else {
+          router.replace("/");
+          toast.success("Login successful");
+        }
       },
     });
 
   return (
     <div>
+      <p className="text-grayColor mb-[30px] mt-[42px] hidden text-right md:block">
+        Don&rsquo;t have an account?{" "}
+        <Link href="/auth/register" className="text-primaryColor font-bold">
+          Sign up
+        </Link>
+      </p>
+
+      <h3 className="text-textColor mb-[40px] text-[28px] font-bold">Log in</h3>
+
       <div className="grid w-full grid-cols-1 gap-5">
         <FormInput<UserLoginDto>
           errors={errors.email}
@@ -59,24 +81,15 @@ const LoginPage = () => {
         </div>
 
         <div className="flex flex-col gap-5">
-          <button
+          <Button
             type="submit"
             disabled={!isValid || isSubmitting}
-            className={`flexCenter h-[52px] rounded-lg border text-xl font-bold text-white lg:w-[275px] ${
-              isValid ? "bg-primaryColor" : "bg-primaryColor/50"
-            }`}
+            className="bg-primaryColor text-white"
             onClick={() => handleSubmit()}
-          >
-            Log in
-          </button>
+            title="Log in"
+          />
 
-          <button
-            type="button"
-            className="flexCenter text-grayColor h-[52px] gap-3 rounded-lg border text-lg font-medium lg:w-[275px]"
-          >
-            <IconGoogle />
-            Log in with the Google
-          </button>
+          <Button type="button" title="Sign in with Google" Icon={IconGoogle} />
 
           <p className="text-grayColor mt-[22px] text-center md:hidden">
             Don&rsquo;t have an account?{" "}
