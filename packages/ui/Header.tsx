@@ -1,5 +1,9 @@
-import * as React from "react";
+import React from "react";
 
-export const Header = ({ text }: { text: string }) => {
-  return <h1>{text}</h1>;
+type Props = React.HTMLAttributes<HTMLHeadingElement> & {
+  text: string;
+};
+
+export const Header = ({ text, className }: Props) => {
+  return <h1 className={`font-bold text-red-200 ${className}`}>{text}</h1>;
 };
