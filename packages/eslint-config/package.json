@@ -12,6 +12,9 @@
     "eslint-config-turbo": "^1.9.3",
     "eslint-plugin-prettier": "^4.0.0"
   },
+  "files": [
+    "lint-nest.js"
+  ],
   "publishConfig": {
     "access": "public"
   }
