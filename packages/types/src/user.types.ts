@@ -9,4 +9,6 @@ export type User = {
   password: string;
 };
 
-export type UserLoginDto = Omit<User, 'name'>;
+export type UserAuth = {};
+
+export type UserLoginDto = Omit<User, "name">;
