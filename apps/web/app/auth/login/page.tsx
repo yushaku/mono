@@ -6,8 +6,8 @@ import { IconGoogle } from "ui";
 import Link from "next/link";
 import React from "react";
 import * as Yup from "yup";
-import { FormInput } from "../../../components";
-import { login } from "../../../services/auth";
+import { FormInput } from "@/components";
+import { login } from "@/services/auth";
 
 const LoginPage = () => {
   const { handleSubmit, handleChange, isValid, isSubmitting, values, errors } =
