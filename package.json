@@ -9,7 +9,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "dev:apis": "pnpm --filter apis start:dev",
     "dev:web": "pnpm --filter web dev",
-    "dev:story": "pnpm --filter workshop storybook"
+    "dev:story": "pnpm --filter story storybook"
   },
   "devDependencies": {
     "@turbo/gen": "^1.9.7",
