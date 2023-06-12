@@ -13,6 +13,8 @@ export class UserSeeder extends Seeder {
         name: faker.name.fullName(),
         email: faker.internet.email(),
         password: faker.lorem.word(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
       });
     }
   }

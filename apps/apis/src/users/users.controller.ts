@@ -53,7 +53,7 @@ export class UsersController {
   @Post('login')
   @HttpCode(200)
   async login(
-    @Body() userDto: UserDto,
+    @Body() userDto: Required<UserDto>,
     @Res({ passthrough: true }) res: Response,
   ) {
     const accessToken = await this.usersService.login(userDto);

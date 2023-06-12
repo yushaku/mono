@@ -58,7 +58,7 @@ export class MinioService {
     policy.setContentLengthRange(0, this.maxUploadSize);
 
     const presignedUrl = await this.minioClient.presignedPostPolicy(policy);
-    presignedUrl.postURL = this.config.get('MINIO_PUBLIC');
+    presignedUrl.postURL = this.config.get('MINIO_PUBLIC') ?? "";
 
     return presignedUrl;
   }

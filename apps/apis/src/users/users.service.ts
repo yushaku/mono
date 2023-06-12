@@ -93,7 +93,7 @@ export class UsersService {
   }
 
   async create(user: CreateUserDto) {
-    const userSchema = this.usersRepository.create(user);
+    const userSchema = this.usersRepository.create(user as any);
     this.usersRepository.persistAndFlush(userSchema);
     return userSchema;
   }
