@@ -8,7 +8,8 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "dev:apis": "pnpm --filter apis start:dev",
-    "dev:web": "pnpm --filter web dev"
+    "dev:web": "pnpm --filter web dev",
+    "dev:story": "pnpm --filter workshop storybook"
   },
   "devDependencies": {
     "@turbo/gen": "^1.9.7",
