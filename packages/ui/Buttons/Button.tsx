@@ -14,7 +14,10 @@ export const Button = ({ title, className, Icon, ...props }: Props) => {
   );
 
   return (
-    <button className={classes} {...props}>
+    <button
+      className={`flexCenter h-[52px] w-full gap-3 rounded-lg border text-lg font-medium ${className}`}
+      {...props}
+    >
       {Icon && <Icon />}
       {title}
     </button>
