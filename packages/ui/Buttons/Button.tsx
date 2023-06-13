@@ -1,4 +1,5 @@
 import React from "react";
+import { twMerge } from "tailwind-merge";
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   title: string;
@@ -6,11 +7,14 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 export const Button = ({ title, className, Icon, ...props }: Props) => {
+  const classes = twMerge(
+    `flexCenter h-[52px] gap-3 rounded-lg border text-lg font-medium lg:w-[275px] ${
+      className ?? ""
+    }`
+  );
+
   return (
-    <button
-      className={`flexCenter h-[52px] gap-3 rounded-lg border text-lg font-medium lg:w-[275px] ${className}`}
-      {...props}
-    >
+    <button className={classes} {...props}>
       {Icon && <Icon />}
       {title}
     </button>

@@ -1,5 +1,5 @@
+import Providers from "@/utils/provider";
 import React from "react";
-import Providers from "../utils/provider";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 

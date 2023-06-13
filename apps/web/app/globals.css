@@ -20,6 +20,10 @@
   .baseText {
     @apply text-grayColor text-sm md:text-base;
   }
+
+  .animationShow {
+    @apply transition-all duration-300 ease-in-out;
+  }
 }
 
 ::-webkit-scrollbar-track {
