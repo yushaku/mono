@@ -7,7 +7,7 @@ type Props = React.HTMLAttributes<HTMLElement> & {};
 
 export const Footer = ({ className }: Props) => {
   const classes = twMerge(
-    "container mt-[50px] mx-auto flex h-20 items-center justify-between " +
+    "max-w-[1110px] mt-[50px] mx-auto flex h-20 items-center justify-between " +
       className
   );
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Header } from "ui";
+import { Button, Footer, Header } from "ui";
 import React from "react";
 
 export default function Page() {
@@ -8,6 +8,7 @@ export default function Page() {
     <div className="min-h-[200vh]">
       <Header topItems={topBar} />
       <Button title="click" />
+      <Footer />
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import { Layout } from "@/components/Layout";
 import { ListItem } from "@/components/ListItem";
 import { TopicTitle } from "@/components/TopicTitle";
 import { BigCard, Card } from "@/components/card";
@@ -11,7 +12,7 @@ export default async function Home() {
   const firstResult = blogList.results.shift();
 
   return (
-    <section className="grid grid-cols-1 gap-x-10 px-6 md:grid-cols-2 md:px-3 lg:grid-cols-3 lg:p-0">
+    <Layout className="grid grid-cols-1 gap-x-10 px-6 md:grid-cols-2 md:px-3 lg:grid-cols-3 lg:p-0">
       <div className="md:col-span-2">
         <BigCard
           summary={firstResult.properties.tldr.rich_text[0].plain_text}
@@ -58,7 +59,7 @@ export default async function Home() {
           <SocialMedia />
         </article>
 
-        <article className="mx-auto mb-10 flex max-w-[350px] flex-col items-center justify-center gap-y-4 rounded-lg px-6 py-8 text-center shadow-lg">
+        <article className="mx-auto mb-10 flex max-w-[350px] flex-col items-center justify-center gap-y-4 rounded-lg px-6 text-center shadow-lg">
           <TopicTitle title="Popular Posts" />
 
           <ul className="divide-y">
@@ -100,6 +101,6 @@ export default async function Home() {
           </ul>
         </article>
       </div>
-    </section>
+    </Layout>
   );
 }
