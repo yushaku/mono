@@ -1,12 +1,14 @@
 import React from "react";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
+import { SocialMedia } from ".";
 
 type Props = React.HTMLAttributes<HTMLElement> & {};
 
 export const Footer = ({ className }: Props) => {
   const classes = twMerge(
-    "container mx-auto flex h-20 items-center justify-between " + className
+    "container mt-[50px] mx-auto flex h-20 items-center justify-between " +
+      className
   );
 
   return (
@@ -16,7 +18,10 @@ export const Footer = ({ className }: Props) => {
         <Link href="">Privacy Policy</Link>
         <Link href="">Terms of Service</Link>
       </div>
-      <div>social media</div>
+
+      <div>
+        <SocialMedia />
+      </div>
     </footer>
   );
 };

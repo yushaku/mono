@@ -1,16 +1,35 @@
+import { BigCard, Card } from "@/components/card";
+import { fetchPages } from "@/utils/notion";
 import Link from "next/link";
-import { Card } from "../components/card";
-import { fetchPages } from "../utils/notion";
-import { IconArrowRight, IconGithub, IconLinkedin, IconWaveLine } from "ui";
+import {
+  IconArrowRight,
+  IconGithub,
+  IconLinkedin,
+  IconWaveLine,
+  SocialMedia,
+} from "ui";
 import { ListItem } from "../components/ListItem";
 import { topics } from "../utils/constants";
+import { TopicTitle } from "@/components/TopicTitle";
 
 export default async function Home() {
   const blogList = await fetchPages();
+  const firstResult = blogList.results.shift();
 
   return (
     <section className="grid grid-cols-3 gap-x-10">
       <div className="col-span-2">
+        <BigCard
+          summary={firstResult.properties.tldr.rich_text[0].plain_text}
+          author={firstResult.created_by.id}
+          imageUrl={firstResult.cover.external.url}
+          slug={firstResult.properties.slug.id}
+          name={firstResult.properties.Name.title[0].plain_text}
+          date={firstResult.created_time}
+        />
+
+        <TopicTitle title="Latest Posts" className="my-12" />
+
         <ul className="flex flex-wrap gap-6">
           {blogList.results.map((el) => {
             return (
@@ -38,22 +57,12 @@ export default async function Home() {
             Become better React developer. Following our tips, tricks and real
             life experiences.
           </p>
-          <span className="flex gap-4">
-            <Link href={""}>
-              <IconLinkedin />
-            </Link>
-
-            <Link href={""}>
-              <IconGithub />
-            </Link>
-          </span>
+          <SocialMedia />
         </article>
 
         <article className="mb-10 flex flex-col items-center justify-center gap-y-4 rounded-lg px-6 py-8 text-center shadow-lg">
-          <h3 className="text-primaryColor flex flex-col items-center text-xl font-semibold">
-            Popular Posts
-            <IconWaveLine className="mt-2" />
-          </h3>
+          <TopicTitle title="Popular Posts" />
+
           <ul className="divide-y">
             {blogList.results.map((el) => {
               return (
@@ -70,10 +79,8 @@ export default async function Home() {
         </article>
 
         <article className="mb-10 flex flex-col items-center justify-center gap-y-4 rounded-lg px-6 py-8 text-center shadow-lg">
-          <h3 className="text-primaryColor flex flex-col items-center text-xl font-semibold">
-            Explore Topics
-            <IconWaveLine className="mt-2" />
-          </h3>
+          <TopicTitle title="Explore Topics" />
+
           <ul className="w-full divide-y">
             {topics.map((el, index) => {
               return (
