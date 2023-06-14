@@ -1,0 +1,246 @@
+{
+  "object": "list",
+  "results": [
+    {
+      "object": "page",
+      "id": "7740199b-e398-454e-8947-60676fee6f27",
+      "created_time": "2023-06-14T07:57:00.000Z",
+      "l ast_edited_time": "2023-06-14T08:26:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "b96dedfd-7867-4d1b-958e-a9db699e5836"
+      },
+      "last_edited_b y": {
+        "object": "user",
+        "id": "b96dedfd-7867-4d1b-958e-a9db699e5836"
+      },
+      "cover": {
+        "type": "external",
+        "external": {
+          "url": "https://www.notion.so/ images/page-cover/woodcuts_14.jpg"
+        }
+      },
+      "icon": { "type": "emoji", "emoji": "😃" },
+      "parent": {
+        "type": "database_id",
+        "database_id": "0f8d661c-e22e -4d6c-afeb-974f048c0f91"
+      },
+      "archived": false,
+      "properties": {
+        "slug": {
+          "id": "%3BguR",
+          "type": "rich_text",
+          "rich_text": [
+            {
+              "type": "text",
+              "text": { "content": "react_one_month", "link": null },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "react_one_month",
+              "href": null
+            }
+          ]
+        },
+        "category": {
+          "id": "CAMJ",
+          "type": "select",
+          "select": {
+            "id": "60584b9 9-7119-4474-8fea-4f18e95a3717",
+            "name": "React",
+            "color": "blue"
+          }
+        },
+        "status": {
+          "id": "mYaQ",
+          "type": "select",
+          "select": {
+            "id": "f17e5aeb-6976-4f 29-b086-a0650bf07d73",
+            "name": "inprocess",
+            "color": "pink"
+          }
+        },
+        "link": { "id": "udsp", "type": "url", "url": null },
+        "Date": {
+          "id": "xfrc",
+          "type": "da te",
+          "date": { "start": "2023-06-14", "end": null, "time_zone": null }
+        },
+        "tldr": {
+          "id": "~Sli",
+          "type": "rich_text",
+          "rich_text": [
+            {
+              "type": "text",
+              "te xt": {
+                "content": "Text on the image is a classic type of content. And we see it everywhere around us. It's usually used to pinpoint the eyes of readers. And to demonstrate the concept or the idea in a better way.",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Text on the image is a classic type of conten t. And we see it everywhere around us. It's usually used to pinpoint the eyes of readers. And to demonstrate the concept or the idea in a better way.",
+              "href": null
+            }
+          ]
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Can You Learn React J S in One Month?",
+                "link": null
+              },
+              "annotations": {
+                "bold": true,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Can You Learn React JS in One Month?",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://www.notion.so/Can-You-Learn-React-JS-in -One-Month-7740199be398454e894760676fee6f27",
+      "public_url": null
+    },
+    {
+      "object": "page",
+      "id": "409fb836-9ce6-41e4-870b-8e42f368b118",
+      "created _time": "2023-05-18T16:11:00.000Z",
+      "last_edited_time": "2023-06-14T08:26:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "b96dedfd-7867-4d1 b-958e-a9db699e5836"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "b96dedfd-7867-4d1b-958e-a9db699e5836"
+      },
+      "cover": {
+        "type": "external",
+        "exte rnal": {
+          "url": "https://www.notion.so/images/page-cover/webb4.jpg"
+        }
+      },
+      "icon": { "type": "emoji", "emoji": "😄" },
+      "parent": {
+        "type": "database_id ",
+        "database_id": "0f8d661c-e22e-4d6c-afeb-974f048c0f91"
+      },
+      "archived": false,
+      "properties": {
+        "slug": {
+          "id": "%3BguR",
+          "type": "rich_text",
+          "rich _text": [
+            {
+              "type": "text",
+              "text": { "content": "test_react", "link": null },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                " underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "test_react",
+              "href": null
+            }
+          ]
+        },
+        "category": {
+          "id": "CAMJ",
+          "type": "select",
+          "se lect": {
+            "id": "d5a92421-73b1-469b-aab7-28b22b723652",
+            "name": "JS",
+            "color": "green"
+          }
+        },
+        "status": {
+          "id": "mYaQ",
+          "type": "select",
+          "select": {
+            "id": "f17e5aeb-6976-4f29-b086-a0650bf07d73",
+            "name": "inprocess",
+            "color": "pink"
+          }
+        },
+        "link": { "id": "udsp", "type": "url", "url": null },
+        "Date": {
+          "id": "xfrc",
+          "type": "date",
+          "date": { "start": "2023-06-14", "end": null, "time_zone": null }
+        },
+        "tldr": {
+          "id": "~Sli",
+          "type": "rich_text",
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "I can remember the day I started learning React like it was yesterday. And there is one thing in pa rticular that makes me smile, even today. Back then, React wasn't that popular like it is today. Back then, the fight with Angular wa s very even.",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "d efault"
+              },
+              "plain_text": "I can remember the day I started learning React like it was yesterday. And there is one thing in particular th at makes me smile, even today. Back then, React wasn't that popular like it is today. Back then, the fight with Angular was very even .",
+              "href": null
+            }
+          ]
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": { "content": "TEST", "link": null },
+              "annotations": {
+                "b old": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "TEST",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://www.notion.so/TEST-409fb8369ce641e4870b8e42f368b118",
+      "public_url": null
+    }
+  ],
+  "next_cursor": null,
+  "has_more": false,
+  "type": " page",
+  "page": {}
+}
