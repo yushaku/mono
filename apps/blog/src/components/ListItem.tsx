@@ -1,30 +1,51 @@
 import React from "react";
 import Image from "next/image";
 import moment from "moment";
+import Link from "next/link";
 
 type Props = React.HTMLAttributes<HTMLElement> & {
   name: string;
   imageUrl: string;
   date: string;
+  slug: string;
+  category: string;
 };
-export const ListItem = ({ name, imageUrl, date, ...props }: Props) => {
+export const ListItem = ({
+  name,
+  imageUrl,
+  date,
+  slug,
+  category,
+  ...props
+}: Props) => {
   return (
-    <article {...props} className="flex items-center gap-4 py-4">
-      <div className="relative h-[60px] w-[60px] overflow-hidden rounded-full">
-        <Image
-          src={imageUrl}
-          alt={name}
-          loading="lazy"
-          placeholder="empty"
-          quality={100}
-          fill={true}
-          object-fit="cover"
-        />
-      </div>
-      <div className="flex-1 text-left">
-        <h3 className="text-textColor text-base font-semibold">{name}</h3>
-        <p className="text-grayColor text-sm">{moment(date).format("LL")}</p>
-      </div>
-    </article>
+    <Link href={`/${slug}`}>
+      <article {...props} className="group flex items-center gap-4 py-4">
+        <div className="relative h-[60px] w-[60px] overflow-hidden rounded-full">
+          <Image
+            src={imageUrl}
+            alt={name}
+            loading="lazy"
+            placeholder="empty"
+            quality={100}
+            fill={true}
+            object-fit="cover"
+          />
+        </div>
+        <div className="flex-1 text-left">
+          <h3 className="text-textColor group-hover:text-primaryColor animationShow mb-1 text-base font-semibold group-hover:font-bold">
+            {name}
+          </h3>
+          <p className="flex items-center gap-4">
+            <span className="text-primaryColor bg-primaryColor/20 overflow-hidden rounded-lg px-3 py-1">
+              {category}
+            </span>
+            <span className="animationShow text-grayColor w-0 overflow-hidden whitespace-nowrap text-sm group-hover:w-24">
+              {moment(date).format("LL")}
+            </span>
+          </p>
+        </div>
+      </article>
+    </Link>
   );
 };

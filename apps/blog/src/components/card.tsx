@@ -14,7 +14,7 @@ type Props = React.HTMLAttributes<HTMLElement> & {
 
 export const Card = ({ name, date, imageUrl, slug, summary }: Props) => {
   return (
-    <article className="w-[350px] rounded-lg shadow-lg">
+    <article className="group max-w-[350px] rounded-lg shadow-lg">
       <Link href={`/${slug}`}>
         <div className="relative h-[200px] w-full overflow-hidden rounded-t-lg">
           <Image
@@ -33,7 +33,7 @@ export const Card = ({ name, date, imageUrl, slug, summary }: Props) => {
             <span>yushaku</span>
             <span className="ml-4">{moment(date).format("LL")}</span>
           </p>
-          <h3 className="text-textColor hover:text-primaryColor my-2 text-xl font-semibold">
+          <h3 className="text-textColor group-hover:text-primaryColor my-2 text-xl font-semibold">
             {name}
           </h3>
           <p className="text-grayColor line-clamp-4 text-sm">{summary}</p>
