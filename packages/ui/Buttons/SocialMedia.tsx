@@ -10,11 +10,11 @@ export const SocialMedia = ({ className, ...props }: Props) => {
 
   return (
     <span className={classes} {...props}>
-      <Link href={""}>
+      <Link href="https://www.linkedin.com/in/levanson180200">
         <IconLinkedin />
       </Link>
 
-      <Link href={""}>
+      <Link href="https://github.com/yushaku">
         <IconGithub />
       </Link>
     </span>

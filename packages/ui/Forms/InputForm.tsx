@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { IconEye, IconEyeSlash } from "..";
 import { twMerge } from "tailwind-merge";
+import { IconEye, IconEyeSlash } from "..";
 
 type Props<TType> = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: string;

@@ -45,7 +45,6 @@ export const Header = ({ topItems }: Props) => {
         setTransparent(false);
       }
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -54,15 +53,15 @@ export const Header = ({ topItems }: Props) => {
 
   const dynamicHeaderStyle = scrollDirection === "up" ? "top-0" : "-top-[11vh]";
   const transparentStyle = !transparent
-    ? "bg-transparent mt-0 md:top-9"
-    : `shadow-lg "bg-white/90"`;
+    ? "bg-transparent shadow-md mt-0"
+    : `shadow-lg bg-white/70`;
 
   return (
     <header
-      className={`${dynamicHeaderStyle} ${transparentStyle} animationShow fixed left-0 right-0 z-40 mx-auto`}
+      className={`${dynamicHeaderStyle} ${transparentStyle} animationShow fixed left-0 right-0 z-50 mx-auto`}
     >
       <div
-        className={`container mx-auto flex items-center justify-between gap-4 py-4`}
+        className={`mx-auto flex max-w-[1110px] items-center justify-between gap-4 py-4`}
       >
         <Link href="/">
           <div className="flex items-center gap-2">
@@ -73,7 +72,7 @@ export const Header = ({ topItems }: Props) => {
               height={35}
               loading="lazy"
             />
-            <span className="text-grayColor text-[24px] font-semibold">
+            <span className="text-secondColor text-[24px] font-semibold">
               Yushaku
             </span>
           </div>

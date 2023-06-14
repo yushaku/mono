@@ -1,13 +1,13 @@
 import React from "react";
 
 type Props = React.SVGProps<SVGSVGElement> & {};
-export const IconWaveLine = (props: Props) => {
+export const IconWaveLine = ({ color = "#a55eea", ...props }: Props) => {
   return (
     <svg width="35" height="6" xmlns="http://www.w3.org/2000/svg" {...props}>
       <defs>
         <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#a55eea"></stop>
-          <stop offset="100%" stop-color="#a55eea"></stop>
+          <stop offset="0%" stopColor={color}></stop>
+          <stop offset="100%" stopColor={color}></stop>
         </linearGradient>
       </defs>
       <path
