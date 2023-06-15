@@ -72,7 +72,7 @@ export const Header = ({ topItems }: Props) => {
               height={35}
               loading="lazy"
             />
-            <span className="text-secondColor text-[24px] font-semibold">
+            <span className="text-primaryColor text-[24px] font-semibold">
               Yushaku
             </span>
           </div>

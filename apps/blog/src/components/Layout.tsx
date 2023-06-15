@@ -1,3 +1,5 @@
+"use client";
+
 import { topItems } from "@/utils/constants";
 import React from "react";
 import { Header, Footer } from "ui";

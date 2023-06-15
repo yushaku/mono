@@ -36,12 +36,12 @@ export const getAllPublished = async () => {
         equals: true,
       },
     },
-    sorts: [
-      {
-        property: "Date",
-        direction: "descending",
-      },
-    ],
+    // sorts: [
+    //   {
+    //     timestamp: "created_time",
+    //     direction: "descending",
+    //   },
+    // ],
   });
 
   const allPosts = posts.results;
@@ -56,7 +56,6 @@ const getPageMetaData = (post) => {
     const allTags = tags.map((tag) => {
       return tag.name;
     });
-
     return allTags;
   };
 
@@ -73,7 +72,7 @@ export const fetchPageBySlug = cache(async (slug: string) => {
   const res = await notion.databases.query({
     database_id: process.env.NOTION_DATABASE!,
     filter: {
-      property: "Slug",
+      property: "slug",
       rich_text: {
         equals: slug,
       },
@@ -84,5 +83,5 @@ export const fetchPageBySlug = cache(async (slug: string) => {
 
 export const fetchPageBlocks = cache(async (pageId: string) => {
   const res = await notion.blocks.children.list({ block_id: pageId });
-  return res.results as BlockObjectResponse[];
+  return res.results as any;
 });
