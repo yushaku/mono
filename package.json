@@ -3,8 +3,8 @@
   "private": true,
   "packageManager": "pnpm@7.15.0",
   "scripts": {
-    "build": "turbo run build",
     "dev": "turbo run dev",
+    "build": "turbo run build",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "dev:apis": "pnpm --filter apis start:dev",
