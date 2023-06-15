@@ -1,12 +1,8 @@
 import { CategoryList, IntroBlock, RelatePosts } from "@/components/IntroBlock";
 import { Layout } from "@/components/Layout";
-import { ListItem } from "@/components/ListItem";
 import { TopicTitle } from "@/components/TopicTitle";
 import { BigCard, Card } from "@/components/card";
-import { topics } from "@/utils/constants";
 import { fetchPages } from "@/utils/notion";
-import Link from "next/link";
-import { IconArrowRight } from "ui";
 
 export default async function Home() {
   const blogList = await fetchPages();
@@ -34,7 +30,7 @@ export default async function Home() {
                   summary={el.properties.tldr.rich_text[0].plain_text}
                   author={el.created_by.id}
                   imageUrl={el.cover.external.url}
-                  slug={el.properties.slug.id}
+                  slug={el.properties.slug.rich_text[0].plain_text}
                   name={el.properties.Name.title[0].plain_text}
                   date={el.created_time}
                 />

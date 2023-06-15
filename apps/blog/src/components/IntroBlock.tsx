@@ -1,10 +1,11 @@
-import React from "react";
-import { IconArrowRight, SocialMedia } from "ui";
-import { TopicTitle } from "./TopicTitle";
+import { TableOfContent } from "@/app/[slug]/page";
 import { topics } from "@/utils/constants";
 import Link from "next/link";
-import { ListItem } from "./ListItem";
+import React from "react";
 import { Result } from "types";
+import { IconArrowRight, IconDot, SocialMedia } from "ui";
+import { ListItem } from "./ListItem";
+import { TopicTitle } from "./TopicTitle";
 
 export const IntroBlock = () => {
   return (
@@ -28,24 +29,36 @@ export const Warper = ({
   children: React.ReactNode;
   className?: string;
 }) => {
-  const classes = `mx-auto mb-10 flex max-w-[350px] flex-col items-center justify-center gap-y-4 rounded-lg px-6 text-center shadow-lg ${className}`;
+  const classes = `mx-auto mb-10 py-6 flex max-w-[350px] flex-col items-center justify-center gap-y-4 rounded-lg px-6 text-center shadow-lg ${className}`;
   return <article className={classes}>{children}</article>;
 };
 
-export const BlogOutline = () => {
+export const BlogOutline = ({ outline }: { outline: TableOfContent[] }) => {
   return (
     <Warper className="sticky top-20">
       <TopicTitle title="Page Outline" />
       <ul className="w-full">
-        {topics.map((el, index) => {
+        {outline.map((el) => {
           return (
-            <li key={index} className="group">
-              <Link href={el.href} className="flex items-center py-3 ">
-                <IconArrowRight
-                  className="animationShow mr-2 rotate-180 group-hover:mr-4"
-                  color="#234f66"
-                />
-                <span className="group-hover:text-primaryColor animationShow group-hover:font-bold">
+            <li
+              key={el.id}
+              className={`group ${el.type === "heading_3" ? "pl-3" : "pl-0"}`}
+            >
+              <Link href={`#${el.href}`} className="flex items-center py-2">
+                {el.type === "heading_3" ? (
+                  <IconDot
+                    width="15px"
+                    height="15px"
+                    className="animationShow mr-1 group-hover:mr-3"
+                    color="#234f66"
+                  />
+                ) : (
+                  <IconArrowRight
+                    className="animationShow mr-2 rotate-180 group-hover:mr-4"
+                    color="#234f66"
+                  />
+                )}
+                <span className="group-hover:text-primaryColor animationShow group-hover:font-medium">
                   {el.title}
                 </span>
               </Link>

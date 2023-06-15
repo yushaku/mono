@@ -1,7 +1,7 @@
 import React from "react";
 
 type Props = React.SVGProps<SVGSVGElement> & {};
-export const IconGithub = ({ width = "32px", height = "32px" }: Props) => {
+export const IconGithub = ({ width = 32, height = 32 }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
