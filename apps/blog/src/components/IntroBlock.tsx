@@ -6,10 +6,20 @@ import { Result } from "types";
 import { IconArrowRight, IconDot, SocialMedia } from "ui";
 import { ListItem } from "./ListItem";
 import { TopicTitle } from "./TopicTitle";
+import Image from "next/image";
 
 export const IntroBlock = () => {
   return (
-    <Warper>
+    <Warper className="relative">
+      <Image
+        src="/map-doted.png"
+        alt="dot_map_world"
+        loading="lazy"
+        placeholder="empty"
+        object-fit="cover"
+        quality={100}
+        fill={true}
+      />
       <h3 className="text-primaryColor text-xl font-semibold">
         Dev &quot;phèn&quot;
       </h3>
@@ -29,7 +39,9 @@ export const Warper = ({
   children: React.ReactNode;
   className?: string;
 }) => {
-  const classes = `mx-auto mb-10 py-6 flex max-w-[350px] flex-col items-center justify-center gap-y-4 rounded-lg px-6 text-center shadow-lg ${className}`;
+  const classes = `mx-auto mb-10 py-6 flex max-w-[350px] flex-col items-center justify-center gap-y-4 rounded-lg px-6 text-center shadow-lg ${
+    className ?? ""
+  }`;
   return <article className={classes}>{children}</article>;
 };
 

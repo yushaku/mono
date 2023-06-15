@@ -30,7 +30,7 @@ export const Heading3 = ({ plainText }: { plainText: string }) => {
 };
 
 export const Paragraph = ({ plainText }: { plainText: string }) => {
-  return <p className="text-textColor my-3">{plainText}</p>;
+  return <p className="text-textColor my-6">{plainText}</p>;
 };
 
 export const BlockCode = ({ plainText, language }: DropedProps) => {

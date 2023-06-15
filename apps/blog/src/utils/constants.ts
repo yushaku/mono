@@ -1,11 +1,11 @@
 export const topItems = [
   {
     title: "Home",
-    href: "",
+    href: "/",
   },
   {
     title: "Article",
-    href: "",
+    href: "/category/React",
   },
   {
     title: "Contact",
@@ -20,22 +20,22 @@ export const topItems = [
 export const topics = [
   {
     title: "Dev life",
-    href: "",
+    href: "Dev",
   },
   {
     title: "React js",
-    href: "",
+    href: "React",
   },
   {
     title: "Nest js",
-    href: "",
+    href: "Nest",
   },
   {
     title: "Typescript",
-    href: "",
+    href: "Typescript",
   },
   {
     title: "Javascript",
-    href: "",
+    href: "Javascript",
   },
 ];

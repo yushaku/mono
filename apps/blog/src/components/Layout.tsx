@@ -11,7 +11,7 @@ export const Layout = ({ children, ...props }: Props) => {
   return (
     <section>
       <Header topItems={topItems} />
-      <section className="mx-auto mt-[20vh] min-h-[100vh] max-w-[1110px]">
+      <section className="mx-auto mt-[15vh] min-h-[100vh] max-w-[1110px]">
         <div {...props}>{children}</div>
       </section>
       <Footer />

@@ -9,12 +9,14 @@ import { Layout } from "@/components/Layout";
 import { fetchPageBlocks, fetchPageBySlug } from "@/utils/notion";
 import {
   Render,
+  blockEnum,
   indexGenerator,
   rnrSlugify,
-  blockEnum,
   withContentValidation,
 } from "@9gustin/react-notion-render";
 import "@9gustin/react-notion-render/dist/index.css";
+import moment from "moment";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 
 export type TableOfContent = {
@@ -30,8 +32,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   const blocks = await fetchPageBlocks(post.id);
 
-  console.log(JSON.stringify(blocks));
-
   const tablecontent: TableOfContent[] = indexGenerator(blocks).map(
     ({ id, plainText, type }) => ({
       id,
@@ -45,6 +45,28 @@ export default async function Page({ params }: { params: { slug: string } }) {
     <Layout>
       <section className="grid grid-cols-3 gap-10">
         <article className="col-span-2">
+          <div className="grid gap-4">
+            <h3 className="text-textColor text-[36px] font-bold">
+              {post.properties.Name.title[0].plain_text}
+            </h3>
+            <p className="text-grayColor flex items-center gap-3">
+              <span>yushaku</span>
+              <span className="bg-primaryColor inline-block h-2 w-2 rounded-full" />
+              <span>{moment(post.created_time).format("LL")}</span>
+            </p>
+            <div className="relative h-[410px] w-full">
+              <Image
+                src={post.cover.external.url}
+                alt="dsfsdf"
+                loading="lazy"
+                placeholder="empty"
+                object-fit="cover"
+                quality={100}
+                fill={true}
+              />
+            </div>
+          </div>
+
           <Render
             blocks={blocks}
             useStyles

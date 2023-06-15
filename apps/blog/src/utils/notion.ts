@@ -7,7 +7,7 @@ import {
   PageObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 import { cache } from "react";
-import { BlogList } from "types";
+import { BlogList, Result } from "types";
 
 export const notion = new Client({
   auth: process.env.NOTION_SECRET,
@@ -15,58 +15,39 @@ export const notion = new Client({
 
 export const fetchPages = cache(async () => {
   const post = await notion.databases.query({
-    database_id:
-      process.env.NOTION_DATABASE ?? "0f8d661ce22e4d6cafeb974f048c0f91",
-    // filter: {
-    //   property: "Status",
-    //   select: {
-    //     equals: "Published",
-    //   },
-    // },
+    database_id: process.env.NOTION_DATABASE,
+    filter: {
+      property: "status",
+      select: {
+        equals: "published",
+      },
+    },
   });
   return post as unknown as BlogList;
 });
 
-export const getAllPublished = async () => {
-  const posts = await notion.databases.query({
-    database_id: process.env.DATABASE_ID,
+export const fetchPagesByCategory = cache(async (category: string) => {
+  const post = await notion.databases.query({
+    database_id: process.env.NOTION_DATABASE,
     filter: {
-      property: "Published",
-      checkbox: {
-        equals: true,
-      },
+      and: [
+        {
+          property: "category",
+          select: {
+            equals: category,
+          },
+        },
+        {
+          property: "status",
+          select: {
+            equals: "published",
+          },
+        },
+      ],
     },
-    // sorts: [
-    //   {
-    //     timestamp: "created_time",
-    //     direction: "descending",
-    //   },
-    // ],
   });
-
-  const allPosts = posts.results;
-
-  return allPosts.map((post) => {
-    return getPageMetaData(post);
-  });
-};
-
-const getPageMetaData = (post) => {
-  const getTags = (tags) => {
-    const allTags = tags.map((tag) => {
-      return tag.name;
-    });
-    return allTags;
-  };
-
-  return {
-    id: post.id,
-    title: post.properties.Name.title[0].plain_text,
-    tags: getTags(post.properties.Tags.multi_select),
-    description: post.properties.Description.rich_text[0].plain_text,
-    slug: post.properties.Slug.rich_text[0].plain_text,
-  };
-};
+  return post as unknown as BlogList;
+});
 
 export const fetchPageBySlug = cache(async (slug: string) => {
   const res = await notion.databases.query({
@@ -78,7 +59,7 @@ export const fetchPageBySlug = cache(async (slug: string) => {
       },
     },
   });
-  return res.results[0] as PageObjectResponse | undefined;
+  return res.results[0] as Result;
 });
 
 export const fetchPageBlocks = cache(async (pageId: string) => {
