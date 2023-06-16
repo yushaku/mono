@@ -6,14 +6,19 @@ import { useEffect, useState } from "react";
 import { Button, IconMenu } from ".";
 
 type Props = {
+  isAuth?: boolean;
+  ontoggleSideBar: () => void;
   topItems: {
     href: string;
     title: string;
   }[];
 };
 
-export const Header = ({ topItems }: Props) => {
-  const [showNavbar, setShowNavbar] = useState(false);
+export const Header = ({
+  topItems,
+  isAuth = false,
+  ontoggleSideBar,
+}: Props) => {
   const [scrollDirection, setScrollDirection] = useState("up");
   const [transparent, setTransparent] = useState(false);
 
@@ -93,22 +98,21 @@ export const Header = ({ topItems }: Props) => {
               );
             })}
 
-            <li>
-              <Link href={"/auth/login"}>
-                <Button
-                  title="Login"
-                  className="bg-primaryColor text-white lg:w-20"
-                />
-              </Link>
+            {isAuth ?? (
+              <li>
+                <Link href={"/auth/login"}>
+                  <Button
+                    title="Login"
+                    className="bg-primaryColor text-white lg:w-20"
+                  />
+                </Link>
+              </li>
+            )}
+
+            <li className="float-right px-6" onClick={ontoggleSideBar}>
+              <IconMenu color="#132150" />
             </li>
           </ul>
-
-          <div
-            className="px-6 md:hidden"
-            onClick={() => setShowNavbar((prev) => !prev)}
-          >
-            <IconMenu color="#132150" />
-          </div>
         </div>
       </div>
     </header>

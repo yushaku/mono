@@ -1,5 +1,4 @@
 import { CategoryList, IntroBlock, RelatePosts } from "@/components/IntroBlock";
-import { Layout } from "@/components/Layout";
 import { TopicTitle } from "@/components/TopicTitle";
 import { Card } from "@/components/card";
 import { topics } from "@/utils/constants";
@@ -16,14 +15,14 @@ export default async function Category({
   const relatedBlog = await fetchPages();
 
   return (
-    <Layout className="grid grid-cols-1 gap-x-10 px-6 md:grid-cols-2 md:px-3 lg:grid-cols-3 lg:p-0">
+    <div className="grid grid-cols-1 gap-x-10 px-6 md:grid-cols-2 md:px-3 lg:grid-cols-3 lg:p-0">
       <div className="md:col-span-2">
         <div className="flex items-center gap-4">
           {topics.map((el, index) => {
             return (
               <Link href={`/category/${el.href}`} key={index}>
                 <Button
-                  className={` w-fit px-4 py-2  ${
+                  className={`w-fit px-4 py-2  ${
                     params.slug === el.href
                       ? "bg-primaryColor text-white shadow-lg"
                       : "hover:text-primaryColor shadow-md"
@@ -63,6 +62,6 @@ export default async function Category({
         <RelatePosts blogList={relatedBlog.results} />
         <CategoryList />
       </div>
-    </Layout>
+    </div>
   );
 }
