@@ -6,5 +6,7 @@ export * from "./IconGithub";
 export * from "./IconGoogle";
 export * from "./IconLinkedin";
 export * from "./IconMenu";
+export * from "./IconMoon";
 export * from "./IconRightArrow";
+export * from "./IconSun";
 export * from "./IconWaveLine";
