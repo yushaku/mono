@@ -109,8 +109,11 @@ export const Header = ({
               </li>
             )}
 
-            <li className="float-right px-6" onClick={ontoggleSideBar}>
-              <IconMenu color="#132150" />
+            <li
+              className="float-right cursor-pointer px-6"
+              onClick={ontoggleSideBar}
+            >
+              <IconMenu className="hover:stroke-primaryColor stroke-black" />
             </li>
           </ul>
         </div>

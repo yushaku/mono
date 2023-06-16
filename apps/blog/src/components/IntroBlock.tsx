@@ -27,6 +27,7 @@ export const IntroBlock = () => {
         From &quot;Phèn&quot; developer Become better Full-stack developer.
         Following our tips, tricks and real life experiences.
       </p>
+
       <SocialMedia />
     </Warper>
   );
