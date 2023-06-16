@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useState } from "react";
 import {
   TwitterShareButton,
   TwitterIcon,
@@ -50,16 +50,16 @@ export const FaceBookShareBtn = ({ url }: { url: string }) => {
 };
 
 export const ProviderShareBlock = ({
-  path = location.href,
   title,
   children,
 }: {
-  path?: string;
   title: string;
   children: React.ReactNode;
 }) => {
+  const path = location.href;
+
   return (
-    <div>
+    <div className="relative">
       <ul className="top-1/5 fixed left-0 z-20 flex flex-col gap-2 rounded-r-lg bg-white px-2 py-4 lg:left-10 lg:bg-transparent">
         <li>
           <FacebookShareButton url={path} quote={title} hashtag={"#yushaku"}>
@@ -88,6 +88,38 @@ export const ProviderShareBlock = ({
       </ul>
 
       {children}
+
+      {/* <div className="top-1/5 fixed right-0"></div> */}
+      {/* <Bubble /> */}
     </div>
+  );
+};
+
+export const Bubble = () => {
+  const isDragging = useRef<boolean>(false);
+  const position = useRef({ x: 150, y: 50 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (isDragging) {
+      position.current = { x: e.clientX, y: e.clientY };
+    }
+  };
+
+  const handleMouseUp = () => {
+    isDragging.current = false;
+  };
+
+  return (
+    <div
+      className="absolute h-12 w-12 rounded-full bg-blue-500 transition-all duration-300"
+      style={{
+        top: position.current.y,
+        left: position.current.x,
+      }}
+      onMouseDown={handleMouseUp}
+      onMouseUp={handleMouseUp}
+      onMouseOut={handleMouseUp}
+      onMouseMove={handleMouseMove}
+    />
   );
 };
