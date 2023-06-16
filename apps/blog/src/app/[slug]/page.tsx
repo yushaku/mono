@@ -5,7 +5,6 @@ import {
   Paragraph,
 } from "@/components/BlogDetail";
 import { BlogOutline, IntroBlock } from "@/components/IntroBlock";
-import { Layout } from "@/components/Layout";
 import { fetchPageBlocks, fetchPageBySlug } from "@/utils/notion";
 import {
   Render,
@@ -42,7 +41,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   );
 
   return (
-    <Layout>
+    <div>
       <section className="grid grid-cols-3 gap-10">
         <article className="col-span-2">
           <div className="grid gap-4">
@@ -84,6 +83,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
           <BlogOutline outline={tablecontent} />
         </article>
       </section>
-    </Layout>
+    </div>
   );
 }

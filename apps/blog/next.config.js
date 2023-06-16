@@ -1,5 +1,7 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
-module.exports = {
+/** @type {import('next').NextConfig} */
+
+const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ["ui"],
   images: {
@@ -10,3 +12,5 @@ module.exports = {
     NOTION_SECRET: process.env.NOTION_SECRET,
   },
 };
+
+module.exports = nextConfig;

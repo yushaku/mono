@@ -1,5 +1,4 @@
 import { CategoryList, IntroBlock, RelatePosts } from "@/components/IntroBlock";
-import { Layout } from "@/components/Layout";
 import { TopicTitle } from "@/components/TopicTitle";
 import { BigCard, Card } from "@/components/card";
 import { fetchPages } from "@/utils/notion";
@@ -9,7 +8,7 @@ export default async function Home() {
   const firstResult = blogList.results.shift();
 
   return (
-    <Layout className="grid grid-cols-1 gap-x-10 px-6 md:grid-cols-2 md:px-3 lg:grid-cols-3 lg:p-0">
+    <section className="grid grid-cols-1 gap-x-10 px-6 md:grid-cols-2 md:px-3 lg:grid-cols-3 lg:p-0">
       <div className="md:col-span-2">
         <BigCard
           summary={firstResult.properties.tldr.rich_text[0].plain_text}
@@ -49,6 +48,6 @@ export default async function Home() {
         <RelatePosts blogList={blogList.results} />
         <CategoryList />
       </div>
-    </Layout>
+    </section>
   );
 }
