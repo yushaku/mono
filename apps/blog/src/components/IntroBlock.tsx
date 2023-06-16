@@ -92,7 +92,10 @@ export const CategoryList = () => {
         {topics.map((el, index) => {
           return (
             <li key={index} className="group">
-              <Link href={el.href} className="flex items-center py-3 ">
+              <Link
+                href={`/category/${el.href}`}
+                className="flex items-center py-3 "
+              >
                 <IconArrowRight
                   className="animationShow mr-2 rotate-180 group-hover:mr-4"
                   color="#234f66"

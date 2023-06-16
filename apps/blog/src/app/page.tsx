@@ -21,7 +21,7 @@ export default async function Home() {
 
         <TopicTitle title="Latest Posts" className="my-12" />
 
-        <ul className="flex flex-wrap justify-center gap-6">
+        <ul className="flex flex-wrap justify-center gap-6 md:flex-nowrap">
           {blogList.results.map((el) => {
             return (
               <li key={el.id}>

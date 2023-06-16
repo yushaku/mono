@@ -60,7 +60,7 @@ export const ProviderShareBlock = ({
 }) => {
   return (
     <div>
-      <ul className="fixed left-10 top-1/3 ml-2 flex gap-2 lg:flex-col">
+      <ul className="top-1/5 fixed left-0 z-20 flex flex-col gap-2 rounded-r-lg bg-white px-2 py-4 lg:left-10 lg:bg-transparent">
         <li>
           <FacebookShareButton url={path} quote={title} hashtag={"#yushaku"}>
             <FacebookIcon size={32} round />

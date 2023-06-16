@@ -20,7 +20,7 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
         showSidebar={showSidebar}
         ontoggleSideBar={() => setShowSidebar(!showSidebar)}
       />
-      <div className="mx-auto mt-[15vh] min-h-[100vh] max-w-[1110px]">
+      <div className="mx-auto mt-[15vh] min-h-[100vh] max-w-[1110px] px-6">
         <Toaster position="bottom-center" />
         {children}
       </div>

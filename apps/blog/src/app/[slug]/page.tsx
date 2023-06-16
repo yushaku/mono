@@ -43,7 +43,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <ProviderShareBlock title={post.properties.Name.title[0].plain_text}>
-      <section className="relative grid grid-cols-3 gap-10">
+      <section className="relative grid grid-cols-2 gap-10 lg:grid-cols-3">
         <article className="col-span-2 overflow-y-scroll">
           <div className="grid gap-4">
             <h3 className="text-textColor text-[36px] font-bold">
@@ -79,7 +79,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           />
         </article>
 
-        <article className="relative col-span-1">
+        <article className="relative col-span-2 md:col-span-1">
           <IntroBlock />
           <BlogOutline outline={tablecontent} />
         </article>
