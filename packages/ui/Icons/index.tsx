@@ -1,4 +1,5 @@
 export * from "./BigLogo";
+export * from "./IconCopy";
 export * from "./IconDot";
 export * from "./IconEye";
 export * from "./IconEyeSlash";
