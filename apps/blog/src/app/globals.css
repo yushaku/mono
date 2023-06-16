@@ -9,7 +9,7 @@
     font-family: "Poppins", sans-serif;
   }
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth !important;
     box-sizing: border-box;
   }
 }

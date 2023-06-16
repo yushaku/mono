@@ -43,7 +43,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   return (
     <div>
       <section className="grid grid-cols-3 gap-10">
-        <article className="col-span-2">
+        <article className="col-span-2 overflow-y-scroll">
           <div className="grid gap-4">
             <h3 className="text-textColor text-[36px] font-bold">
               {post.properties.Name.title[0].plain_text}
