@@ -8,7 +8,7 @@ import {
   quoteBlock,
 } from "@/components/BlogDetail";
 import { BlogOutline, IntroBlock } from "@/components/IntroBlock";
-import { ProviderShareBlock } from "@/components/ShareButton";
+import { ContentWarper } from "@/components/ContentWarper";
 import { fetchPageBlocks, fetchPageBySlug } from "@/utils/notion";
 import {
   Render,
@@ -45,7 +45,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   );
 
   return (
-    <ProviderShareBlock title={post.properties.Name.title[0].plain_text}>
+    <ContentWarper title={post.properties.Name.title[0].plain_text}>
       <section className="relative grid grid-cols-2 gap-10 lg:grid-cols-3">
         <article className="col-span-2 overflow-y-scroll">
           <div className="grid gap-4">
@@ -90,6 +90,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
           <BlogOutline outline={tablecontent} />
         </article>
       </section>
-    </ProviderShareBlock>
+    </ContentWarper>
   );
 }

@@ -9,10 +9,11 @@ import {
   FacebookIcon,
   FacebookShareButton,
 } from "next-share";
-import { IconCopy } from "ui";
+import { IconCopy, IconMoon, IconSun } from "ui";
 import { toast } from "react-hot-toast";
 import Prism from "prismjs";
 import "prismjs/themes/prism-tomorrow.css";
+import { useTheme } from "next-themes";
 
 export const TwitterShareBtn = ({ url }: { url: string }) => {
   return (
@@ -51,13 +52,15 @@ export const FaceBookShareBtn = ({ url }: { url: string }) => {
   );
 };
 
-export const ProviderShareBlock = ({
+export const ContentWarper = ({
   title,
   children,
 }: {
   title: string;
   children: React.ReactNode;
 }) => {
+  const { theme, setTheme } = useTheme();
+
   const path = location.href;
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -84,20 +87,34 @@ export const ProviderShareBlock = ({
           </TwitterShareButton>
         </li>
         <li
-          className="flexCenter h-8 w-8 cursor-pointer rounded-full border bg-green-50"
+          className="flexCenter bg-strokeColor/20 h-8 w-8 cursor-pointer rounded-full border"
           onClick={() => {
             navigator.clipboard.writeText(path);
             toast.success("Copied!");
           }}
         >
-          <IconCopy width="28px" height="28px" />
+          <IconCopy
+            color={theme === "dark" ? "white" : "#234f66"}
+            width="28px"
+            height="28px"
+          />
+        </li>
+
+        <li
+          className="flexCenter bg-strokeColor/20 h-8 w-8 cursor-pointer rounded-full border"
+          onClick={() => {
+            setTheme(theme === "dark" ? "light" : "dark");
+          }}
+        >
+          {theme === "dark" ? (
+            <IconMoon color="#ffffff" width="20px" height="20px" />
+          ) : (
+            <IconSun color="#234f66" width="20px" height="20px" />
+          )}
         </li>
       </ul>
 
       {children}
-
-      {/* <div className="top-1/5 fixed right-0"></div> */}
-      {/* <Bubble /> */}
     </div>
   );
 };
