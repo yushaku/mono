@@ -49,12 +49,12 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <section className="relative grid grid-cols-2 gap-10 lg:grid-cols-3">
         <article className="col-span-2 overflow-y-scroll">
           <div className="grid gap-4">
-            <h3 className="text-textColor text-[36px] font-bold">
+            <h3 className="text-textColor dark:text-strokeColor text-[36px] font-bold">
               {post.properties.Name.title[0].plain_text}
             </h3>
             <p className="text-grayColor flex items-center gap-3">
               <span>yushaku</span>
-              <span className="bg-primaryColor inline-block h-2 w-2 rounded-full" />
+              <span className="bg-primaryColor dark:bg-secondColor inline-block h-2 w-2 rounded-full" />
               <span>{moment(post.created_time).format("LL")}</span>
             </p>
             <div className="relative h-[410px] w-full">

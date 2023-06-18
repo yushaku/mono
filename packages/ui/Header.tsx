@@ -77,7 +77,7 @@ export const Header = ({
               height={35}
               loading="lazy"
             />
-            <span className="text-primaryColor text-[24px] font-semibold">
+            <span className="text-primaryColor dark:text-secondColor text-[24px] font-semibold">
               Yushaku
             </span>
           </div>
@@ -90,7 +90,7 @@ export const Header = ({
                 <li key={index} className="group">
                   <Link
                     href={href}
-                    className="animationShow hover:text-primaryColor text-grayColor relative cursor-pointer text-lg font-medium"
+                    className="animationShow hover:text-primaryColor text-grayColor dark:hover:text-secondColor relative cursor-pointer text-lg font-medium"
                   >
                     {title}
                   </Link>
@@ -113,7 +113,7 @@ export const Header = ({
               className="float-right cursor-pointer px-6"
               onClick={ontoggleSideBar}
             >
-              <IconMenu className="hover:stroke-primaryColor stroke-black" />
+              <IconMenu className="hover:stroke-primaryColor dark:hover:stroke-secondColor stroke-black dark:stroke-white" />
             </li>
           </ul>
         </div>

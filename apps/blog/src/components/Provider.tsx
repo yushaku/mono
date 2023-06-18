@@ -10,7 +10,7 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
   const [showSidebar, setShowSidebar] = useState(false);
 
   return (
-    <ThemeProvider>
+    <ThemeProvider attribute="class">
       <section>
         <Header
           topItems={topItems}
