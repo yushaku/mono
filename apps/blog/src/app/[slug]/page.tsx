@@ -3,6 +3,9 @@ import {
   Heading2,
   Heading3,
   Paragraph,
+  callout,
+  numberList,
+  quoteBlock,
 } from "@/components/BlogDetail";
 import { BlogOutline, IntroBlock } from "@/components/IntroBlock";
 import { ProviderShareBlock } from "@/components/ShareButton";
@@ -12,7 +15,7 @@ import {
   blockEnum,
   indexGenerator,
   rnrSlugify,
-  withContentValidation,
+  withContentValidation as custom,
 } from "@9gustin/react-notion-render";
 import "@9gustin/react-notion-render/dist/index.css";
 import moment from "moment";
@@ -71,10 +74,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
             blocks={blocks}
             useStyles
             blockComponentsMapper={{
-              heading_2: withContentValidation(Heading2),
-              heading_3: withContentValidation(Heading3),
-              code: withContentValidation(BlockCode),
-              paragraph: withContentValidation(Paragraph),
+              heading_2: custom(Heading2),
+              heading_3: custom(Heading3),
+              code: custom(BlockCode),
+              paragraph: custom(Paragraph),
+              callout: custom(callout),
+              numbered_list_item: custom(numberList),
+              quote: custom(quoteBlock),
             }}
           />
         </article>
