@@ -2,6 +2,7 @@ import { rnrSlugify } from "@9gustin/react-notion-render";
 import { DropedProps } from "@9gustin/react-notion-render/dist/hoc/withContentValidation";
 import Link from "next/link";
 import React from "react";
+import { IconCopy } from "ui";
 
 export const Heading2 = ({ plainText }: { plainText: string }) => {
   return (
@@ -35,7 +36,23 @@ export const Paragraph = ({ plainText }: { plainText: string }) => {
 
 export const BlockCode = ({ plainText, language }: DropedProps) => {
   return (
-    <pre className="mt-8 overflow-auto">
+    <pre
+      className={`language-${language} group relative mt-8 overflow-auto`}
+      style={{ paddingTop: "2rem" }}
+    >
+      <div className="absolute left-0 top-0 z-30 flex w-full justify-between px-4 pt-3">
+        <p className="flex gap-2">
+          <span className="inline-block h-3 w-3 rounded-full bg-yellow-400"></span>
+          <span className="inline-block h-3 w-3 rounded-full bg-green-400"></span>
+          <span className="inline-block h-3 w-3 rounded-full bg-red-400"></span>
+        </p>
+        <span
+          // onClick={() => navigator.clipboard.writeText(plainText)}
+          className="hidden cursor-pointer rounded-md border border-[#cdcdcd] group-hover:block"
+        >
+          <IconCopy className="h-7 w-7" color="#cdcdcd" />
+        </span>
+      </div>
       <code>{plainText}</code>
     </pre>
   );

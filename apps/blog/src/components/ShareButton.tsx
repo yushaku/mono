@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   TwitterShareButton,
   TwitterIcon,
@@ -11,6 +11,8 @@ import {
 } from "next-share";
 import { IconCopy } from "ui";
 import { toast } from "react-hot-toast";
+import Prism from "prismjs";
+import "prismjs/themes/prism-tomorrow.css";
 
 export const TwitterShareBtn = ({ url }: { url: string }) => {
   return (
@@ -57,6 +59,11 @@ export const ProviderShareBlock = ({
   children: React.ReactNode;
 }) => {
   const path = location.href;
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      Prism.highlightAll();
+    }
+  }, []);
 
   return (
     <div className="relative">
