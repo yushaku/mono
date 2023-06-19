@@ -1,23 +1,24 @@
+import { CommonModule } from './common/common.module';
+import { FilesModule } from './files/files.module';
+import { HealthModule } from './health/health.module';
+import { MetricModule } from './metric/metric.module';
+import { UsersModule } from './users/users.module';
+import { OpenaiModule } from '@/openai/openai.module';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MulterModule } from '@nestjs/platform-express';
 import { ThrottlerModule } from '@nestjs/throttler';
-import * as Joi from 'joi';
-import { CommonModule } from '../common/common.module';
-import { FilesModule } from '../files/files.module';
-import { HealthModule } from '../health/health.module';
-import { MetricModule } from '../metric/metric.module';
-import { PrometheusModule } from '../prometheus/prometheus.module';
-import { UsersModule } from '../users/users.module';
-import { AppController } from './app.controller';
+import { PrometheusModule } from '@willsoto/nestjs-prometheus';
+import Joi from 'joi';
 
 const { NODE_ENV = 'development' } = process.env;
 const isTest = NODE_ENV === 'test';
 const isDev = NODE_ENV === 'development';
 
 @Module({
+  providers: [ConfigService],
   imports: [
     HttpModule,
     ConfigModule.forRoot({
@@ -76,8 +77,7 @@ const isDev = NODE_ENV === 'development';
     HealthModule,
     PrometheusModule,
     UsersModule,
+    OpenaiModule,
   ],
-  providers: [ConfigService],
-  controllers: [AppController],
 })
 export class AppModule {}

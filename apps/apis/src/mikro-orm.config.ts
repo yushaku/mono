@@ -1,4 +1,4 @@
-import { UserEntity } from '../databases/entities';
+import { UserEntity } from './databases/entities';
 import { Options } from '@mikro-orm/core';
 import { ConfigService } from '@nestjs/config';
 

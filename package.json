@@ -34,6 +34,7 @@
     "turbo": "latest"
   },
   "dependencies": {
+    "@nestjs/mapped-types": "*",
     "autoprefixer": "^10.4.14",
     "tailwind-config": "workspace:^"
   }
