@@ -12,10 +12,23 @@
     "dev:blog": "pnpm --filter blog dev",
     "dev:story": "pnpm --filter story storybook"
   },
+ "lint-staged": {
+    "apps/**/*.{js,ts,jsx,tsx}": [
+      "eslint --fix"
+    ],
+    "packages/ui/**/*.{js,ts,jsx,tsx}": [
+      "eslint --fix"
+    ],
+    "*.json": [
+      "prettier --write"
+    ]
+  },
   "devDependencies": {
     "@turbo/gen": "^1.9.7",
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
     "prettier-config": "workspace:*",
     "tsconfig": "^7.0.0",
     "turbo": "latest"
