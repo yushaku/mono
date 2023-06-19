@@ -6,14 +6,19 @@ import { useEffect, useState } from "react";
 import { Button, IconMenu } from ".";
 
 type Props = {
+  isAuth?: boolean;
+  ontoggleSideBar: () => void;
   topItems: {
     href: string;
     title: string;
   }[];
 };
 
-export const Header = ({ topItems }: Props) => {
-  const [showNavbar, setShowNavbar] = useState(false);
+export const Header = ({
+  topItems,
+  isAuth = false,
+  ontoggleSideBar,
+}: Props) => {
   const [scrollDirection, setScrollDirection] = useState("up");
   const [transparent, setTransparent] = useState(false);
 
@@ -54,14 +59,14 @@ export const Header = ({ topItems }: Props) => {
   const dynamicHeaderStyle = scrollDirection === "up" ? "top-0" : "-top-[11vh]";
   const transparentStyle = !transparent
     ? "bg-transparent shadow-md mt-0"
-    : `shadow-lg bg-white/70`;
+    : `shadow-lg bg-white/70 dark:bg-black/50`;
 
   return (
     <header
       className={`${dynamicHeaderStyle} ${transparentStyle} animationShow fixed left-0 right-0 z-50 mx-auto`}
     >
       <div
-        className={`mx-auto flex max-w-[1110px] items-center justify-between gap-4 py-4`}
+        className={`mx-auto flex max-w-[1110px] items-center justify-between gap-4 px-6 py-4`}
       >
         <Link href="/">
           <div className="flex items-center gap-2">
@@ -72,7 +77,7 @@ export const Header = ({ topItems }: Props) => {
               height={35}
               loading="lazy"
             />
-            <span className="text-primaryColor text-[24px] font-semibold">
+            <span className="text-primaryColor dark:text-secondColor text-[24px] font-semibold">
               Yushaku
             </span>
           </div>
@@ -85,7 +90,7 @@ export const Header = ({ topItems }: Props) => {
                 <li key={index} className="group">
                   <Link
                     href={href}
-                    className="animationShow hover:text-primaryColor text-grayColor relative cursor-pointer text-lg font-medium"
+                    className="animationShow hover:text-primaryColor text-grayColor dark:hover:text-secondColor relative cursor-pointer text-lg font-medium"
                   >
                     {title}
                   </Link>
@@ -93,22 +98,24 @@ export const Header = ({ topItems }: Props) => {
               );
             })}
 
-            <li>
-              <Link href={"/auth/login"}>
-                <Button
-                  title="Login"
-                  className="bg-primaryColor text-white lg:w-20"
-                />
-              </Link>
+            {isAuth ?? (
+              <li>
+                <Link href={"/auth/login"}>
+                  <Button
+                    title="Login"
+                    className="bg-primaryColor text-white lg:w-20"
+                  />
+                </Link>
+              </li>
+            )}
+
+            <li
+              className="float-right cursor-pointer px-6"
+              onClick={ontoggleSideBar}
+            >
+              <IconMenu className="hover:stroke-primaryColor dark:hover:stroke-secondColor stroke-black dark:stroke-white" />
             </li>
           </ul>
-
-          <div
-            className="px-6 md:hidden"
-            onClick={() => setShowNavbar((prev) => !prev)}
-          >
-            <IconMenu color="#132150" />
-          </div>
         </div>
       </div>
     </header>

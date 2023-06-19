@@ -13,8 +13,10 @@ export const Footer = ({ className }: Props) => {
 
   return (
     <footer className={classes}>
-      <div className="flex gap-6">
-        <span className="text-primaryColor">© 2023 yushaku Code</span>
+      <div className="text-grayColor flex gap-6">
+        <span className="text-primaryColor dark:text-secondColor">
+          © 2023 yushaku Code
+        </span>
         <Link href="">Privacy Policy</Link>
         <Link href="">Terms of Service</Link>
       </div>

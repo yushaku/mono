@@ -3,16 +3,19 @@ import {
   Heading2,
   Heading3,
   Paragraph,
+  callout,
+  numberList,
+  quoteBlock,
 } from "@/components/BlogDetail";
 import { BlogOutline, IntroBlock } from "@/components/IntroBlock";
-import { Layout } from "@/components/Layout";
+import { ContentWarper } from "@/components/ContentWarper";
 import { fetchPageBlocks, fetchPageBySlug } from "@/utils/notion";
 import {
   Render,
   blockEnum,
   indexGenerator,
   rnrSlugify,
-  withContentValidation,
+  withContentValidation as custom,
 } from "@9gustin/react-notion-render";
 import "@9gustin/react-notion-render/dist/index.css";
 import moment from "moment";
@@ -42,16 +45,16 @@ export default async function Page({ params }: { params: { slug: string } }) {
   );
 
   return (
-    <Layout>
-      <section className="grid grid-cols-3 gap-10">
-        <article className="col-span-2">
+    <ContentWarper title={post.properties.Name.title[0].plain_text}>
+      <section className="relative grid grid-cols-2 gap-10 lg:grid-cols-3">
+        <article className="col-span-2 overflow-y-scroll">
           <div className="grid gap-4">
-            <h3 className="text-textColor text-[36px] font-bold">
+            <h3 className="text-textColor dark:text-strokeColor text-[36px] font-bold">
               {post.properties.Name.title[0].plain_text}
             </h3>
             <p className="text-grayColor flex items-center gap-3">
               <span>yushaku</span>
-              <span className="bg-primaryColor inline-block h-2 w-2 rounded-full" />
+              <span className="bg-primaryColor dark:bg-secondColor inline-block h-2 w-2 rounded-full" />
               <span>{moment(post.created_time).format("LL")}</span>
             </p>
             <div className="relative h-[410px] w-full">
@@ -71,19 +74,22 @@ export default async function Page({ params }: { params: { slug: string } }) {
             blocks={blocks}
             useStyles
             blockComponentsMapper={{
-              heading_2: withContentValidation(Heading2),
-              heading_3: withContentValidation(Heading3),
-              code: withContentValidation(BlockCode),
-              paragraph: withContentValidation(Paragraph),
+              heading_2: custom(Heading2),
+              heading_3: custom(Heading3),
+              code: custom(BlockCode),
+              paragraph: custom(Paragraph),
+              callout: custom(callout),
+              numbered_list_item: custom(numberList),
+              quote: custom(quoteBlock),
             }}
           />
         </article>
 
-        <article className="relative col-span-1">
+        <article className="relative col-span-2 md:col-span-1">
           <IntroBlock />
           <BlogOutline outline={tablecontent} />
         </article>
       </section>
-    </Layout>
+    </ContentWarper>
   );
 }

@@ -14,7 +14,7 @@ type Props = React.HTMLAttributes<HTMLElement> & {
 
 export const Card = ({ name, date, imageUrl, slug, summary }: Props) => {
   return (
-    <article className="group max-w-[350px] rounded-lg shadow-lg">
+    <article className="dark:shadow-darkShadow group max-w-[350px] rounded-lg shadow-lg">
       <Link href={`/${slug}`}>
         <div className="relative h-[200px] w-full overflow-hidden rounded-t-lg">
           <Image
@@ -33,7 +33,7 @@ export const Card = ({ name, date, imageUrl, slug, summary }: Props) => {
             <span>yushaku</span>
             <span className="ml-4">{moment(date).format("LL")}</span>
           </p>
-          <h3 className="text-textColor group-hover:text-primaryColor my-2 text-xl font-semibold">
+          <h3 className="text-textColor dark:text-strokeColor/80 group-hover:text-primaryColor my-2 text-xl font-semibold">
             {name}
           </h3>
           <p className="text-grayColor line-clamp-4 text-sm">{summary}</p>
@@ -45,7 +45,7 @@ export const Card = ({ name, date, imageUrl, slug, summary }: Props) => {
 
 export const BigCard = ({ name, date, imageUrl, slug, summary }: Props) => {
   return (
-    <article className="relative mb-6 w-full overflow-hidden rounded-lg shadow-lg">
+    <article className="dark:shadow-darkShadow group relative mb-6 w-full overflow-hidden rounded-lg shadow-lg">
       <Link href={`/${slug}`}>
         <div className=" h-[424px] w-full">
           <Image
@@ -59,12 +59,12 @@ export const BigCard = ({ name, date, imageUrl, slug, summary }: Props) => {
           />
         </div>
 
-        <div className="absolute bottom-8 left-8 rounded-md bg-white/5 px-2 py-4 backdrop-blur-sm">
+        <div className=" absolute bottom-8 left-8 rounded-md bg-white/5 px-2 py-4 backdrop-blur-sm">
           <p className="text-strokeColor text-sm">
             <span>yushaku</span>
             <span className="ml-4">{moment(date).format("LL")}</span>
           </p>
-          <h3 className="hover:text-primaryColor my-2 text-xl font-semibold text-white">
+          <h3 className="group-hover:text-primaryColor dark:group-hover:text-secondColor my-2 text-xl font-semibold text-white">
             {name}
           </h3>
           <p className="text-strokeColor line-clamp-4 text-sm">{summary}</p>
