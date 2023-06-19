@@ -87,7 +87,7 @@ export const ContentWarper = ({
           </TwitterShareButton>
         </li>
         <li
-          className="flexCenter bg-strokeColor/20 h-8 w-8 cursor-pointer rounded-full border"
+          className="flexCenter bg-strokeColor/20 dark:hover:bg-primaryColor h-8 w-8 cursor-pointer rounded-full border"
           onClick={() => {
             navigator.clipboard.writeText(path);
             toast.success("Copied!");
@@ -95,13 +95,13 @@ export const ContentWarper = ({
         >
           <IconCopy
             color={theme === "dark" ? "white" : "#234f66"}
-            width="28px"
-            height="28px"
+            width="25px"
+            height="25px"
           />
         </li>
 
         <li
-          className="flexCenter bg-strokeColor/20 h-8 w-8 cursor-pointer rounded-full border"
+          className="flexCenter bg-strokeColor/20 dark:hover:bg-primaryColor h-8 w-8 cursor-pointer rounded-full border"
           onClick={() => {
             setTheme(theme === "dark" ? "light" : "dark");
           }}

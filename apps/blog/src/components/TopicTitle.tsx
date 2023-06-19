@@ -7,7 +7,7 @@ type Props = React.HTMLAttributes<HTMLHeadingElement> & {
 export const TopicTitle = ({ className, title, ...props }: Props) => {
   return (
     <h3
-      className={`text-primaryColor flex flex-col items-center text-xl font-semibold ${className}`}
+      className={`text-primaryColor dark:text-secondColor flex flex-col items-center text-xl font-semibold ${className}`}
       {...props}
     >
       {title}

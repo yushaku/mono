@@ -19,6 +19,8 @@ module.exports = {
         strokeColor: "#F1F2F3",
         tagColor: "#F6F7F8",
         blackColor: "#051320",
+        darkColor: "#0a0f2f",
+        subDark: "#0f2243",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

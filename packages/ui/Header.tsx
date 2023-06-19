@@ -59,7 +59,7 @@ export const Header = ({
   const dynamicHeaderStyle = scrollDirection === "up" ? "top-0" : "-top-[11vh]";
   const transparentStyle = !transparent
     ? "bg-transparent shadow-md mt-0"
-    : `shadow-lg bg-white/70`;
+    : `shadow-lg bg-white/70 dark:bg-black/50`;
 
   return (
     <header

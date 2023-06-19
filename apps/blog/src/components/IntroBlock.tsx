@@ -20,7 +20,7 @@ export const IntroBlock = () => {
         quality={100}
         fill={true}
       />
-      <h3 className="text-primaryColor text-xl font-semibold">
+      <h3 className="text-primaryColor dark:text-secondColor text-xl font-semibold">
         Dev &quot;phèn&quot;
       </h3>
       <p className="text-grayColor text-sm">
@@ -62,8 +62,7 @@ export const BlogOutline = ({ outline }: { outline: TableOfContent[] }) => {
                   <IconDot
                     width="15px"
                     height="15px"
-                    className="animationShow mr-1 group-hover:mr-3"
-                    color="#234f66"
+                    className="animationShow stroke-primaryColor mr-1 group-hover:mr-3"
                   />
                 ) : (
                   <IconArrowRight
@@ -71,7 +70,7 @@ export const BlogOutline = ({ outline }: { outline: TableOfContent[] }) => {
                     color="#234f66"
                   />
                 )}
-                <span className="group-hover:text-primaryColor animationShow group-hover:font-medium">
+                <span className="group-hover:text-primaryColor dark:group-hover:text-secondColor animationShow group-hover:font-medium">
                   {el.title}
                 </span>
               </Link>
@@ -88,7 +87,7 @@ export const CategoryList = () => {
     <Warper className="w-[350px]">
       <TopicTitle title="Explore Topics" />
 
-      <ul className="w-full divide-y">
+      <ul className="divide-grayColor/40 w-full divide-y">
         {topics.map((el, index) => {
           return (
             <li key={index} className="group">

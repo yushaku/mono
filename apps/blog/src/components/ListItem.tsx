@@ -33,7 +33,7 @@ export const ListItem = ({
           />
         </div>
         <div className="flex-1 text-left">
-          <h3 className="text-textColor group-hover:text-primaryColor animationShow mb-1 text-base font-semibold group-hover:font-bold">
+          <h3 className="text-textColor dark:text-strokeColor group-hover:text-primaryColor animationShow mb-1 text-base font-semibold group-hover:font-bold">
             {name}
           </h3>
           <p className="flex items-center gap-4">

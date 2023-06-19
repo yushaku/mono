@@ -11,7 +11,7 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <ThemeProvider attribute="class">
-      <section>
+      <section className="">
         <Header
           topItems={topItems}
           ontoggleSideBar={() => setShowSidebar(!showSidebar)}
@@ -22,7 +22,7 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
           showSidebar={showSidebar}
           ontoggleSideBar={() => setShowSidebar(!showSidebar)}
         />
-        <div className="mx-auto mt-[15vh] min-h-[100vh] max-w-[1110px] px-6">
+        <div className="mx-auto min-h-[100vh] max-w-[1110px] px-6 pt-[15vh]">
           <Toaster position="bottom-center" />
           {children}
         </div>

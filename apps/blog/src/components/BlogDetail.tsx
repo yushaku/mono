@@ -1,7 +1,5 @@
 import { rnrSlugify } from "@9gustin/react-notion-render";
 import { DropedProps } from "@9gustin/react-notion-render/dist/hoc/withContentValidation";
-import { CONFIG_FILES } from "next/dist/shared/lib/constants";
-import { Palanquin } from "next/font/google";
 import React from "react";
 import { IconCopy, IconInfo } from "ui";
 
@@ -66,7 +64,9 @@ export const numberList = ({ config }: DropedProps) => {
             {el.content.text.map((te, index) => {
               return (
                 <li key={index}>
-                  <span className="text-grayColor mr-2 text-sm">{num}.</span>
+                  <span className="text-primaryColor dark:text-secondColor mr-2 text-sm">
+                    {num}.
+                  </span>
                   {te.plain_text}
                 </li>
               );
@@ -80,14 +80,14 @@ export const numberList = ({ config }: DropedProps) => {
 
 export const callout = ({ config, plainText }: DropedProps) => {
   return (
-    <div className="bg-strokeColor/70 m-4 flex items-center rounded-md p-4">
+    <div className="bg-strokeColor/70 text-textColor m-4 flex items-center rounded-md p-4">
       <span className="w-8">{config.block.content.icon.emoji}</span>
       <p>{plainText}</p>
     </div>
   );
 };
 
-export const quoteBlock = ({ config, plainText }: DropedProps) => {
+export const quoteBlock = ({ plainText }: DropedProps) => {
   return (
     <div className="relative m-4 border-l-[3px] border-[#4c3cff] bg-[#4c3cff]/10 p-4">
       <IconInfo
