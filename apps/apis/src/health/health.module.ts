@@ -1,9 +1,9 @@
-import { Module } from '@nestjs/common';
+import { PrometheusModule } from '../prometheus/prometheus.module';
 import { HealthController } from './health.controller';
 import { HealthService } from './health.service';
-import { TerminusModule } from '@nestjs/terminus';
-import { PrometheusModule } from '../prometheus/prometheus.module';
 import { FilesModule } from '@/files/files.module';
+import { Module } from '@nestjs/common';
+import { TerminusModule } from '@nestjs/terminus';
 
 @Module({
   imports: [TerminusModule, PrometheusModule, FilesModule],

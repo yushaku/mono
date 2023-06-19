@@ -1,5 +1,5 @@
-import * as uuid from 'uuid';
 import { PrimaryKey, Property, UuidType } from '@mikro-orm/core';
+import * as uuid from 'uuid';
 
 export abstract class BaseEntity {
   @PrimaryKey({ type: UuidType })

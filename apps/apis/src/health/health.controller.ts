@@ -1,5 +1,5 @@
-import { Controller, Get, ServiceUnavailableException } from '@nestjs/common';
 import { HealthService } from './health.service';
+import { Controller, Get, ServiceUnavailableException } from '@nestjs/common';
 import { HealthCheckResult } from '@nestjs/terminus';
 
 @Controller('health')

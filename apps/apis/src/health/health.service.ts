@@ -1,3 +1,7 @@
+import { FileModuleHealthIndicator } from './models/FileModule.indicator';
+import { NestjsHealthIndicator } from './models/nestjs-health.indicator';
+import { HealthIndicator } from './type/health-indicator.interface';
+import { FilesService } from '@/files/files.service';
 import { PrometheusService } from '@/prometheus/prometheus.service';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -9,10 +13,6 @@ import {
   MemoryHealthIndicator,
   MikroOrmHealthIndicator,
 } from '@nestjs/terminus';
-import { FileModuleHealthIndicator } from './models/FileModule.indicator';
-import { NestjsHealthIndicator } from './models/nestjs-health.indicator';
-import { HealthIndicator } from './type/health-indicator.interface';
-import { FilesService } from '@/files/files.service';
 
 @Injectable()
 export class HealthService {

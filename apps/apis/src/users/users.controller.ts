@@ -1,3 +1,6 @@
+import { CreateUserDto } from './dto/createUser.dto';
+import { UserDto } from './dto/user.dto';
+import { UsersService } from './users.service';
 import { JwtUser } from '@/common/decorators';
 import { GoogleOAuthGuard, JwtAuthGuard } from '@/common/guards';
 import {
@@ -12,9 +15,6 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
-import { CreateUserDto } from './dto/createUser.dto';
-import { UserDto } from './dto/user.dto';
-import { UsersService } from './users.service';
 import { RequestWithUser } from 'types';
 
 @Controller('user')

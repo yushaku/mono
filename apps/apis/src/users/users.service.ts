@@ -1,3 +1,5 @@
+import { CreateUserDto } from './dto/createUser.dto';
+import { UserDto } from './dto/user.dto';
 import { CommonService } from '@/common/common.service';
 import { UserEntity } from '@/databases/entities';
 import { EntityRepository } from '@mikro-orm/core';
@@ -10,8 +12,6 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { CreateUserDto } from './dto/createUser.dto';
-import { UserDto } from './dto/user.dto';
 
 @Injectable()
 export class UsersService {

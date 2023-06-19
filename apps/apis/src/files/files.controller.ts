@@ -1,3 +1,4 @@
+import { FilesService } from './files.service';
 import {
   Body,
   Controller,
@@ -8,11 +9,10 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { createReadStream } from 'fs';
-import { join } from 'path';
-import { FilesService } from './files.service';
 import { Express } from 'express';
+import { createReadStream } from 'fs';
 import { Multer } from 'multer';
+import { join } from 'path';
 
 @Controller('files')
 export class FilesController {
