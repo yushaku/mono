@@ -1,33 +1,13 @@
 "use client";
 
-import { Button, Footer, Header } from "ui";
+import { Warper } from "@/components";
 import React from "react";
+import { Button } from "ui";
 
 export default function Page() {
   return (
-    <div className="min-h-[200vh]">
-      <Header topItems={topBar} />
+    <Warper>
       <Button title="click" />
-      <Footer />
-    </div>
+    </Warper>
   );
 }
-
-const topBar = [
-  {
-    title: "Products",
-    href: "/products",
-  },
-  {
-    title: "Developer",
-    href: "/introduction",
-  },
-  {
-    title: "Pricing",
-    href: "/pricing",
-  },
-  {
-    title: "About",
-    href: "/about",
-  },
-];

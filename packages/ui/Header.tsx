@@ -7,7 +7,7 @@ import { Button, IconMenu } from ".";
 
 type Props = {
   isAuth?: boolean;
-  ontoggleSideBar: () => void;
+  ontoggleSideBar?: () => void;
   topItems: {
     href: string;
     title: string;
