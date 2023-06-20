@@ -135,6 +135,9 @@ importers:
       openai:
         specifier: ^3.3.0
         version: 3.3.0
+      openai-api:
+        specifier: ^1.3.1
+        version: 1.3.1
       passport:
         specifier: ^0.6.0
         version: 0.6.0
@@ -162,7 +165,7 @@ importers:
         version: 9.0.0
       '@nestjs/schematics':
         specifier: ^9.0.0
-        version: 9.0.0(typescript@5.1.3)
+        version: 9.0.0(typescript@4.3.5)
       '@nestjs/testing':
         specifier: ^9.0.0
         version: 9.0.0(@nestjs/common@9.0.0)(@nestjs/core@9.0.0)(@nestjs/platform-express@9.3.10)
@@ -213,10 +216,10 @@ importers:
         version: 6.1.3
       ts-node:
         specifier: ^10.9.1
-        version: 10.9.1(@types/node@16.18.35)(typescript@5.1.3)
+        version: 10.9.1(@types/node@16.18.35)(typescript@4.3.5)
       ts-patch:
         specifier: ^2.1.0
-        version: 2.1.0(typescript@5.1.3)
+        version: 2.1.0(typescript@4.3.5)
       tsconfig:
         specifier: workspace:^
         version: link:../../packages/tsconfig
@@ -224,8 +227,8 @@ importers:
         specifier: workspace:^
         version: link:../../packages/types
       typescript:
-        specifier: 5.1.3
-        version: 5.1.3
+        specifier: 4.3.5
+        version: 4.3.5
 
   apps/blog:
     dependencies:
@@ -1718,7 +1721,7 @@ packages:
       - chokidar
     dev: true
 
-  /@nestjs/schematics@9.0.0(typescript@5.1.3):
+  /@nestjs/schematics@9.0.0(typescript@4.3.5):
     resolution: {integrity: sha512-l4AReqX597iKyAXVN9WsrLQ1NDY0G15s7x8dHpwM0+3MOFoEKZMvqeiFrfVMqbwuMiTvXTuLcoMdlKuz7qtrDg==}
     peerDependencies:
       typescript: ^4.3.5
@@ -1728,7 +1731,7 @@ packages:
       fs-extra: 10.1.0
       jsonc-parser: 3.0.0
       pluralize: 8.0.0
-      typescript: 5.1.3
+      typescript: 4.3.5
     transitivePeerDependencies:
       - chokidar
     dev: true
@@ -3128,6 +3131,14 @@ packages:
     engines: {node: '>=4'}
     dev: false
 
+  /axios@0.21.4:
+    resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
+    dependencies:
+      follow-redirects: 1.15.2
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /axios@0.26.1:
     resolution: {integrity: sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==}
     dependencies:
@@ -4214,6 +4225,11 @@ packages:
   /dotenv@16.0.3:
     resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
     engines: {node: '>=12'}
+    dev: false
+
+  /dotenv@8.6.0:
+    resolution: {integrity: sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==}
+    engines: {node: '>=10'}
     dev: false
 
   /eastasianwidth@0.2.0:
@@ -6166,7 +6182,7 @@ packages:
       pretty-format: 28.1.3
       slash: 3.0.0
       strip-json-comments: 3.1.1
-      ts-node: 10.9.1(@types/node@16.18.35)(typescript@5.1.3)
+      ts-node: 10.9.1(@types/node@16.18.35)(typescript@4.3.5)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -6206,7 +6222,7 @@ packages:
       pretty-format: 28.1.3
       slash: 3.0.0
       strip-json-comments: 3.1.1
-      ts-node: 10.9.1(@types/node@16.18.35)(typescript@5.1.3)
+      ts-node: 10.9.1(@types/node@16.18.35)(typescript@4.3.5)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -7495,6 +7511,15 @@ packages:
       define-lazy-prop: 3.0.0
       is-inside-container: 1.0.0
       is-wsl: 2.2.0
+    dev: false
+
+  /openai-api@1.3.1:
+    resolution: {integrity: sha512-wKhm/BZS/PyzQRJTdl6kciwL4LpqqyertLYEbbPYDg7ySk1tEywPSBnMio0xdSQaRmdSYVS8VHzJvnwKb9tqkw==}
+    dependencies:
+      axios: 0.21.4
+      dotenv: 8.6.0
+    transitivePeerDependencies:
+      - debug
     dev: false
 
   /openai@3.3.0:
@@ -9182,7 +9207,7 @@ packages:
       code-block-writer: 11.0.3
     dev: false
 
-  /ts-node@10.9.1(@types/node@16.18.35)(typescript@5.1.3):
+  /ts-node@10.9.1(@types/node@16.18.35)(typescript@4.3.5):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -9208,7 +9233,7 @@ packages:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 5.1.3
+      typescript: 4.3.5
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     dev: true
@@ -9244,7 +9269,7 @@ packages:
       yn: 3.1.1
     dev: true
 
-  /ts-patch@2.1.0(typescript@5.1.3):
+  /ts-patch@2.1.0(typescript@4.3.5):
     resolution: {integrity: sha512-+6LbQSGgHUnK+grgk9nvKhesc0/dDNxms0IL1XPZeTfmPFCx/QSuwz9k+9yFe0xYDD7xBlHYK0Zp0qrTCaJcAw==}
     hasBin: true
     peerDependencies:
@@ -9257,7 +9282,7 @@ packages:
       resolve: 1.22.2
       shelljs: 0.8.5
       strip-ansi: 6.0.1
-      typescript: 5.1.3
+      typescript: 4.3.5
     dev: true
 
   /tsconfig-paths-webpack-plugin@3.5.2:
@@ -9433,6 +9458,12 @@ packages:
   /typedarray@0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
 
+  /typescript@4.3.5:
+    resolution: {integrity: sha512-DqQgihaQ9cUrskJo9kIyW/+g0Vxsk8cDtZ52a3NGh0YNTfpUSArXSohyUGnvbPazEPLu398C0UxmKSOrPumUzA==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
+
   /typescript@4.5.3:
     resolution: {integrity: sha512-eVYaEHALSt+s9LbvgEv4Ef+Tdq7hBiIZgii12xXJnukryt3pMgJf6aKhoCZ3FWQsu6sydEnkg11fYXLzhLBjeQ==}
     engines: {node: '>=4.2.0'}
@@ -9454,6 +9485,7 @@ packages:
     resolution: {integrity: sha512-XH627E9vkeqhlZFQuL+UsyAXEnibT0kWR2FWONlr4sTjvxyJYnyefgrkyECLzM5NenmKzRAy2rR/OlYLA1HkZw==}
     engines: {node: '>=14.17'}
     hasBin: true
+    dev: false
 
   /uglify-js@3.17.4:
     resolution: {integrity: sha512-T9q82TJI9e/C1TAxYvfb16xO120tMVFZrGA3f9/P4424DNu6ypK103y0GPFVa17yotwSyZW5iYXgjYHkGrJW/g==}

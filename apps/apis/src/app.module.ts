@@ -1,9 +1,10 @@
-import { CommonModule } from './common/common.module';
-import { FilesModule } from './files/files.module';
-import { HealthModule } from './health/health.module';
-import { MetricModule } from './metric/metric.module';
-import { UsersModule } from './users/users.module';
+import { AppControler } from './app.controller';
+import { CommonModule } from '@/common/common.module';
+import { FilesModule } from '@/files/files.module';
+import { HealthModule } from '@/health/health.module';
+import { MetricModule } from '@/metric/metric.module';
 import { OpenaiModule } from '@/openai/openai.module';
+import { UsersModule } from '@/users/users.module';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
@@ -11,13 +12,14 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MulterModule } from '@nestjs/platform-express';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { PrometheusModule } from '@willsoto/nestjs-prometheus';
-import Joi from 'joi';
+import * as Joi from 'joi';
 
 const { NODE_ENV = 'development' } = process.env;
 const isTest = NODE_ENV === 'test';
 const isDev = NODE_ENV === 'development';
 
 @Module({
+  controllers: [AppControler],
   providers: [ConfigService],
   imports: [
     HttpModule,
@@ -35,6 +37,8 @@ const isDev = NODE_ENV === 'development';
         JWT_SECRET: Joi.string().required(),
         JWT_EXPIRED_TIME: Joi.string().required(),
         APP_PORT: Joi.number().required(),
+
+        OPENAI_API_KEY: Joi.string().required(),
 
         MINIO_ENDPOINT: Joi.string().required().default('localhost'),
         MINIO_PORT: Joi.number().required().default(9000),
