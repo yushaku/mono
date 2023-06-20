@@ -1,5 +1,3 @@
-"use client";
-
 import { Warper } from "@/components";
 import React from "react";
 import { Button } from "ui";

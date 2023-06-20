@@ -36,5 +36,4 @@ const httpClient = () => {
 };
 
 const axiosClient = httpClient();
-
 export default axiosClient;

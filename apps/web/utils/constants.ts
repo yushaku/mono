@@ -4,15 +4,15 @@ export const topBar = [
     href: "/products",
   },
   {
-    title: "Developer",
-    href: "/introduction",
-  },
-  {
     title: "Pricing",
     href: "/pricing",
   },
   {
     title: "About",
-    href: "/about",
+    href: "https://yu-portfolio.vercel.app",
+  },
+  {
+    title: "Blogs",
+    href: "https://yushaku.vercel.app",
   },
 ];

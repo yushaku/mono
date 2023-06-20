@@ -1,8 +1,7 @@
-import NextAuth, { Session } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
 import { login, register } from "@/services/auth";
+import NextAuth, { NextAuthOptions, Session } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
 import { UserAuth } from "types";
-import { NextAuthOptions } from "next-auth";
 
 export const authOptions: NextAuthOptions = {
   providers: [
