@@ -25,18 +25,49 @@ export class OpenaiService {
         model: 'gpt-3.5-turbo',
         messages: [{ role: 'user', content: prompt }],
       })
-      .then((res) => console.log(res.data.choices));
+      .then((res) => console.log(res.data.choices[0].message?.content));
   }
 
-  getStreamValue(): Observable<number> {
-    return new Observable<number>((observer) => {
-      let i = 0;
-      const intervalId = setInterval(() => {
-        observer.next(i++);
-      }, 5000);
+  streamCompletion(prompt: string) {
+    return new Observable((subscriber) => {
+      this.openai
+        .createChatCompletion(
+          {
+            model: 'gpt-3.5-turbo',
+            messages: [{ role: 'user', content: prompt }],
+            max_tokens: 100,
+            temperature: 0,
+            stream: true,
+          },
+          { responseType: 'stream' },
+        )
+        .then((res: any) => {
+          res.data.on('data', (data: any) => {
+            const lines = data
+              .toString()
+              .split('\n')
+              .filter((line: any) => line.trim() !== '');
 
-      // Clean up function when subscriber unsubscribes
-      return () => clearInterval(intervalId);
+            for (const line of lines) {
+              const message = line.replace(/^data: /, '');
+              if (message === '[DONE]') {
+                subscriber.complete();
+                return;
+              }
+              try {
+                const parsed = JSON.parse(message);
+                const data = parsed.choices[0].text;
+                subscriber.next({ data });
+              } catch (error) {
+                console.error(
+                  'Could not JSON parse stream message',
+                  message,
+                  error,
+                );
+              }
+            }
+          });
+        });
     });
   }
 }
