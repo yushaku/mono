@@ -20,12 +20,12 @@ export class OpenaiService {
   }
 
   async askGpt(prompt: string) {
-    await this.openai
+    return this.openai
       .createChatCompletion({
         model: 'gpt-3.5-turbo',
         messages: [{ role: 'user', content: prompt }],
       })
-      .then((res) => console.log(res.data.choices[0].message?.content));
+      .then((res) => res.data.choices[0].message?.content);
   }
 
   streamCompletion(prompt: string) {
@@ -56,18 +56,52 @@ export class OpenaiService {
               }
               try {
                 const parsed = JSON.parse(message);
-                const data = parsed.choices[0].text;
+                const data = parsed.choices[0].delta.content;
+                // console.log(data);
+
                 subscriber.next({ data });
               } catch (error) {
-                console.error(
-                  'Could not JSON parse stream message',
-                  message,
-                  error,
-                );
+                console.error('Error parsing AI response:', error);
               }
             }
           });
         });
+    });
+  }
+
+  stream(prompt: string): Observable<string> {
+    return new Observable((subscriber) => {
+      this.openai
+        .createChatCompletion(
+          {
+            model: 'gpt-3.5-turbo',
+            messages: [{ role: 'user', content: prompt }],
+            max_tokens: 100,
+            temperature: 0,
+            stream: true,
+          },
+          { responseType: 'stream' },
+        )
+        .then((res: any) => {
+          res.data.on('data', (chunk: any) => {
+            const data = chunk.toString();
+
+            if (data === '[DONE]') {
+              subscriber.complete();
+              return;
+            }
+            try {
+              const parsed = JSON.parse(data);
+              const text = parsed.choices[0].text.trim();
+              console.log(text);
+
+              subscriber.next(text);
+            } catch (error) {
+              console.error('Error parsing AI response:', error);
+            }
+          });
+        })
+        .catch((error) => console.error('Error calling OpenAI API:', error));
     });
   }
 }
