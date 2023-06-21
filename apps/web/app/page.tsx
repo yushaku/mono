@@ -1,18 +1,18 @@
 "use client";
 
 import { Warper } from "@/components";
-import { askGpt } from "@/services/chat";
+import { fetchStreamData } from "@/services/chat";
 import React, { ChangeEvent } from "react";
 import { useRef } from "react";
 import { useState } from "react";
 
-let controller = null; // Store the AbortController instance
+let controller = null;
 
 export default function Page() {
   controller = new AbortController();
   const signal = controller.signal;
 
-  const [promt, setPrompt] = useState("");
+  const [prompt, setPrompt] = useState("How to create React App");
   const resultRef = useRef<HTMLParagraphElement>(null);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -27,7 +27,9 @@ export default function Page() {
   };
 
   const handleSend = async () => {
-    const stream = await askGpt(promt, signal);
+    fetchStreamData(prompt, signal, (msg: string) => {
+      resultRef.current.innerText += msg;
+    });
   };
 
   return (
@@ -46,7 +48,8 @@ export default function Page() {
           className="w-full px-4 py-2 rounded-md bg-gray-200 placeholder-gray-500 focus:outline-none mt-4"
           onChange={handleChange}
           placeholder="Enter prompt..."
-        />
+          defaultValue={prompt}
+        ></textarea>
 
         <div className="flex justify-center mt-4">
           <button

@@ -1,13 +1,9 @@
-import axios from "axios";
-import { Session } from "next-auth";
-import { getSession } from "next-auth/react";
+import axios, { ResponseType } from "axios";
 
 export const httpClient = ({
   responseType = "json",
-  contentType = "application/json",
 }: {
-  responseType?: "json" | "stream" | "text" | "document";
-  contentType?: "application/json" | "text/event-stream";
+  responseType?: ResponseType;
 }) => {
   const client = axios.create({
     baseURL: process.env.API_URL || "http://localhost:8005/api",
@@ -15,13 +11,12 @@ export const httpClient = ({
     headers: {
       Accept: "*",
       responseType: responseType,
-      "Content-Type": contentType,
     },
   });
 
   client.interceptors.request.use(
     async (config) => {
-      const session: Session | null = await getSession();
+      // const session: Session | null = await getSession();
       // config.headers.Authorization = `Bearer ${session?.access_token ?? ""}`;
       return config;
     },
@@ -44,7 +39,10 @@ export const httpClient = ({
 
 const axiosClient = httpClient({
   responseType: "json",
-  contentType: "application/json",
+});
+
+export const streamClient = httpClient({
+  responseType: "stream",
 });
 
 export default axiosClient;
