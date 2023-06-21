@@ -1,5 +1,6 @@
 import { OpenaiService } from './openai.service';
-import { Body, Controller, Post, Query, Sse } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Res } from '@nestjs/common';
+import { Response } from 'express';
 
 @Controller('openai')
 export class OpenaiController {
@@ -10,26 +11,19 @@ export class OpenaiController {
     return this.openaiService.askGpt(prompt);
   }
 
-  // @Sse('stream')
-  @Post('stream')
-  gpt(@Query() { prompt }: { prompt: string }) {
-    const stream = this.openaiService.streamCompletion(prompt);
+  @Get('askStream')
+  async askStream(
+    @Res() response: Response,
+    @Query() { prompt }: { prompt: string },
+  ) {
+    const stream = await this.openaiService.askStream(prompt);
 
-    const readableStream = new ReadableStream<string>({
-      start(controller) {
-        stream.subscribe({
-          next(value) {
-            controller.enqueue(value as any);
-          },
-          error(error) {
-            controller.error(error);
-          },
-          complete() {
-            controller.close();
-          },
-        });
-      },
+    response.writeHead(200, {
+      'Content-Type': 'application/octet-stream',
+      'X-Accel-Buffering': 'no',
+      'Transfer-Encoding': 'chunked',
     });
-    return readableStream;
+
+    stream.pipe(response);
   }
 }
