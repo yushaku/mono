@@ -1,10 +1,12 @@
 "use client";
 
 import { Warper } from "@/components";
+import Markdown from "@/components/Markdown";
 import { fetchStreamData } from "@/services/chat";
 import React, { ChangeEvent } from "react";
 import { useRef } from "react";
 import { useState } from "react";
+import ReactMarkdown from "react-markdown";
 
 let controller = null;
 
@@ -35,8 +37,8 @@ export default function Page() {
   return (
     <Warper>
       <div className="lg:w-1/2 2xl:w-1/3 p-8 rounded-md bg-gray-100">
-        <h1 className="text-3xl font-bold mb-6">
-          Streaming OpenAI API Completions in JavaScript
+        <h1 className="text-2xl text-primaryColor font-bold mb-6">
+          Streaming OpenAI API Completions
         </h1>
 
         <div id="resultContainer" className="mt-4 h-48 overflow-y-auto">

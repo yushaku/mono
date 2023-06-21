@@ -11,7 +11,7 @@ export const Warper = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <ThemeProvider attribute="class">
-      <section className="">
+      <section>
         <Header
           isAuth={true}
           topItems={topBar}
