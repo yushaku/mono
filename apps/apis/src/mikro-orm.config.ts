@@ -1,4 +1,13 @@
-import { UserEntity } from './databases/entities';
+import {
+  BotEntity,
+  BotKnowledgeEntity,
+  ChatEntity,
+  ContentEntity,
+  KnowledgeEntity,
+  MessageEntity,
+  TeamEntity,
+  UserEntity,
+} from './databases/entities';
 import { Options } from '@mikro-orm/core';
 import { ConfigService } from '@nestjs/config';
 
@@ -15,7 +24,16 @@ const MikroOrmConfig: Options = {
   user: config.get('DB_USER'),
   password: config.get('DB_PASS'),
   discovery: { warnWhenNoEntities: false },
-  entities: [UserEntity],
+  entities: [
+    UserEntity,
+    TeamEntity,
+    BotEntity,
+    ChatEntity,
+    MessageEntity,
+    KnowledgeEntity,
+    ContentEntity,
+    BotKnowledgeEntity,
+  ],
   migrations: {
     path: './dist/databases/migrations',
     pathTs: './src/databases/migrations',
