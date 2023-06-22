@@ -55,26 +55,7 @@ const isDev = NODE_ENV === 'development';
     MulterModule.register({
       dest: './store',
     }),
-    MikroOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        type: config.get('DB_TYPE'),
-        host: config.get('DB_HOST'),
-        port: config.get('DB_PORT'),
-        dbName: isTest ? config.get('DB_TEST') : config.get('DB_MAIN'),
-        user: config.get('DB_USER'),
-        password: config.get('DB_PASS'),
-        autoLoadEntities: true,
-        discovery: { warnWhenNoEntities: false },
-        debug: isDev ? true : false,
-        pool: {
-          min: 2,
-          max: 10,
-          idleTimeoutMillis: 1000,
-        },
-      }),
-    }),
+    MikroOrmModule.forRoot(),
     CommonModule,
     FilesModule,
     MetricModule,

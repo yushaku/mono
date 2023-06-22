@@ -11,6 +11,11 @@ export class OpenaiController {
     return this.openaiService.askGpt(prompt);
   }
 
+  @Get('listModel')
+  listModel() {
+    return this.openaiService.listModel();
+  }
+
   @Get('askStream')
   async askStream(
     @Res() response: Response,

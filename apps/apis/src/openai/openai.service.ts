@@ -28,6 +28,10 @@ export class OpenaiService {
       .then((res) => res.data.choices[0].message?.content);
   }
 
+  async listModel() {
+    return this.openai.listModels().then((res) => res.data);
+  }
+
   async askStream(prompt: string) {
     const res = await this.openai.createChatCompletion(
       {
@@ -40,5 +44,17 @@ export class OpenaiService {
       { responseType: 'stream' },
     );
     return res.data as unknown as Stream;
+  }
+
+  async genImage(prompt: string) {
+    const res = await this.openai.createImage({
+      prompt,
+      n: 1,
+      size: '1024x1024',
+    });
+
+    const href = res.data.data[0].url;
+    console.log(href);
+    return href;
   }
 }

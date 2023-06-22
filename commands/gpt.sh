@@ -6,4 +6,9 @@ function ask() {
 		-d "{\"prompt\": \"$1\"}" | pino-pretty
 }
 
-ask "$1"
+function listModel() {
+	curl -X GET http://localhost:8005/api/openai/listModel \
+		-H "Content-Type: application/json" | pino-pretty
+}
+
+"$1" "$2"
