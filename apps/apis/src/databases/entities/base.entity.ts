@@ -6,8 +6,8 @@ export abstract class BaseEntity {
   id: string = uuid.v4();
 
   @Property({ fieldName: 'created_at' })
-  createdAt: Date = new Date();
+  createdAt?: Date = new Date();
 
   @Property({ fieldName: 'updated_at', onUpdate: () => new Date() })
-  updatedAt: Date = new Date();
+  updatedAt?: Date = new Date();
 }

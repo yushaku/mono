@@ -1,7 +1,7 @@
 import { CreateUserDto } from './dto/createUser.dto';
 import { UserDto } from './dto/user.dto';
 import { CommonService } from '@/common/common.service';
-import { UserEntity } from '@/databases/entities';
+import { TeamEntity, UserEntity } from '@/databases/entities';
 import { EntityRepository } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import {
@@ -17,7 +17,9 @@ import * as bcrypt from 'bcrypt';
 export class UsersService {
   constructor(
     @InjectRepository(UserEntity)
-    private usersRepository: EntityRepository<UserEntity>,
+    private usersRepo: EntityRepository<UserEntity>,
+    @InjectRepository(TeamEntity)
+    private teamRepo: EntityRepository<TeamEntity>,
     private common: CommonService,
   ) {}
 
@@ -52,8 +54,11 @@ export class UsersService {
       throw new BadRequestException("email's user already existed");
 
     const hash = await bcrypt.hash(userDto.password, saltRounds);
+    const team_id = await this.createTeam({ name: userDto.name });
+
     const user = await this.create({
       ...userDto,
+      team_id,
       password: hash,
     });
 
@@ -80,11 +85,11 @@ export class UsersService {
   }
 
   async getByEmail(email: string) {
-    return this.usersRepository.findOne({ email });
+    return this.usersRepo.findOne({ email });
   }
 
   async getById(id: string) {
-    const user = await this.usersRepository.findOne(
+    const user = await this.usersRepo.findOne(
       { id },
       { fields: ['name', 'email', 'createdAt', 'updatedAt'] },
     );
@@ -92,9 +97,18 @@ export class UsersService {
     return user;
   }
 
-  async create(user: CreateUserDto) {
-    const userSchema = this.usersRepository.create(user as any);
-    this.usersRepository.persistAndFlush(userSchema);
+  async create(user: CreateUserDto & { team_id: string }) {
+    const userSchema = this.usersRepo.create({
+      ...user,
+      role: 'Owner',
+    });
+    await this.usersRepo.persistAndFlush(userSchema);
     return userSchema;
+  }
+
+  async createTeam({ name }: { name: string }) {
+    const team = this.teamRepo.create({ name, vip_plan: 'Free' });
+    await this.teamRepo.persistAndFlush(team);
+    return team.id;
   }
 }

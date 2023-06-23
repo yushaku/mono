@@ -1,20 +1,19 @@
 import { FilesService } from './files.service';
+import { JwtAuthGuard } from '@/common/guards';
 import {
   Body,
   Controller,
   Get,
   Post,
-  StreamableFile,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
-import { createReadStream } from 'fs';
-import { Multer } from 'multer';
-import { join } from 'path';
 
-@Controller('files')
+@Controller('knowledge')
+@UseGuards(JwtAuthGuard)
 export class FilesController {
   constructor(private uploadService: FilesService) {}
 
@@ -30,9 +29,14 @@ export class FilesController {
     return this.uploadService.presignedMinio(fileName);
   }
 
+  // @Get()
+  // getFile(): StreamableFile {
+  //   const file = createReadStream(join(process.cwd(), 'package.json'));
+  //   return new StreamableFile(file);
+  // }
+
   @Get()
-  getFile(): StreamableFile {
-    const file = createReadStream(join(process.cwd(), 'package.json'));
-    return new StreamableFile(file);
+  getKnowledge() {
+    return;
   }
 }
