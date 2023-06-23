@@ -1,8 +1,8 @@
 "use client";
 
+import { IconEye, IconEyeSlash } from "..";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
-import { IconEye, IconEyeSlash } from "..";
 
 type Props<TType> = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
@@ -18,6 +18,7 @@ export function FormInput<TType>({
   ...props
 }: Props<TType>) {
   const [isShowPassword, setIsShowPassword] = useState(false);
+  console.log(type);
 
   const classes = twMerge(
     `mt-3 h-[52px] w-full appearance-none rounded-[8px] border bg-white px-[20px] py-[15px] text-sm text-[#627480] placeholder-[#A3A9B1] focus:outline-none md:text-base ${
@@ -41,10 +42,14 @@ export function FormInput<TType>({
 
       {type === "password" && (
         <span
-          className="absolute right-5 top-12 z-10"
+          className="absolute right-5 top-[50px] z-20 w-7 h-7 cursor-pointer"
           onClick={() => setIsShowPassword(!isShowPassword)}
         >
-          {isShowPassword ? <IconEyeSlash /> : <IconEye />}
+          {isShowPassword ? (
+            <IconEyeSlash color="#234f66" />
+          ) : (
+            <IconEye color="#234f66" className="-translate-y-2" />
+          )}
         </span>
       )}
     </div>

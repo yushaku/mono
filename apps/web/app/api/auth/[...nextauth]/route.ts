@@ -29,6 +29,7 @@ export const authOptions: NextAuthOptions = {
             }));
 
         if (user) return user as any;
+
         return null;
       },
     }),
