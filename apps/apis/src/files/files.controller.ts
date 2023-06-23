@@ -13,7 +13,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
 
 @Controller('knowledge')
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 export class FilesController {
   constructor(private uploadService: FilesService) {}
 
@@ -35,8 +35,8 @@ export class FilesController {
   //   return new StreamableFile(file);
   // }
 
-  @Get()
-  getKnowledge() {
-    return;
+  @Post('crawl')
+  CrawlWebsite(@Body() { url }: { url: string }) {
+    return this.uploadService.CrawlWebsite(url);
   }
 }

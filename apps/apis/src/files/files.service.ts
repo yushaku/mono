@@ -2,6 +2,7 @@ import { MinioService } from '@/common/minio.service';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as fs from 'fs';
+import puppeteer from 'puppeteer';
 
 @Injectable()
 export class FilesService {
@@ -32,5 +33,17 @@ export class FilesService {
 
   async presignedMinio(fileName: string) {
     return this.minioService.getPresignedUrl(fileName);
+  }
+
+  async CrawlWebsite(url: string) {
+    const browser = await puppeteer.launch({ headless: true });
+    const page = await browser.newPage();
+    await page.goto(url);
+
+    const element = await page.content();
+
+    const stream = fs.createWriteStream(`./aaa.html`);
+    stream.write(element);
+    await browser.close();
   }
 }
