@@ -29,7 +29,8 @@ export class UsersService {
 
     await this.verifyPassword(userDto.password, user.password);
     const accessToken = this.common.createAccessToken({
-      userId: user.id,
+      user_id: user.id,
+      team_id: user.team_id ?? '',
     });
 
     return accessToken;
@@ -40,7 +41,8 @@ export class UsersService {
     if (!existedUser) return this.register(user);
 
     const accessToken = this.common.createAccessToken({
-      userId: existedUser.id,
+      user_id: existedUser.id,
+      team_id: existedUser.team_id ?? '',
     });
 
     return accessToken;
@@ -63,7 +65,8 @@ export class UsersService {
     });
 
     const accessToken = this.common.createAccessToken({
-      userId: user.id,
+      user_id: user.id,
+      team_id: user.team_id ?? '',
     });
     return accessToken;
   }

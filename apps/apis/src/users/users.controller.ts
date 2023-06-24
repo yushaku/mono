@@ -80,7 +80,7 @@ export class UsersController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  async getProfile(@JwtUser('userId') id: string) {
+  async getProfile(@JwtUser('user_id') id: string) {
     const user = await this.usersService.getById(id);
     return user;
   }

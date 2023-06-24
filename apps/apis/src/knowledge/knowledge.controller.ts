@@ -1,4 +1,6 @@
+import { CreateProjectDto } from './dto/createProject.dto';
 import { KnowledgeService } from './knowledge.service';
+import { JwtUser } from '@/common/decorators';
 import { JwtAuthGuard } from '@/common/guards';
 import {
   Body,
@@ -10,6 +12,7 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
+import { TokenPayload } from 'types';
 
 @Controller('knowledge')
 @UseGuards(JwtAuthGuard)
@@ -37,5 +40,13 @@ export class KnowledgeController {
   @Post('crawl')
   CrawlWebsite(@Body() { url }: { url: string }) {
     return this.uploadService.CrawlWebsite(url);
+  }
+
+  @Post()
+  createProject(
+    @Body() { title }: CreateProjectDto,
+    @JwtUser() { team_id }: TokenPayload,
+  ) {
+    return this.uploadService.createKnowledge({ title, team_id });
   }
 }

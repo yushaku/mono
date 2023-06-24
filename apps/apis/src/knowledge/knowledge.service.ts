@@ -1,4 +1,8 @@
+import { CreateProjectDto } from './dto/createProject.dto';
 import { MinioService } from '@/common/minio.service';
+import { KnowledgeEntity } from '@/databases/entities';
+import { EntityRepository } from '@mikro-orm/core';
+import { InjectRepository } from '@mikro-orm/nestjs';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as fs from 'fs';
@@ -9,6 +13,8 @@ export class KnowledgeService {
   constructor(
     private configService: ConfigService,
     private minioService: MinioService,
+    @InjectRepository(KnowledgeEntity)
+    private projectRepo: EntityRepository<KnowledgeEntity>,
   ) {}
 
   public get isConnected(): boolean {
@@ -45,5 +51,9 @@ export class KnowledgeService {
     const stream = fs.createWriteStream(`./aaa.html`);
     stream.write(element);
     await browser.close();
+  }
+
+  async createKnowledge(data: CreateProjectDto & { team_id: string }) {
+    return this.projectRepo.create(data);
   }
 }
