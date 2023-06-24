@@ -5,7 +5,7 @@ import * as fs from 'fs';
 import puppeteer from 'puppeteer';
 
 @Injectable()
-export class FilesService {
+export class KnowledgeService {
   constructor(
     private configService: ConfigService,
     private minioService: MinioService,

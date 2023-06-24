@@ -1,9 +1,8 @@
-import { FilesService } from './files.service';
+import { KnowledgeService } from './knowledge.service';
 import { JwtAuthGuard } from '@/common/guards';
 import {
   Body,
   Controller,
-  Get,
   Post,
   UploadedFile,
   UseGuards,
@@ -13,9 +12,9 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
 
 @Controller('knowledge')
-// @UseGuards(JwtAuthGuard)
-export class FilesController {
-  constructor(private uploadService: FilesService) {}
+@UseGuards(JwtAuthGuard)
+export class KnowledgeController {
+  constructor(private uploadService: KnowledgeService) {}
 
   @Post()
   @UseInterceptors(FileInterceptor('file'))

@@ -1,6 +1,6 @@
 import { AppControler } from './app.controller';
+import { KnowledgeModule } from './knowledge/knowledge.module';
 import { CommonModule } from '@/common/common.module';
-import { FilesModule } from '@/files/files.module';
 import { HealthModule } from '@/health/health.module';
 import { MetricModule } from '@/metric/metric.module';
 import { OpenaiModule } from '@/openai/openai.module';
@@ -13,10 +13,6 @@ import { MulterModule } from '@nestjs/platform-express';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { PrometheusModule } from '@willsoto/nestjs-prometheus';
 import * as Joi from 'joi';
-
-const { NODE_ENV = 'development' } = process.env;
-const isTest = NODE_ENV === 'test';
-const isDev = NODE_ENV === 'development';
 
 @Module({
   controllers: [AppControler],
@@ -48,16 +44,11 @@ const isDev = NODE_ENV === 'development';
         MINIO_BUCKET: Joi.string().required().default('doodle'),
       }),
     }),
-    ThrottlerModule.forRoot({
-      ttl: 60,
-      limit: 10,
-    }),
-    MulterModule.register({
-      dest: './store',
-    }),
+    ThrottlerModule.forRoot({ ttl: 60, limit: 10 }),
+    MulterModule.register({ dest: './store' }),
     MikroOrmModule.forRoot(),
     CommonModule,
-    FilesModule,
+    KnowledgeModule,
     MetricModule,
     HealthModule,
     PrometheusModule,
