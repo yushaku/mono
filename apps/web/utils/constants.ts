@@ -1,18 +1,24 @@
+import { IconBot, IconChat, IconKnowledge, IconSetting } from "ui";
+
 export const topBar = [
   {
     title: "Products",
     href: "/products",
+    icon: IconChat,
   },
   {
-    title: "Pricing",
-    href: "/pricing",
+    title: "Bots",
+    href: "/bots",
+    icon: IconBot,
   },
   {
-    title: "About",
-    href: "https://yu-portfolio.vercel.app",
+    title: "Knowledge",
+    href: "/knowledge",
+    icon: IconKnowledge,
   },
   {
     title: "Blogs",
     href: "https://yushaku.vercel.app",
+    icon: IconSetting,
   },
 ];
