@@ -13,9 +13,9 @@ export const IconKnowledge = ({ color = "#888888", ...props }: Props) => {
       <g
         id="outlined"
         stroke="none"
-        stroke-width="1"
+        strokeWidth="1"
         fill="none"
-        fill-rule="evenodd"
+        fillRule="evenodd"
       >
         <g
           id="Marketing_sliced"
@@ -25,9 +25,9 @@ export const IconKnowledge = ({ color = "#888888", ...props }: Props) => {
           id="Marketing"
           transform="translate(-712.000000, -120.000000)"
           stroke={color}
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         >
           <g id="Desk" transform="translate(716.000000, 115.000000)">
             <path

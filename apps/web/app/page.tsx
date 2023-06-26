@@ -34,7 +34,7 @@ export default function Page() {
 
   return (
     <Warper>
-      <div className="lg:w-1/2 2xl:w-1/3 p-8 rounded-md">
+      <div className="p-8 rounded-md">
         <h1 className="text-2xl text-primaryColor font-bold mb-6">
           Streaming OpenAI API Completions
         </h1>

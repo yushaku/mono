@@ -2,8 +2,8 @@ import { IconBot, IconChat, IconKnowledge, IconSetting } from "ui";
 
 export const topBar = [
   {
-    title: "Products",
-    href: "/products",
+    title: "Chats",
+    href: "/chats",
     icon: IconChat,
   },
   {
@@ -17,8 +17,8 @@ export const topBar = [
     icon: IconKnowledge,
   },
   {
-    title: "Blogs",
-    href: "https://yushaku.vercel.app",
+    title: "Settings",
+    href: "settings",
     icon: IconSetting,
   },
 ];

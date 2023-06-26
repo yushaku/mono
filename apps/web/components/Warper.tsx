@@ -1,22 +1,17 @@
 "use client";
 
 import { topBar } from "@/utils/constants";
-import { ThemeProvider } from "next-themes";
 import React from "react";
-import { Toaster } from "react-hot-toast";
 import { Navbar } from "ui";
 
-export const Warper = ({ children }: { children: React.ReactNode }) => {
+export const Warper = ({ children }: React.PropsWithChildren) => {
   return (
-    <ThemeProvider defaultTheme="dark" attribute="class">
-      <section className="flex">
-        <Navbar topItems={topBar} />
+    <section className="flex dark:bg-dark-300">
+      <Navbar topItems={topBar} />
 
-        <div className="mx-auto w-full bg-strokeColor my-4 mr-4 rounded-lg dark:bg-dark flex px-6 pt-[15vh]">
-          <Toaster position="top-center" />
-          {children}
-        </div>
-      </section>
-    </ThemeProvider>
+      <div className="mx-auto w-full bg-strokeColor my-4 mr-4 rounded-lg dark:bg-dark flex px-6 pt-[15vh]">
+        {children}
+      </div>
+    </section>
   );
 };
