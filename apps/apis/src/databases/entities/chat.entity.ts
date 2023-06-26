@@ -10,5 +10,5 @@ export class ChatEntity extends BaseEntity {
   title: string;
 
   @Property({ fieldName: 'is_pin', type: Boolean, default: false })
-  is_pin: boolean;
+  is_pin?: boolean;
 }

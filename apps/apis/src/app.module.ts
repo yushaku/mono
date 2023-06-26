@@ -12,6 +12,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MulterModule } from '@nestjs/platform-express';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { PrometheusModule } from '@willsoto/nestjs-prometheus';
+import { ChatsModule } from './chats/chats.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -54,6 +55,7 @@ import * as Joi from 'joi';
     PrometheusModule,
     UsersModule,
     OpenaiModule,
+    ChatsModule,
   ],
 })
 export class AppModule {}
