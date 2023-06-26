@@ -41,13 +41,14 @@ export class UsersController {
     const user = req.user as CreateUserDto;
     const accessToken = await this.usersService.googleAuth(user);
 
-    res.cookie('access_token', accessToken, {
-      httpOnly: true,
-      sameSite: this.isDevelopment ? 'lax' : 'strict',
-      secure: this.isDevelopment ? false : true,
-      expires: new Date(Date.now() + 30 * 60 * 1000),
-    });
-    res.redirect(this.config.get('CLIENT_URL') ?? 'http://localhost:3000');
+    // res.cookie('access_token', accessToken, {
+    //   httpOnly: true,
+    //   sameSite: this.isDevelopment ? 'lax' : 'strict',
+    //   secure: this.isDevelopment ? false : true,
+    //   expires: new Date(Date.now() + 30 * 60 * 1000),
+    // });
+    // res.redirect(this.config.get('CLIENT_URL') ?? 'http://localhost:3000');
+    return { accessToken };
   }
 
   @Post('login')
@@ -58,14 +59,7 @@ export class UsersController {
   ) {
     const accessToken = await this.usersService.login(userDto);
 
-    res
-      .cookie('access_token', accessToken, {
-        httpOnly: true,
-        sameSite: this.isDevelopment ? 'lax' : 'strict',
-        secure: this.isDevelopment ? false : true,
-        expires: new Date(Date.now() + 30 * 60 * 1000),
-      })
-      .send({ status: 'login successfully' });
+    return { accessToken };
   }
 
   @Post('register')
@@ -75,14 +69,7 @@ export class UsersController {
   ) {
     const accessToken = await this.usersService.register(userDto);
 
-    res
-      .cookie('access_token', accessToken, {
-        httpOnly: true,
-        sameSite: this.isDevelopment ? 'lax' : 'strict',
-        secure: this.isDevelopment ? false : true,
-        expires: new Date(Date.now() + 30 * 60 * 1000),
-      })
-      .send({ status: 'register successfully' });
+    return { accessToken };
   }
 
   @Post('logout')
