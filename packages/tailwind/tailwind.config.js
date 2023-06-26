@@ -19,8 +19,12 @@ module.exports = {
         strokeColor: "#F1F2F3",
         tagColor: "#F6F7F8",
         blackColor: "#051320",
-        darkColor: "#0a0f2f",
-        subDark: "#0f2243",
+        dark: {
+          DEFAULT: "#323337",
+          100: "#0a0f2f",
+          200: "#0f2243",
+          300: "#151718",
+        },
       },
       boxShadow: {
         lightShadow: "-2px 2px 20px 10px #00000024",
