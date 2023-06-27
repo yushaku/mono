@@ -13,11 +13,19 @@ export class ChatsService {
   ) {}
 
   getAll(team_id: string) {
-    return this.chatRepo.find({ team_id });
+    return this.chatRepo.find(
+      { team_id },
+      {
+        fields: ['title', 'is_pin', 'createdAt'],
+        orderBy: { createdAt: 'DESC' },
+      },
+    );
   }
 
-  create(chatDto: CreateChatDto & { team_id: string }) {
-    return this.chatRepo.create(chatDto);
+  async create(chatDto: CreateChatDto & { team_id: string }) {
+    const chat = this.chatRepo.create(chatDto);
+    await this.chatRepo.persistAndFlush(chat);
+    return chat;
   }
 
   updateTitle(chatDto: UpdateChatDto) {

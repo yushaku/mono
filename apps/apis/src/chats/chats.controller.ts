@@ -21,7 +21,7 @@ export class ChatsController {
 
   @Get()
   async getAll(@JwtUser() { team_id }: TokenPayload) {
-    this.chatsService.getAll(team_id);
+    return this.chatsService.getAll(team_id);
   }
 
   @Post()
