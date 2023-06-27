@@ -1,8 +1,17 @@
 import { ChatsService } from './chats.service';
-import { CreateChatDto } from './dto/createChat.dto';
+import { CreateChatDto, UpdateChatDto } from './dto/createChat.dto';
 import { JwtUser } from '@/common/decorators';
 import { JwtAuthGuard } from '@/common/guards';
-import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  UseGuards,
+  Patch,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { TokenPayload } from 'types';
 
 @Controller('chats')
@@ -21,5 +30,15 @@ export class ChatsController {
     @Body() { title }: CreateChatDto,
   ) {
     this.chatsService.create({ team_id, title });
+  }
+
+  @Patch()
+  async updatetitle(@Body() chatDto: UpdateChatDto) {
+    this.chatsService.updateTitle(chatDto);
+  }
+
+  @Delete()
+  async delete(@Query() { id }: { id: string }) {
+    this.chatsService.delete(id);
   }
 }

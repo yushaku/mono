@@ -1,14 +1,15 @@
-import { CreateChatDto } from './dto/createChat.dto';
+import { CreateChatDto, UpdateChatDto } from './dto/createChat.dto';
 import { ChatEntity } from '@/databases/entities';
-import { EntityRepository } from '@mikro-orm/core';
+import { EntityRepository as ER } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
+import { EntityManager } from '@mikro-orm/postgresql';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ChatsService {
   constructor(
-    @InjectRepository(ChatEntity)
-    private chatRepo: EntityRepository<ChatEntity>,
+    @InjectRepository(ChatEntity) private chatRepo: ER<ChatEntity>,
+    private em: EntityManager,
   ) {}
 
   getAll(team_id: string) {
@@ -17,5 +18,18 @@ export class ChatsService {
 
   create(chatDto: CreateChatDto & { team_id: string }) {
     return this.chatRepo.create(chatDto);
+  }
+
+  updateTitle(chatDto: UpdateChatDto) {
+    const query = this.em.createQueryBuilder(ChatEntity);
+    return query
+      .update({ title: chatDto.title })
+      .where({ id: chatDto.id })
+      .execute('run');
+  }
+
+  delete(id: string) {
+    const query = this.em.createQueryBuilder(ChatEntity);
+    return query.delete().where({ id }).execute('run');
   }
 }
