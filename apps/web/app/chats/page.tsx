@@ -1,5 +1,3 @@
-"use client";
-
 import ListChats from "@/components/chats/listChats";
 import { getChats } from "@/services/chat";
 import getQueryClient from "@/utils/getQueryClient";
@@ -10,8 +8,6 @@ const ChatPage = async () => {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery(["hydrate-chats"], getChats);
   const dehydratedState = dehydrate(queryClient);
-
-  console.log(dehydratedState);
 
   return (
     <Hydrate state={dehydratedState}>

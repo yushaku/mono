@@ -1,7 +1,9 @@
-import Providers from "@/utils/provider";
+import "./globals.css";
+import { Navbar } from "@/components/Navbar";
+import { TopPage } from "@/components/TopPage";
+import Providers from "@/components/provider";
 import React from "react";
 import { Toaster } from "react-hot-toast";
-import "./globals.css";
 
 export const metadata = {
   title: "YuPoller",
@@ -17,7 +19,13 @@ export default function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning={true}>
         <Toaster />
-        <Providers>{children}</Providers>
+
+        <Providers>
+          <section className="flex dark:bg-dark-300 bg-strokeColor">
+            <Navbar />
+            {children}
+          </section>
+        </Providers>
       </body>
     </html>
   );
