@@ -76,12 +76,12 @@ export const Navbar = ({ topItems }: Props) => {
 
         <div
           className={`flex p-1 rounded-xl ${
-            theme === "light" ? "bg-strokeColor" : "bg-dark"
+            theme === "dark" ? "bg-dark" : "bg-strokeColor"
           }`}
         >
           <button
             className={`${
-              theme === "light" && "bg-white"
+              theme === "dark" ? "" : "bg-white"
             } flexCenter h-[52px] w-full gap-3 rounded-lg`}
             onClick={() => setTheme("light")}
           >

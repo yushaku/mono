@@ -1,3 +1,7 @@
+import { httpClient } from ".";
+import { useQuery } from "@tanstack/react-query";
+import { Chats } from "types";
+
 export const fetchStreamData = (
   prompt: string,
   signal: AbortSignal,
@@ -41,4 +45,18 @@ export const fetchStreamData = (
     .catch((error) => {
       console.error("Error fetching stream data:", error);
     });
+};
+
+const chatPath = "/chats";
+
+export const useGetChats = () => {
+  return useQuery([chatPath], async () => {
+    return await getChats();
+  });
+};
+
+export const getChats = async () => {
+  const res = await httpClient().get(chatPath);
+  const messageList = res.data.data ?? [];
+  return messageList as Chats[];
 };
