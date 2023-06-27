@@ -1,4 +1,5 @@
 import { CreateUserDto } from './dto/createUser.dto';
+import { InviteUserDto } from './dto/inviteUser.dto';
 import { UserDto } from './dto/user.dto';
 import { CommonService } from '@/common/common.service';
 import { TeamEntity, UserEntity } from '@/databases/entities';
@@ -107,6 +108,10 @@ export class UsersService {
     });
     await this.usersRepo.persistAndFlush(userSchema);
     return userSchema;
+  }
+
+  async inviteUser(userDto: { team_id: string; users: InviteUserDto[] }) {
+    return;
   }
 
   async createTeam({ name }: { name: string }) {

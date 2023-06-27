@@ -8,5 +8,6 @@ import { Module } from '@nestjs/common';
   imports: [MikroOrmModule.forFeature([ChatEntity])],
   controllers: [ChatsController],
   providers: [ChatsService],
+  exports: [ChatsService],
 })
 export class ChatsModule {}

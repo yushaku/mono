@@ -12,7 +12,7 @@
     "dev:blog": "pnpm --filter blog dev",
     "dev:story": "pnpm --filter story storybook"
   },
- "lint-staged": {
+  "lint-staged": {
     "apps/**/*.{js,ts,jsx,tsx}": [
       "eslint --fix"
     ],
@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@turbo/gen": "^1.9.7",
+    "@types/lodash": "^4.14.195",
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
     "husky": "^8.0.3",
@@ -36,6 +37,7 @@
   "dependencies": {
     "@nestjs/mapped-types": "*",
     "autoprefixer": "^10.4.14",
+    "lodash": "^4.17.21",
     "tailwind-config": "workspace:^"
   }
 }

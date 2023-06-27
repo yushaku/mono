@@ -1,4 +1,5 @@
 import { CreateUserDto } from './dto/createUser.dto';
+import { InviteUserDto } from './dto/inviteUser.dto';
 import { UserDto } from './dto/user.dto';
 import { UsersService } from './users.service';
 import { JwtUser } from '@/common/decorators';
@@ -94,5 +95,16 @@ export class UsersController {
   async getProfile(@JwtUser('user_id') id: string) {
     const user = await this.usersService.getById(id);
     return user;
+  }
+
+  @Post('invite')
+  async inviteUser(
+    @JwtUser('team_id') team_id: string,
+    @Body() users: InviteUserDto[],
+  ) {
+    return this.usersService.inviteUser({
+      team_id,
+      users,
+    });
   }
 }
