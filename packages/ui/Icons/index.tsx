@@ -1,4 +1,5 @@
 export * from "./BigLogo";
+export * from "./IconAdd";
 export * from "./IconBot";
 export * from "./IconChat";
 export * from "./IconCopy";
@@ -13,6 +14,8 @@ export * from "./IconLinkedin";
 export * from "./IconMenu";
 export * from "./IconMoon";
 export * from "./IconRightArrow";
+export * from "./IconSearch";
 export * from "./IconSetting";
 export * from "./IconSun";
+export * from "./IconTheme";
 export * from "./IconWaveLine";
