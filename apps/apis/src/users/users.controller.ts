@@ -39,16 +39,16 @@ export class UsersController {
   @UseGuards(GoogleOAuthGuard)
   async googleAuthRedirect(@Req() req: RequestWithUser, @Res() res: Response) {
     const user = req.user as CreateUserDto;
-    const accessToken = await this.usersService.googleAuth(user);
+    const access_token = await this.usersService.googleAuth(user);
 
-    // res.cookie('access_token', accessToken, {
+    // res.cookie('access_token', access_token, {
     //   httpOnly: true,
     //   sameSite: this.isDevelopment ? 'lax' : 'strict',
     //   secure: this.isDevelopment ? false : true,
     //   expires: new Date(Date.now() + 30 * 60 * 1000),
     // });
     // res.redirect(this.config.get('CLIENT_URL') ?? 'http://localhost:3000');
-    return { accessToken };
+    return { access_token };
   }
 
   @Post('login')
@@ -57,9 +57,9 @@ export class UsersController {
     @Body() userDto: Required<UserDto>,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const accessToken = await this.usersService.login(userDto);
+    const access_token = await this.usersService.login(userDto);
 
-    return { accessToken };
+    return { access_token };
   }
 
   @Post('register')
@@ -67,9 +67,9 @@ export class UsersController {
     @Body() userDto: CreateUserDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const accessToken = await this.usersService.register(userDto);
+    const access_token = await this.usersService.register(userDto);
 
-    return { accessToken };
+    return { access_token };
   }
 
   @Post('logout')

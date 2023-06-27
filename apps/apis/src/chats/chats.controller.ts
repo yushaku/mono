@@ -11,7 +11,7 @@ export class ChatsController {
   constructor(private readonly chatsService: ChatsService) {}
 
   @Get()
-  async getChats(@JwtUser() { team_id }: TokenPayload) {
+  async getAll(@JwtUser() { team_id }: TokenPayload) {
     this.chatsService.getAll(team_id);
   }
 
