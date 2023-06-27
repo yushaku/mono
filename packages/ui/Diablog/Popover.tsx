@@ -1,3 +1,5 @@
+"use client";
+
 import { IconArrowRight, IconAutomation, IconInsight, IconReport } from "..";
 import { Popover, Transition } from "@headlessui/react";
 import { Fragment } from "react";
