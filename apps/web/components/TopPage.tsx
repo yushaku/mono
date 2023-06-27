@@ -7,7 +7,7 @@ import { Button } from "ui";
 
 export const TopPage = () => {
   return (
-    <article className="w-full flex items-center justify-between pt-2">
+    <article className="w-full flex items-center justify-between pt-5">
       <h3 className="text-primaryColor text-2xl font-semibold">Header</h3>
       <div className="flex">
         <button className="flexCenter" onClick={() => signOut()}>

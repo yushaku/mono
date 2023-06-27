@@ -7,14 +7,14 @@ export const topBar = [
     icon: IconChat,
   },
   {
-    title: "Bots",
-    href: "/bots",
-    icon: IconBot,
-  },
-  {
     title: "Knowledge",
     href: "/knowledge",
     icon: IconKnowledge,
+  },
+  {
+    title: "Bots",
+    href: "/bots",
+    icon: IconBot,
   },
   {
     title: "Settings",

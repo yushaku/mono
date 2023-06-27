@@ -1,4 +1,3 @@
-import ListChats from "@/components/chats/listChats";
 import { getChats } from "@/services/chat";
 import getQueryClient from "@/utils/getQueryClient";
 import { dehydrate, Hydrate } from "@tanstack/react-query";
@@ -11,7 +10,7 @@ const ChatPage = async () => {
 
   return (
     <Hydrate state={dehydratedState}>
-      <ListChats />
+      <div></div>
     </Hydrate>
   );
 };

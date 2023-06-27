@@ -8,7 +8,7 @@ import { IconArrowRight } from "ui";
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <section className="relative flex w-full ml-8">
-      <div className="absolute top-[20%] -left-3 bg-white rounded-lg border-4 border-strokeColor">
+      <div className="absolute top-[30%] -left-3 bg-white rounded-lg border-4 border-strokeColor">
         <IconArrowRight className="stroke-primaryColor rotate-180 w-4 h-4" />
       </div>
 

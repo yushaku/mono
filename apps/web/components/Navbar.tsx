@@ -10,9 +10,14 @@ import { IconTheme } from "ui";
 export const Navbar = () => {
   const { theme, setTheme } = useTheme();
   const pathName = usePathname();
+  const isAuthPage = pathName.includes("/auth/");
 
   return (
-    <nav className="w-24 rounded-3xl bg-white dark:bg-dark px-4 ml-6 my-[2dvh] h-[96dvh] flex flex-col items-center justify-between">
+    <nav
+      className={`${
+        isAuthPage ? "hidden" : "block"
+      } w-24 rounded-3xl bg-white dark:bg-dark px-4 ml-6 my-[2dvh] h-[96dvh] flex flex-col items-center justify-between`}
+    >
       <section className="py-4 my-8">
         <Link href="/" className="flexCenter">
           <Image
@@ -26,7 +31,7 @@ export const Navbar = () => {
 
         <ul className="flex flex-col gap-4 mt-12">
           {topBar.map(({ href, icon: Icon }, index) => {
-            const isSelected = pathName === href;
+            const isSelected = pathName.includes(href);
 
             const selectElement = isSelected
               ? "bg-strokeColor translate-x-12 rounded-full "

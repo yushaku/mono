@@ -1,5 +1,6 @@
 import { httpClient } from ".";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 import { Chats } from "types";
 
 export const fetchStreamData = (
@@ -57,6 +58,24 @@ export const useGetChats = () => {
 
 export const getChats = async () => {
   const res = await httpClient().get(chatPath);
-  const messageList = res.data.data ?? [];
+  const messageList = res.data ?? [];
   return messageList as Chats[];
+};
+
+export const useCreateChat = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    [chatPath],
+    async (data: { title: string }) => {
+      const res = await httpClient().post(chatPath, data);
+      return res.data.data as any;
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([chatPath]);
+        toast.success("Create successfully");
+      },
+    }
+  );
 };
