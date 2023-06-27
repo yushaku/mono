@@ -1,5 +1,3 @@
-"use client";
-
 import { TopPage } from "@/components/TopPage";
 import ListChats from "@/components/chats/listChats";
 import React from "react";
@@ -16,7 +14,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
       <article className="ml-4 w-full">
         <div className="mx-auto w-full bg-white my-4 mr-4 rounded-2xl dark:bg-dark px-6 ml-4">
-          <TopPage />
+          <TopPage title="Chats" />
           <hr className="my-2" />
           {children}
         </div>

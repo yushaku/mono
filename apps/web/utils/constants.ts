@@ -18,7 +18,7 @@ export const topBar = [
   },
   {
     title: "Settings",
-    href: "settings",
+    href: "/settings",
     icon: IconSetting,
   },
 ];
