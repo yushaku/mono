@@ -2,23 +2,15 @@ import React from "react";
 
 type Props = React.SVGProps<SVGSVGElement> & {};
 
-export const IconArrowRight = ({
-  color = "#051320",
-  width = 7,
-  height = 16,
-  ...props
-}: Props) => {
+export const IconArrowRight = (props: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={width}
-      height={height}
       fill="none"
       viewBox="0 0 9 18"
       {...props}
     >
       <path
-        stroke={color}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeMiterlimit="10"
