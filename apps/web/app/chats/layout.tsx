@@ -15,7 +15,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <article className="ml-4 w-full">
         <div className="mx-auto w-full bg-white my-4 mr-4 rounded-2xl dark:bg-dark px-6 ml-4">
           <TopPage title="Chats" />
+
           <hr className="my-2" />
+
           {children}
         </div>
       </article>

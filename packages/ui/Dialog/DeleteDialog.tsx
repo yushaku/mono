@@ -5,14 +5,14 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
 type Props = {
-  id: string;
+  isShow: boolean;
   onSubmit: () => void;
   onCancel: () => void;
 };
 
-export const DeleteDialog = ({ id, onSubmit, onCancel }: Props) => {
+export const DeleteDialog = ({ isShow, onSubmit, onCancel }: Props) => {
   return (
-    <Transition appear show={id !== undefined} as={Fragment}>
+    <Transition appear show={isShow} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={onCancel}>
         <Transition.Child
           as={Fragment}

@@ -1,5 +1,5 @@
 import { TopPage } from "@/components/TopPage";
-import ListChats from "@/components/chats/listChats";
+import ListProject from "@/components/knowledge/listPropject";
 import React from "react";
 import { IconArrowRight } from "ui";
 
@@ -10,7 +10,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <IconArrowRight className="stroke-primaryColor rotate-180 w-4 h-4" />
       </div>
 
-      <ListChats />
+      <ListProject />
 
       <article className="ml-4 w-full">
         <div className="mx-auto w-full bg-white my-4 mr-4 rounded-2xl dark:bg-dark px-6 ml-4">

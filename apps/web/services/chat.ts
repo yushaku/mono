@@ -79,3 +79,38 @@ export const useCreateChat = () => {
     }
   );
 };
+
+export const useUpdateChat = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    [chatPath],
+    async (data: { title: string; id: string }) => {
+      const res = await httpClient().patch(chatPath, data);
+      return res.data;
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([chatPath]);
+        toast.success("Update successfully");
+      },
+    }
+  );
+};
+
+export const useDeleteChat = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    [chatPath],
+    async (id: string) => {
+      const res = await httpClient().delete(`${chatPath}/${id}`);
+      return res.data;
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([chatPath]);
+      },
+    }
+  );
+};

@@ -7,14 +7,14 @@ import { Fragment } from "react";
 type Props = {
   title: string;
   page: string;
-  setToggle: () => void;
+  onCancel: () => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onsubmit: () => void;
 };
 export const FormDialog = ({
   title,
   page,
-  setToggle,
+  onCancel,
   onChange,
   onsubmit,
 }: Props) => {
@@ -27,7 +27,7 @@ export const FormDialog = ({
 
   return (
     <Transition appear show={title !== undefined} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={setToggle}>
+      <Dialog as="div" className="relative z-10" onClose={onCancel}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -65,6 +65,7 @@ export const FormDialog = ({
                   {/*   an email with all of the details of your order. */}
                   {/* </p> */}
                   <FormInput
+                    value={title}
                     name={`${page} title`}
                     placeholder={`${page} title`}
                     onChange={onChange}
@@ -78,13 +79,13 @@ export const FormDialog = ({
                     className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                     onClick={onsubmit}
                   >
-                    Create
+                    Submit
                   </button>
 
                   <button
                     type="button"
                     className="rounded-md border border-transparent bg-white px-4 py-2 text-sm font-medium text-grayColor hover:bg-blue-200"
-                    onClick={setToggle}
+                    onClick={onCancel}
                   >
                     Cancel
                   </button>

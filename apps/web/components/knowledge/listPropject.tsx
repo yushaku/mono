@@ -3,31 +3,32 @@
 import { ListItem } from "../ListItem";
 import { SearchBox } from "../SearchBox";
 import {
-  getChats,
-  useCreateChat,
-  useDeleteChat,
-  useUpdateChat,
-} from "@/services/chat";
+  getProject,
+  knowledgePath,
+  useCreateProject,
+  useDeleteProject,
+  useUpdateProject,
+} from "@/services";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { Action } from "types";
 import { DeleteDialog, FormDialog } from "ui";
 
-export default function ListChats() {
+export default function ListProject() {
   const [title, setTitle] = useState<string | undefined>();
   const [id, setId] = useState<string | undefined>();
+
+  const { mutate: createProject } = useCreateProject();
+  const { mutate: updateProject } = useUpdateProject();
+  const { mutate: deleteProject } = useDeleteProject();
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: [knowledgePath],
+    queryFn: () => getProject(),
+  });
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
-
-  const { mutate: createChat } = useCreateChat();
-  const { mutate: updateChatTitle } = useUpdateChat();
-  const { mutate: deleteChat } = useDeleteChat();
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ["hydrate-chats"],
-    queryFn: () => getChats(),
-  });
 
   const handleAction = (type: Action, id: string, oldName: string) => {
     if (type === "update") {
@@ -46,15 +47,15 @@ export default function ListChats() {
   };
 
   const handleDelete = () => {
-    deleteChat(id);
+    deleteProject(id);
     handleCancel();
   };
 
   const handleSubmit = () => {
     if (id && title) {
-      updateChatTitle({ id, title });
+      updateProject({ id, title });
     } else {
-      createChat({ title });
+      createProject({ title });
     }
     handleCancel();
   };
@@ -73,8 +74,8 @@ export default function ListChats() {
             return (
               <ListItem
                 onAction={(type) => handleAction(type, el.id, el.title)}
+                href={`/knowledge/${el.id}`}
                 key={el.id}
-                href={`chats/${el.id}`}
                 title={el.title}
               />
             );
@@ -83,7 +84,7 @@ export default function ListChats() {
       </ul>
 
       <FormDialog
-        page="Chats"
+        page="Project"
         title={title}
         onChange={handleOnChange}
         onsubmit={handleSubmit}

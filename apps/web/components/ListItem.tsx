@@ -1,8 +1,6 @@
-"use client";
-
 import Link from "next/link";
 import React from "react";
-import { Action, Chats, MenuFeatures } from "types";
+import { Action, MenuFeatures } from "types";
 import { DropdownMenu, IconPen, IconTrash } from "ui";
 
 const dropdownFeatures: MenuFeatures = [
@@ -10,25 +8,22 @@ const dropdownFeatures: MenuFeatures = [
   { title: "update", icon: <IconPen /> },
 ];
 
-export const ListItem = ({ title, id }: Partial<Chats>) => {
-  const handleAction = (type: Action, id: string, oldName: string) => {
-    if (type === "update") {
-    }
-
-    if (type === "delete") {
-    }
-  };
-
+type Props = {
+  title: string;
+  href: string;
+  onAction: (type: Action) => void;
+};
+export const ListItem = ({ title, href, onAction }: Props) => {
   return (
-    <Link href={`/chats/${id}`}>
-      <li className="bg-strokeColor flex justify-between items-center px-4 py-3 rounded-lg text-grayColor w-full">
+    <li className="bg-strokeColor flex justify-between items-center px-4 py-3 rounded-lg text-grayColor w-full">
+      <Link href={href} className="hover:text-primaryColor hover:font-medium">
         {title}
+      </Link>
 
-        <DropdownMenu
-          menuFeatures={dropdownFeatures}
-          handleAction={(type) => handleAction(type, id, title)}
-        />
-      </li>
-    </Link>
+      <DropdownMenu
+        menuFeatures={dropdownFeatures}
+        handleAction={(type) => onAction(type)}
+      />
+    </li>
   );
 };

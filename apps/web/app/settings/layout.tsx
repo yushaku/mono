@@ -7,9 +7,9 @@ import React from "react";
 import { IconArrowRight } from "ui";
 
 const settingPages = [
-  { href: "/", title: "Group" },
-  { href: "users", title: "User" },
-  { href: "billing", title: "billing" },
+  { href: "", title: "Group" },
+  { href: "/users", title: "User" },
+  { href: "/billing", title: "billing" },
 ];
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -17,14 +17,15 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <section className="relative flex w-full ml-8">
-      <div className="absolute top-[63%] -left-3 bg-white rounded-lg border-4 border-strokeColor">
+      <div className="absolute top-[500px] -left-3 bg-white rounded-lg border-4 border-strokeColor">
         <IconArrowRight className="stroke-primaryColor rotate-180 w-4 h-4" />
       </div>
 
       <article className="my-[2dvh] h-[96dvh] p-4 bg-white w-1/4 rounded-2xl">
         <ul className="mt-4 flex flex-col gap-3">
           {settingPages.map((el, index) => {
-            const isSelected = pathName === el.href;
+            const isSelected = pathName === `/settings${el.href}`;
+
             return (
               <li key={index}>
                 <Link
