@@ -7,6 +7,8 @@ export const IconArrowRight = (props: Props) => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
+      width={20}
+      height={20}
       viewBox="0 0 9 18"
       {...props}
     >
