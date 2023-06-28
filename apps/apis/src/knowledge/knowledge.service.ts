@@ -14,6 +14,7 @@ import { CreateProjectDto, UpdateProjectDto } from 'types';
 export class KnowledgeService {
   constructor(
     @InjectRepository(KnowledgeEntity) private projectRepo: ER<KnowledgeEntity>,
+    @InjectRepository(KnowledgeEntity) private contentRepo: ER<KnowledgeEntity>,
     private em: EntityManager,
     private configService: ConfigService,
     private minioService: MinioService,

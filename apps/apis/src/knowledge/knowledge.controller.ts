@@ -26,15 +26,33 @@ export class KnowledgeController {
   //   return { message: 'success', filePath };
   // }
 
+  // @Post('crawl')
+  // CrawlWebsite(@Body() { url }: { url: string }) {
+  //   return this.knowledgeService.CrawlWebsite(url);
+  // }
+
   @Post('/presigned')
   async presignedFile(@Body('fileName') fileName: string) {
     return this.knowledgeService.presignedMinio(fileName);
   }
 
-  // @Post('crawl')
-  // CrawlWebsite(@Body() { url }: { url: string }) {
-  //   return this.knowledgeService.CrawlWebsite(url);
-  // }
+  @Post('/content')
+  createContent(
+    @Body() { title }: CreateProjectDto,
+    @JwtUser() { team_id }: TokenPayload,
+  ) {
+    return this.knowledgeService.createKnowledge({ title, team_id });
+  }
+
+  @Patch('/content/:id')
+  updateContent(@Body() projectDto: UpdateProjectDto) {
+    return this.knowledgeService.updateTitle(projectDto);
+  }
+
+  @Delete('/content/:id')
+  deleteContent(@Param('id') id: string) {
+    return this.knowledgeService.delete(id);
+  }
 
   @Post()
   createProject(
