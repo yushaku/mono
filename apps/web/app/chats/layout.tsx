@@ -1,19 +1,28 @@
 import { TopPage } from "@/components/TopPage";
 import ListChats from "@/components/chats/listChats";
+import { getChats } from "@/services/chat";
+import getQueryClient from "@/utils/getQueryClient";
+import { dehydrate, Hydrate } from "@tanstack/react-query";
 import React from "react";
 import { IconArrowRight } from "ui";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = async ({ children }: { children: React.ReactNode }) => {
+  const queryClient = getQueryClient();
+  await queryClient.prefetchQuery(["/chats"], getChats);
+  const dehydratedState = dehydrate(queryClient);
+
   return (
     <section className="relative flex w-full ml-8">
       <div className="absolute top-[20%] -left-3 bg-white rounded-lg border-4 border-strokeColor">
         <IconArrowRight className="stroke-primaryColor rotate-180 w-4 h-4" />
       </div>
 
-      <ListChats />
+      <Hydrate state={dehydratedState}>
+        <ListChats />
+      </Hydrate>
 
-      <article className="ml-4 w-full">
-        <div className="mx-auto w-full bg-white my-4 mr-4 rounded-2xl dark:bg-dark px-6 ml-4">
+      <article className="mx-4 my-4 w-full">
+        <div className="bg-white dark:bg-dark rounded-2xl px-6">
           <TopPage title="Chats" />
 
           <hr className="my-2" />

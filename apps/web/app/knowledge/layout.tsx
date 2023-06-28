@@ -6,14 +6,14 @@ import { IconArrowRight } from "ui";
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <section className="relative flex w-full ml-8">
-      <div className="absolute top-[30%] -left-3 bg-white rounded-lg border-4 border-strokeColor">
+      <div className="absolute top-[295px] -left-3 bg-white rounded-lg border-4 border-strokeColor">
         <IconArrowRight className="stroke-primaryColor rotate-180 w-4 h-4" />
       </div>
 
       <ListProject />
 
-      <article className="ml-4 w-full">
-        <div className="mx-auto w-full bg-white my-4 mr-4 rounded-2xl dark:bg-dark px-6 ml-4">
+      <article className="mx-4 my-4 w-full">
+        <div className="bg-white dark:bg-dark rounded-2xl px-6">
           <TopPage title="Knowledge" />
           <hr className="my-2" />
           {children}

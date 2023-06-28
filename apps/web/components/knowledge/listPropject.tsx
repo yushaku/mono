@@ -73,6 +73,7 @@ export default function ListProject() {
           data.map((el) => {
             return (
               <ListItem
+                page="knowledge"
                 onAction={(type) => handleAction(type, el.id, el.title)}
                 href={`/knowledge/${el.id}`}
                 key={el.id}

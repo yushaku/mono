@@ -25,7 +25,7 @@ export default function ListChats() {
   const { mutate: updateChatTitle } = useUpdateChat();
   const { mutate: deleteChat } = useDeleteChat();
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ["hydrate-chats"],
+    queryKey: ["/chats"],
     queryFn: () => getChats(),
   });
 
@@ -72,10 +72,11 @@ export default function ListChats() {
           data.map((el) => {
             return (
               <ListItem
-                onAction={(type) => handleAction(type, el.id, el.title)}
                 key={el.id}
-                href={`chats/${el.id}`}
+                page="chats"
                 title={el.title}
+                href={`/chats/${el.id}`}
+                onAction={(type) => handleAction(type, el.id, el.title)}
               />
             );
           })
