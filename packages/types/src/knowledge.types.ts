@@ -9,3 +9,8 @@ export type UpdateProjectDto = CreateProjectDto & {
 export type Project = UpdateProjectDto & {
   team_id: string;
 };
+
+export type FolderContent = {
+  folder: UpdateProjectDto;
+  contentList: any[];
+};
