@@ -52,11 +52,11 @@ export class ChatsService {
     return query.delete().where({ id }).execute('run');
   }
 
-  pushQueue(item: MessageEntity) {
+  async pushQueue(item: MessageEntity) {
     return this.bulkExecService.push(item);
   }
 
   async bulkAddMessages(data: any) {
-    return;
+    console.log(data);
   }
 }

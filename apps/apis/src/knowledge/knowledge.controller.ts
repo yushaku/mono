@@ -1,52 +1,61 @@
-import { CreateProjectDto } from './dto/createProject.dto';
+import { CreateProjectDto, UpdateProjectDto } from './dto/project.dto';
 import { KnowledgeService } from './knowledge.service';
 import { JwtUser } from '@/common/decorators';
 import { JwtAuthGuard } from '@/common/guards';
 import {
   Body,
   Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
   Post,
-  UploadedFile,
   UseGuards,
-  UseInterceptors,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { Express } from 'express';
 import { TokenPayload } from 'types';
 
 @Controller('knowledge')
 @UseGuards(JwtAuthGuard)
 export class KnowledgeController {
-  constructor(private uploadService: KnowledgeService) {}
+  constructor(private knowledgeService: KnowledgeService) {}
 
-  @Post()
-  @UseInterceptors(FileInterceptor('file'))
-  async upload(@UploadedFile() file: Express.Multer.File) {
-    const filePath = await this.uploadService.uploadMinio(file);
-    return { message: 'success', filePath };
-  }
+  // @Post()
+  // @UseInterceptors(FileInterceptor('file'))
+  // async upload(@UploadedFile() file: Express.Multer.File) {
+  //   const filePath = await this.knowledgeService.uploadMinio(file);
+  //   return { message: 'success', filePath };
+  // }
 
   @Post('/presigned')
   async presignedFile(@Body('fileName') fileName: string) {
-    return this.uploadService.presignedMinio(fileName);
+    return this.knowledgeService.presignedMinio(fileName);
   }
 
-  // @Get()
-  // getFile(): StreamableFile {
-  //   const file = createReadStream(join(process.cwd(), 'package.json'));
-  //   return new StreamableFile(file);
+  // @Post('crawl')
+  // CrawlWebsite(@Body() { url }: { url: string }) {
+  //   return this.knowledgeService.CrawlWebsite(url);
   // }
-
-  @Post('crawl')
-  CrawlWebsite(@Body() { url }: { url: string }) {
-    return this.uploadService.CrawlWebsite(url);
-  }
 
   @Post()
   createProject(
     @Body() { title }: CreateProjectDto,
     @JwtUser() { team_id }: TokenPayload,
   ) {
-    return this.uploadService.createKnowledge({ title, team_id });
+    return this.knowledgeService.createKnowledge({ title, team_id });
+  }
+
+  @Get()
+  getAll(@JwtUser() { team_id }: TokenPayload) {
+    return this.knowledgeService.getAll(team_id);
+  }
+
+  @Patch()
+  update(@Body() projectDto: UpdateProjectDto) {
+    return this.knowledgeService.updateTitle(projectDto);
+  }
+
+  @Delete(':id')
+  deleteProject(@Param('id') id: string) {
+    return this.knowledgeService.delete(id);
   }
 }

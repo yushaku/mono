@@ -10,7 +10,7 @@ import {
   UseGuards,
   Patch,
   Delete,
-  Query,
+  Param,
 } from '@nestjs/common';
 import { TokenPayload } from 'types';
 
@@ -37,8 +37,8 @@ export class ChatsController {
     this.chatsService.updateTitle(chatDto);
   }
 
-  @Delete()
-  async delete(@Query() { id }: { id: string }) {
+  @Delete(':id')
+  async delete(@Param('id') id: string) {
     this.chatsService.delete(id);
   }
 }

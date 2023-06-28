@@ -1,24 +1,65 @@
-import { CreateProjectDto } from './dto/createProject.dto';
 import { MinioService } from '@/common/minio.service';
-import { KnowledgeEntity } from '@/databases/entities';
-import { EntityRepository } from '@mikro-orm/core';
+import { ContentEntity, KnowledgeEntity } from '@/databases/entities';
+import { EntityRepository as ER } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
-import { Injectable } from '@nestjs/common';
+import { EntityManager } from '@mikro-orm/postgresql';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as fs from 'fs';
+import * as _ from 'lodash';
 import puppeteer from 'puppeteer';
+import { CreateProjectDto, UpdateProjectDto } from 'types';
 
 @Injectable()
 export class KnowledgeService {
   constructor(
+    @InjectRepository(KnowledgeEntity) private projectRepo: ER<KnowledgeEntity>,
+    private em: EntityManager,
     private configService: ConfigService,
     private minioService: MinioService,
-    @InjectRepository(KnowledgeEntity)
-    private projectRepo: EntityRepository<KnowledgeEntity>,
   ) {}
 
   public get isConnected(): boolean {
     return true;
+  }
+
+  async createKnowledge(data: CreateProjectDto & { team_id: string }) {
+    const knowledge = this.projectRepo.create(data);
+    await this.projectRepo.persistAndFlush(knowledge);
+    return knowledge;
+  }
+
+  async getAll(team_id: string) {
+    return this.projectRepo.find(
+      { team_id },
+      {
+        fields: ['title', 'createdAt', 'updatedAt'],
+        orderBy: { createdAt: 'DESC' },
+      },
+    );
+  }
+
+  async updateTitle(projectDto: UpdateProjectDto) {
+    const query = this.em.createQueryBuilder(KnowledgeEntity);
+    return query
+      .update({ title: projectDto.title })
+      .where({ id: projectDto.id })
+      .execute('run');
+  }
+
+  async delete(id: string) {
+    const contentQuery = this.em.createQueryBuilder(ContentEntity);
+    const contentList = await contentQuery
+      .select(['id'])
+      .where({ knowledge_id: id })
+      .execute('run')
+      .then((data) => data.rows as { total: number }[]);
+
+    if (!_.isEmpty(contentList))
+      throw new ForbiddenException('Can not remove unempty project');
+
+    const klQuery = this.em.createQueryBuilder(KnowledgeEntity);
+    return klQuery.delete().where({ id }).execute('run');
   }
 
   async upload(file: Express.Multer.File) {
@@ -51,9 +92,5 @@ export class KnowledgeService {
     const stream = fs.createWriteStream(`./aaa.html`);
     stream.write(element);
     await browser.close();
-  }
-
-  async createKnowledge(data: CreateProjectDto & { team_id: string }) {
-    return this.projectRepo.create(data);
   }
 }
