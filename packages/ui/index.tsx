@@ -7,4 +7,4 @@ export * from "./hooks";
 export * from "./Icons";
 export * from "./Navbar";
 export * from "./Sidebar";
-export * from "./Diablog";
+export * from "./Dialog";

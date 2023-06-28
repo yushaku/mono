@@ -6,16 +6,25 @@ import { Fragment } from "react";
 
 type Props = {
   title: string;
+  page: string;
   setToggle: () => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onsubmit: () => void;
 };
-export const FormCreateDialog = ({
+export const FormDialog = ({
   title,
+  page,
   setToggle,
   onChange,
   onsubmit,
 }: Props) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      onsubmit();
+    }
+  };
+
   return (
     <Transition appear show={title !== undefined} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setToggle}>
@@ -51,14 +60,15 @@ export const FormCreateDialog = ({
                 </Dialog.Title>
 
                 <div className="mt-2">
-                  <p className="text-sm text-gray-500">
-                    Your payment has been successfully submitted. We’ve sent you
-                    an email with all of the details of your order.
-                  </p>
+                  {/* <p className="text-sm text-gray-500"> */}
+                  {/*   Your payment has been successfully submitted. We’ve sent you */}
+                  {/*   an email with all of the details of your order. */}
+                  {/* </p> */}
                   <FormInput
-                    name="chat title"
-                    placeholder="chat title"
+                    name={`${page} title`}
+                    placeholder={`${page} title`}
                     onChange={onChange}
+                    onKeyDown={handleKeyDown}
                   />
                 </div>
 

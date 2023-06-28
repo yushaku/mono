@@ -24,4 +24,5 @@ export * from "./IconSetting";
 export * from "./IconSun";
 export * from "./IconTheme";
 export * from "./IconTrash";
+export * from "./IconWarning";
 export * from "./IconWaveLine";
