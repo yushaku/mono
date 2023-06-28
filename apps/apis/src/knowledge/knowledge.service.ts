@@ -39,6 +39,28 @@ export class KnowledgeService {
     );
   }
 
+  async getOne(team_id: string) {
+    return this.projectRepo.findOne({ team_id }, { fields: ['title'] });
+  }
+
+  async getFolderContent(team_id: string, id: string) {
+    const [contentList, folder] = await Promise.all([
+      this.getAllContent(id),
+      this.getOne(team_id),
+    ]);
+
+    return { folder, contentList };
+  }
+
+  async getAllContent(id: string) {
+    const contentQuery = this.em.createQueryBuilder(ContentEntity);
+    return contentQuery
+      .select(['id'])
+      .where({ knowledge_id: id })
+      .execute('run')
+      .then((data) => data.rows);
+  }
+
   async updateTitle(projectDto: UpdateProjectDto) {
     const query = this.em.createQueryBuilder(KnowledgeEntity);
     return query

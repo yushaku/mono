@@ -94,7 +94,7 @@ const LoginPage = () => {
 
           <Button
             type="button"
-            Icon={IconGoogle}
+            Icon={<IconGoogle/>}
             title="Sign in with Google"
             onClick={() => handleGoogleAuth()}
           />

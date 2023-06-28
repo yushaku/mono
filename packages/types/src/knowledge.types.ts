@@ -14,3 +14,4 @@ export type FolderContent = {
   folder: UpdateProjectDto;
   contentList: any[];
 };
+export type ActionType = "WRITE" | "UPLOAD" | "CRAWL";

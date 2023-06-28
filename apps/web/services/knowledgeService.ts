@@ -1,7 +1,12 @@
 import { httpClient } from ".";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { CreateProjectDto, Project, UpdateProjectDto } from "types";
+import {
+  CreateProjectDto,
+  FolderContent,
+  Project,
+  UpdateProjectDto,
+} from "types";
 
 export const knowledgePath = "/knowledge";
 
@@ -9,6 +14,13 @@ export const getProject = async () => {
   const res = await httpClient().get(knowledgePath);
   const messageList = res.data ?? [];
   return messageList as Project[];
+};
+
+export const useGetfolderContent = (id: string) => {
+  return useQuery([knowledgePath, id], async () => {
+    const res = await httpClient().get(`${knowledgePath}/${id}`);
+    return res.data as FolderContent;
+  });
 };
 
 export const useCreateProject = () => {
@@ -54,6 +66,24 @@ export const useDeleteProject = () => {
     [knowledgePath],
     async (id: string) => {
       const res = await httpClient().delete(`${knowledgePath}/${id}`);
+      return res.data as any;
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([knowledgePath]);
+        toast.success("Create successfully");
+      },
+    }
+  );
+};
+
+export const useUploadFile = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    [knowledgePath],
+    async (file: File) => {
+      const res = await httpClient().delete(`${knowledgePath}/${file}`);
       return res.data as any;
     },
     {
