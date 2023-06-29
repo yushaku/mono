@@ -1,3 +1,4 @@
+import { CreateContentDto, UpdateContentDto } from './dto/content.dto';
 import { MinioService } from '@/common/minio.service';
 import { ContentEntity, KnowledgeEntity } from '@/databases/entities';
 import { EntityRepository as ER } from '@mikro-orm/core';
@@ -14,7 +15,7 @@ import { CreateProjectDto, UpdateProjectDto } from 'types';
 export class KnowledgeService {
   constructor(
     @InjectRepository(KnowledgeEntity) private projectRepo: ER<KnowledgeEntity>,
-    @InjectRepository(KnowledgeEntity) private contentRepo: ER<KnowledgeEntity>,
+    @InjectRepository(ContentEntity) private contentRepo: ER<ContentEntity>,
     private em: EntityManager,
     private configService: ConfigService,
     private minioService: MinioService,
@@ -23,6 +24,8 @@ export class KnowledgeService {
   public get isConnected(): boolean {
     return true;
   }
+
+  // KNOWLEDGE APIS
 
   async createKnowledge(data: CreateProjectDto & { team_id: string }) {
     const knowledge = this.projectRepo.create(data);
@@ -85,6 +88,8 @@ export class KnowledgeService {
     return klQuery.delete().where({ id }).execute('run');
   }
 
+  // FILE APIS
+
   async upload(file: Express.Multer.File) {
     const storePath = `${this.configService.get('FILE_PATH')}/${
       file.originalname
@@ -101,9 +106,15 @@ export class KnowledgeService {
     });
   }
 
-  async presignedMinio(fileName: string) {
-    return this.minioService.getPresignedUrl(fileName);
+  async presignedMinio(fileName: string, team_id: string) {
+    return this.minioService.getPresignedUrl(fileName, team_id);
   }
+
+  async deleteFile(fileName: string, team_id: string) {
+    return this.minioService.deleteFile(fileName, team_id);
+  }
+
+  // CRAWL WEBSITE
 
   async CrawlWebsite(url: string) {
     const browser = await puppeteer.launch({ headless: true });
@@ -115,5 +126,26 @@ export class KnowledgeService {
     const stream = fs.createWriteStream(`./aaa.html`);
     stream.write(element);
     await browser.close();
+  }
+
+  // CONTENT ENTITY
+
+  async createContent(data: CreateContentDto) {
+    const content = this.contentRepo.create(data);
+    await this.contentRepo.persistAndFlush(content);
+    return content;
+  }
+
+  async updateContent(data: UpdateContentDto) {
+    const query = this.em.createQueryBuilder(ContentEntity);
+    return query
+      .update({ title: data.title, text: data.text, file_link: data.file_link })
+      .where({ id: data.id })
+      .execute('run');
+  }
+
+  async deleteContent(id: string) {
+    const query = this.em.createQueryBuilder(ContentEntity);
+    return query.delete().where({ id }).execute('run');
   }
 }

@@ -1,3 +1,4 @@
+import { CreateContentDto, UpdateContentDto } from './dto/content.dto';
 import { CreateProjectDto, UpdateProjectDto } from './dto/project.dto';
 import { KnowledgeService } from './knowledge.service';
 import { JwtUser } from '@/common/decorators';
@@ -31,28 +32,42 @@ export class KnowledgeController {
   //   return this.knowledgeService.CrawlWebsite(url);
   // }
 
-  @Post('/presigned')
-  async presignedFile(@Body('fileName') fileName: string) {
-    return this.knowledgeService.presignedMinio(fileName);
-  }
+  // FILE APIS
 
-  @Post('/content')
-  createContent(
-    @Body() { title }: CreateProjectDto,
+  @Post('/presigned')
+  async presignedFile(
+    @Body('fileName') fileName: string,
     @JwtUser() { team_id }: TokenPayload,
   ) {
-    return this.knowledgeService.createKnowledge({ title, team_id });
+    return this.knowledgeService.presignedMinio(fileName, team_id);
+  }
+
+  @Delete('/file')
+  async deleteFile(
+    @Body('fileName') fileName: string,
+    @JwtUser() { team_id }: TokenPayload,
+  ) {
+    return this.knowledgeService.deleteFile(fileName, team_id);
+  }
+
+  // CONTENT APIS
+
+  @Post('/content')
+  createContent(@Body() dto: CreateContentDto) {
+    return this.knowledgeService.createContent(dto);
   }
 
   @Patch('/content/:id')
-  updateContent(@Body() projectDto: UpdateProjectDto) {
-    return this.knowledgeService.updateTitle(projectDto);
+  updateContent(@Body() data: UpdateContentDto) {
+    return this.knowledgeService.updateContent(data);
   }
 
   @Delete('/content/:id')
   deleteContent(@Param('id') id: string) {
-    return this.knowledgeService.delete(id);
+    return this.knowledgeService.deleteContent(id);
   }
+
+  // PROJECT APIs
 
   @Post()
   createProject(

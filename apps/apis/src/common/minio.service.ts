@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotImplementedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as Minio from 'minio';
-import moment from 'moment';
+import * as moment from 'moment';
 
 @Injectable()
 export class MinioService {
@@ -48,18 +48,25 @@ export class MinioService {
     return this.minioClient.presignedGetObject(this.bucketName, filePath);
   }
 
-  async getPresignedUrl(filename: string) {
-    const date = moment().format('YYYY-MM-DD');
-    const key = `${date}/${filename}`;
+  async getPresignedUrl(filename: string, team_id: string) {
+    const key = `${team_id}/${filename}`;
 
     const policy = new Minio.PostPolicy();
+    policy.setContentLengthRange(0, this.maxUploadSize);
     policy.setBucket(this.bucketName);
     policy.setKey(key);
-    policy.setContentLengthRange(0, this.maxUploadSize);
 
     const presignedUrl = await this.minioClient.presignedPostPolicy(policy);
     presignedUrl.postURL = this.config.get('MINIO_PUBLIC') ?? '';
 
     return presignedUrl;
+  }
+
+  async deleteFile(filename: string, team_id: string) {
+    const key = `${team_id}/${filename}`;
+
+    this.minioClient.removeObject(this.bucketName, key, (err) => {
+      if (err) throw new NotImplementedException('get error when delete file');
+    });
   }
 }
