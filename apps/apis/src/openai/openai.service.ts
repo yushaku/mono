@@ -1,4 +1,3 @@
-import { ChatsService } from '@/chats/chats.service';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Configuration, OpenAIApi } from 'openai';
@@ -9,10 +8,7 @@ export class OpenaiService {
   private openAiConfig: Configuration;
   private openai: OpenAIApi;
 
-  constructor(
-    private configService: ConfigService,
-    private chatService: ChatsService,
-  ) {
+  constructor(private configService: ConfigService) {
     this.openAiConfig = new Configuration({
       apiKey: this.configService.get('OPENAI_API_KEY') || '',
     });
@@ -48,9 +44,6 @@ export class OpenaiService {
       { responseType: 'stream' },
     );
     const stream = res.data as unknown as Stream;
-    stream.on('data', (chunk) => {
-      this.chatService.pushQueue(chunk.toString());
-    });
     return stream;
   }
 

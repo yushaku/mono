@@ -4,3 +4,9 @@ export type Chats = {
   title: string;
   is_pin: boolean;
 };
+
+export type Message = {
+  chat_id: string;
+  question: string;
+  bot_answer: string;
+};
