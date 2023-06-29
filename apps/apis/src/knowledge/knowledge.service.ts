@@ -43,14 +43,14 @@ export class KnowledgeService {
     );
   }
 
-  async getOne(team_id: string) {
-    return this.projectRepo.findOne({ team_id }, { fields: ['title'] });
+  async getOne(id: string) {
+    return this.projectRepo.findOne({ id }, { fields: ['title'] });
   }
 
-  async getFolderContent(team_id: string, id: string) {
+  async getFolderContent(id: string) {
     const [contentList, folder] = await Promise.all([
       this.getAllContent(id),
-      this.getOne(team_id),
+      this.getOne(id),
     ]);
 
     return { folder, contentList };
@@ -59,7 +59,7 @@ export class KnowledgeService {
   async getAllContent(id: string) {
     const contentQuery = this.em.createQueryBuilder(ContentEntity);
     return contentQuery
-      .select(['id'])
+      .select(['id', 'title', 'createdAt', 'updatedAt', 'type', 'is_trained'])
       .where({ knowledge_id: id })
       .execute('run')
       .then((data) => data.rows);

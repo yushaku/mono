@@ -12,9 +12,18 @@ export type Project = UpdateProjectDto & {
 
 export type FolderContent = {
   folder: UpdateProjectDto;
-  contentList: any[];
+  contentList: Content[];
 };
 export type ActionType = "FILE" | "TEXT" | "WEBSITE";
+
+export type Content = {
+  id: string;
+  title: string;
+  type: ActionType;
+  is_trained: boolean;
+  created_at: string;
+  updated_at: string;
+};
 
 export class CreateContentDto {
   knowledge_id: string;

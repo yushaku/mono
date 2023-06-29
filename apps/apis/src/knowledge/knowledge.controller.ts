@@ -78,8 +78,8 @@ export class KnowledgeController {
   }
 
   @Get(':id')
-  getAllContent(@JwtUser() { team_id }: TokenPayload, @Param('id') id: string) {
-    return this.knowledgeService.getFolderContent(team_id, id);
+  getAllContent(@Param('id') id: string) {
+    return this.knowledgeService.getFolderContent(id);
   }
 
   @Get()

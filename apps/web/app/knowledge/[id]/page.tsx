@@ -1,9 +1,9 @@
 "use client";
 
+import { Card } from "@/components/Card";
 import { useGetfolderContent } from "@/services";
 import { usePathname } from "next/navigation";
 import React from "react";
-import { IconMore } from "ui";
 
 const DocumentPage = () => {
   const idProject = usePathname().substring(11);
@@ -15,7 +15,6 @@ const DocumentPage = () => {
         <h3 className="text-xl text-primaryColor font-semibold ">
           {data?.folder?.title}
         </h3>
-        <IconMore />
       </article>
 
       <article className="mt-12 text-center">
@@ -24,9 +23,19 @@ const DocumentPage = () => {
           These are all uploaded documents that Tigon Ai can learn from.
         </p>
 
-        <ul>
+        <ul className="mt-8">
           {data?.contentList.map((el) => {
-            return <li key={el.id}></li>;
+            return (
+              <Card
+                key={el.id}
+                type={el.type}
+                title={el.title}
+                href={`content/${el.id}`}
+                is_trained={el.is_trained}
+                created_at={el.created_at}
+                updated_at={el.updated_at}
+              />
+            );
           })}
         </ul>
       </article>
