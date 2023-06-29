@@ -1,5 +1,6 @@
 import { BaseEntity } from './base.entity';
-import { Entity, Property, UuidType } from '@mikro-orm/core';
+import { Entity, TextType, Property, UuidType } from '@mikro-orm/core';
+import { ActionType } from 'types';
 
 @Entity({ tableName: 'content' })
 export class ContentEntity extends BaseEntity {
@@ -10,17 +11,17 @@ export class ContentEntity extends BaseEntity {
   title: string;
 
   @Property({ fieldName: 'category', type: String, nullable: true })
-  category: string;
+  category?: string;
 
   @Property({ fieldName: 'type', type: String, nullable: true })
-  type: 'FILE' | 'TEXT' | 'WEBSITE';
+  type: ActionType;
 
   @Property({ fieldName: 'is_trained', type: Boolean, default: false })
-  is_trained: boolean;
+  is_trained?: boolean;
 
   @Property({ fieldName: 'file_link', type: String, nullable: true })
   file_link: string;
 
-  @Property({ fieldName: 'text', type: String, nullable: true })
-  text: string;
+  @Property({ fieldName: 'text', type: TextType, nullable: true })
+  text?: string;
 }
