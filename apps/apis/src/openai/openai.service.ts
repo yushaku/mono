@@ -1,3 +1,8 @@
+import { CreateBotDto } from './dto/bot.dto';
+import { BotEntity } from '@/databases/entities';
+import { EntityRepository as ER } from '@mikro-orm/core';
+import { InjectRepository } from '@mikro-orm/nestjs';
+import { EntityManager } from '@mikro-orm/postgresql';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Configuration, OpenAIApi } from 'openai';
@@ -8,7 +13,11 @@ export class OpenaiService {
   private openAiConfig: Configuration;
   private openai: OpenAIApi;
 
-  constructor(private configService: ConfigService) {
+  constructor(
+    @InjectRepository(BotEntity) private botRepo: ER<BotEntity>,
+    private configService: ConfigService,
+    private em: EntityManager,
+  ) {
     this.openAiConfig = new Configuration({
       apiKey: this.configService.get('OPENAI_API_KEY') || '',
     });
@@ -57,5 +66,28 @@ export class OpenaiService {
     const href = res.data.data[0].url;
     console.log(href);
     return href;
+  }
+
+  // BOTS APIS
+
+  async getAll(team_id: string) {
+    return this.botRepo.find(
+      { team_id },
+      {
+        fields: ['name', 'created_at', 'updated_at'],
+        orderBy: { created_at: 'DESC' },
+      },
+    );
+  }
+
+  async createBot(data: CreateBotDto & { team_id: string }) {
+    const bot = this.botRepo.create(data);
+    await this.botRepo.persistAndFlush(bot);
+    return bot;
+  }
+
+  async delete(id: string) {
+    const query = this.em.createQueryBuilder(BotEntity);
+    return query.delete().where({ id }).execute('run');
   }
 }
