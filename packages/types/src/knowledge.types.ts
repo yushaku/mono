@@ -14,4 +14,12 @@ export type FolderContent = {
   folder: UpdateProjectDto;
   contentList: any[];
 };
-export type ActionType = "WRITE" | "UPLOAD" | "CRAWL";
+export type ActionType = "FILE" | "TEXT" | "WEBSITE";
+
+export class CreateContentDto {
+  knowledge_id: string;
+  title: string;
+  type: ActionType;
+  file_link?: string;
+  text?: string;
+}
