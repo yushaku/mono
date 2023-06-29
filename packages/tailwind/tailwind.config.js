@@ -29,6 +29,7 @@ module.exports = {
       boxShadow: {
         lightShadow: "-2px 2px 20px 10px #00000024",
         darkShadow: "-2px 5px 10px rgba(255, 255, 255, 0.1)",
+        inner: "inset 0 2px 4px 0 rgb(0 0 0 / 0.05)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

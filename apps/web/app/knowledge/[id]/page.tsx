@@ -1,13 +1,35 @@
 "use client";
 
 import { Card } from "@/components/Card";
-import { useGetfolderContent } from "@/services";
+import { useDeleteContent, useGetfolderContent } from "@/services";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
+import { Action } from "types";
+import { DeleteDialog } from "ui";
 
 const DocumentPage = () => {
   const idProject = usePathname().substring(11);
+  const [id, setId] = useState<string | undefined>();
+
   const { data } = useGetfolderContent(idProject);
+  const { mutate: deleteContent } = useDeleteContent();
+
+  const handleAction = (type: Action, id: string) => {
+    if (type === "update") {
+      setId(id);
+    }
+
+    if (type === "delete") {
+      setId(id);
+    }
+  };
+
+  const handleDelete = () => {
+    deleteContent(id);
+  };
+  const handleCancel = () => {
+    setId(undefined);
+  };
 
   return (
     <section>
@@ -34,11 +56,18 @@ const DocumentPage = () => {
                 is_trained={el.is_trained}
                 created_at={el.created_at}
                 updated_at={el.updated_at}
+                onAction={(type) => handleAction(type, el.id)}
               />
             );
           })}
         </ul>
       </article>
+
+      <DeleteDialog
+        isShow={!!id}
+        onSubmit={handleDelete}
+        onCancel={handleCancel}
+      />
     </section>
   );
 };

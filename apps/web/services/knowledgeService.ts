@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
 import {
+  Content,
   CreateContentDto,
   CreateProjectDto,
   FolderContent,
@@ -117,6 +118,16 @@ export const useUploadFile = () => {
   });
 };
 
+export const getContentDetail = async (id: string) => {
+  const res = await axiosClient.get(`${contentPath}/${id}`);
+  return res.data as Content;
+};
+export const useGetContent = async (id: string) => {
+  return useQuery([contentPath, id], () => {
+    return getContentDetail(id);
+  });
+};
+
 export const useCreateContent = () => {
   return useMutation(
     [contentPath],
@@ -127,6 +138,21 @@ export const useCreateContent = () => {
     {
       onSuccess: () => {
         toast.success("Create successfully");
+      },
+    }
+  );
+};
+
+export const useDeleteContent = () => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    [contentPath],
+    async (id: string) => {
+      return axiosClient.delete(`${contentPath}/${id}`);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([contentPath]);
       },
     }
   );

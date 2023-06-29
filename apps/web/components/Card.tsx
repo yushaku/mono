@@ -1,11 +1,18 @@
 import moment from "moment";
 import Link from "next/link";
-import { Content } from "types";
+import { Action, Content, MenuFeatures } from "types";
+import { DropdownMenu, IconPen, IconTrash } from "ui";
 
 type Props = React.HTMLAttributes<HTMLElement> &
   Partial<Content> & {
     href: string;
+    onAction: (type: Action) => void;
   };
+
+const dropDown: MenuFeatures = [
+  { title: "delete", icon: <IconTrash /> },
+  { title: "update", icon: <IconPen /> },
+];
 
 export const Card = ({
   href,
@@ -14,12 +21,17 @@ export const Card = ({
   created_at,
   updated_at,
   is_trained,
+  onAction,
 }: Props) => {
   return (
-    <li className="dark:shadow-darkShadow h-[170px] flexCenter group w-1/3 rounded-xl shadow-lg">
+    <li className="dark:shadow-darkShadow h-[170px] flexCenter group w-1/3 min-w-[285px] rounded-xl border hover:shadow-xl px-4 animationShow">
       <Link href={href}>
-        <h3 className="text-textColor dark:text-strokeColor/80 group-hover:text-primaryColor my-2 font-semibold">
+        <h3 className="text-textColor dark:text-strokeColor/80 animationShow group-hover:text-primaryColor flex my-2 font-semibold">
           {title}
+          <DropdownMenu
+            menuFeatures={dropDown}
+            handleAction={(type) => onAction(type)}
+          />
         </h3>
 
         <p className="flex gap-2 justify-evenly mt-4">

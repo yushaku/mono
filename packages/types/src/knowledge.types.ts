@@ -18,6 +18,10 @@ export type ActionType = "FILE" | "TEXT" | "WEBSITE";
 
 export type Content = {
   id: string;
+  category: string | null;
+  knowledge_id: string;
+  text: string;
+  file_link: string;
   title: string;
   type: ActionType;
   is_trained: boolean;
