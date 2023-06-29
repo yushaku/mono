@@ -18,10 +18,7 @@ export const TextEditor = ({ onCreate }: Props) => {
   const { handleSubmit, handleChange, isValid, isSubmitting, values, errors } =
     useFormik({
       validateOnChange: false,
-      initialValues: {
-        title: "",
-        content: "",
-      },
+      initialValues: { title: "", content: "" },
       validationSchema: Yup.object().shape({
         title: Yup.string().required("This field is required"),
         content: Yup.string().required("This field is required"),

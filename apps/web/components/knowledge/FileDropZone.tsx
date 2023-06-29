@@ -50,7 +50,7 @@ export const FileDropZone = ({ onSave }: Props) => {
   });
   return (
     <div className="mt-9">
-      <h5 className="text-lg font-semibold">Upload</h5>
+      <h5 className="text-lg text-grayColor font-semibold">Upload</h5>
       {isLoading ? (
         <span className="flexCenter py-10">
           <p>Loading...</p>

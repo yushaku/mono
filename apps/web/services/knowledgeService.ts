@@ -1,24 +1,34 @@
-import { httpClient } from ".";
+import { axiosClient } from ".";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
 import toast from "react-hot-toast";
 import {
+  CreateContentDto,
   CreateProjectDto,
   FolderContent,
+  PreSignFile,
   Project,
   UpdateProjectDto,
 } from "types";
 
 export const knowledgePath = "/knowledge";
+export const contentPath = "/knowledge/content";
 
 export const getProject = async () => {
-  const res = await httpClient().get(knowledgePath);
+  const res = await axiosClient.get(knowledgePath);
   const messageList = res.data ?? [];
   return messageList as Project[];
 };
 
+export const useGetProjects = async () => {
+  return useQuery([knowledgePath], () => {
+    return getProject();
+  });
+};
+
 export const useGetfolderContent = (id: string) => {
   return useQuery([knowledgePath, id], async () => {
-    const res = await httpClient().get(`${knowledgePath}/${id}`);
+    const res = await axiosClient.get(`${knowledgePath}/${id}`);
     return res.data as FolderContent;
   });
 };
@@ -29,7 +39,7 @@ export const useCreateProject = () => {
   return useMutation(
     [knowledgePath],
     async (data: CreateProjectDto) => {
-      const res = await httpClient().post(knowledgePath, data);
+      const res = await axiosClient.post(knowledgePath, data);
       return res.data as any;
     },
     {
@@ -47,7 +57,7 @@ export const useUpdateProject = () => {
   return useMutation(
     [knowledgePath],
     async (data: UpdateProjectDto) => {
-      const res = await httpClient().patch(knowledgePath, data);
+      const res = await axiosClient.patch(knowledgePath, data);
       return res.data as any;
     },
     {
@@ -65,7 +75,7 @@ export const useDeleteProject = () => {
   return useMutation(
     [knowledgePath],
     async (id: string) => {
-      const res = await httpClient().delete(`${knowledgePath}/${id}`);
+      const res = await axiosClient.delete(`${knowledgePath}/${id}`);
       return res.data as any;
     },
     {
@@ -77,18 +87,45 @@ export const useDeleteProject = () => {
   );
 };
 
-export const useUploadFile = () => {
-  const queryClient = useQueryClient();
+const uploadFile = async (
+  file: File,
+  url: string,
+  fields: Record<string, string>
+) => {
+  const formData = new FormData();
+  Object.entries(fields).forEach(([key, value]) => {
+    formData.append(key, value);
+  });
 
+  formData.append("file", file);
+  return axios.post(url, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
+export const useUploadFile = () => {
+  return useMutation([`${knowledgePath}/presigned`], async (file: File) => {
+    const res = await axiosClient.post(`${knowledgePath}/presigned`, {
+      fileName: file.name,
+    });
+
+    const preSign = res.data as PreSignFile;
+    await uploadFile(file, preSign.postURL, preSign.formData);
+    return preSign.postURL;
+  });
+};
+
+export const useCreateContent = () => {
   return useMutation(
-    [knowledgePath],
-    async (file: File) => {
-      const res = await httpClient().delete(`${knowledgePath}/${file}`);
+    [contentPath],
+    async (data: CreateContentDto) => {
+      const res = await axiosClient.post(contentPath, data);
       return res.data as any;
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries([knowledgePath]);
         toast.success("Create successfully");
       },
     }

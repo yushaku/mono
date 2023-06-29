@@ -1,12 +1,11 @@
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
-import { TopPage } from "@/components/TopPage";
 import Providers from "@/components/provider";
 import React from "react";
 import { Toaster } from "react-hot-toast";
 
 export const metadata = {
-  title: "YuPoller",
+  title: "Tigon AI",
   description: "I do not know what i am doing",
 };
 

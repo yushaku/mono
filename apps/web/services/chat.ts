@@ -1,4 +1,4 @@
-import { httpClient } from ".";
+import { axiosClient } from ".";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { Chats } from "types";
@@ -57,7 +57,7 @@ export const useGetChats = () => {
 };
 
 export const getChats = async () => {
-  const res = await httpClient().get(chatPath);
+  const res = await axiosClient.get(chatPath);
   const messageList = res.data ?? [];
   return messageList as Chats[];
 };
@@ -68,7 +68,7 @@ export const useCreateChat = () => {
   return useMutation(
     [chatPath],
     async (data: { title: string }) => {
-      const res = await httpClient().post(chatPath, data);
+      const res = await axiosClient.post(chatPath, data);
       return res.data.data as any;
     },
     {
@@ -86,7 +86,7 @@ export const useUpdateChat = () => {
   return useMutation(
     [chatPath],
     async (data: { title: string; id: string }) => {
-      const res = await httpClient().patch(chatPath, data);
+      const res = await axiosClient.patch(chatPath, data);
       return res.data;
     },
     {
@@ -104,7 +104,7 @@ export const useDeleteChat = () => {
   return useMutation(
     [chatPath],
     async (id: string) => {
-      const res = await httpClient().delete(`${chatPath}/${id}`);
+      const res = await axiosClient.delete(`${chatPath}/${id}`);
       return res.data;
     },
     {

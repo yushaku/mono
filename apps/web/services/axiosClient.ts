@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getSession } from "next-auth/react";
 
-export const httpClient = () => {
+const httpClient = () => {
   const client = axios.create({
     baseURL: process.env.API_URL || "http://localhost:8005/api",
     withCredentials: process.env.WORKING_ENV !== "product" ? false : true,
@@ -37,6 +37,4 @@ export const httpClient = () => {
   return client;
 };
 
-const axiosClient = httpClient();
-
-export default axiosClient;
+export const axiosClient = httpClient();
