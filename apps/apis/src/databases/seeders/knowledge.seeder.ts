@@ -9,8 +9,8 @@ export class KnowledgeSeeder extends Seeder {
       id: KNOWLEDGE_ID,
       team_id: TEAM_ID,
       title: faker.name.fullName(),
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      created_at: new Date(),
+      updated_at: new Date(),
     });
   }
 }

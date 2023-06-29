@@ -37,8 +37,8 @@ export class KnowledgeService {
     return this.projectRepo.find(
       { team_id },
       {
-        fields: ['title', 'createdAt', 'updatedAt'],
-        orderBy: { createdAt: 'DESC' },
+        fields: ['title', 'created_at', 'updated_at'],
+        orderBy: { created_at: 'DESC' },
       },
     );
   }
@@ -59,7 +59,7 @@ export class KnowledgeService {
   async getAllContent(id: string) {
     const contentQuery = this.em.createQueryBuilder(ContentEntity);
     return contentQuery
-      .select(['id', 'title', 'createdAt', 'updatedAt', 'type', 'is_trained'])
+      .select(['id', 'title', 'created_at', 'updated_at', 'type', 'is_trained'])
       .where({ knowledge_id: id })
       .execute('run')
       .then((data) => data.rows);
@@ -134,6 +134,10 @@ export class KnowledgeService {
     const content = this.contentRepo.create(data);
     await this.contentRepo.persistAndFlush(content);
     return content;
+  }
+
+  async getContent(id: string) {
+    return this.contentRepo.findOne({ id });
   }
 
   async updateContent(data: UpdateContentDto) {

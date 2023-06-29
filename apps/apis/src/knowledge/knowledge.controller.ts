@@ -57,6 +57,11 @@ export class KnowledgeController {
     return this.knowledgeService.createContent(dto);
   }
 
+  @Get('/content/:id')
+  getContent(@Param('id') id: string) {
+    return this.knowledgeService.getContent(id);
+  }
+
   @Patch('/content/:id')
   updateContent(@Body() data: UpdateContentDto) {
     return this.knowledgeService.updateContent(data);

@@ -95,7 +95,7 @@ export class UsersService {
   async getById(id: string) {
     const user = await this.usersRepo.findOne(
       { id },
-      { fields: ['name', 'email', 'createdAt', 'updatedAt'] },
+      { fields: ['name', 'email', 'created_at', 'updated_at'] },
     );
     if (!user) throw new NotFoundException("User's id does not exist");
     return user;

@@ -9,8 +9,8 @@ export class TeamSeeder extends Seeder {
       id: TEAM_ID,
       name: 'yu_team',
       vip_plan: 'Premium',
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      created_at: new Date(),
+      updated_at: new Date(),
     });
   }
 }

@@ -27,8 +27,8 @@ export class ChatsService {
     return this.chatRepo.find(
       { team_id },
       {
-        fields: ['title', 'is_pin', 'createdAt'],
-        orderBy: { createdAt: 'DESC' },
+        fields: ['title', 'is_pin', 'created_at'],
+        orderBy: { created_at: 'DESC' },
       },
     );
   }

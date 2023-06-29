@@ -20,8 +20,8 @@ export class UserSeeder extends Seeder {
       avatar: '',
       role: 'Owner',
       is_confirm_email: true,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      created_at: new Date(),
+      updated_at: new Date(),
     });
 
     for (let i = 0; i < TOTAL; i++) {
@@ -34,8 +34,8 @@ export class UserSeeder extends Seeder {
         avatar: '',
         role: 'Member',
         is_confirm_email: true,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        created_at: new Date(),
+        updated_at: new Date(),
       });
     }
   }
