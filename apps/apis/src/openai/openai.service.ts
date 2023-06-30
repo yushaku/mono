@@ -74,7 +74,7 @@ export class OpenaiService {
     return this.botRepo.find(
       { team_id },
       {
-        fields: ['name', 'created_at', 'updated_at'],
+        fields: ['id', 'name', 'description', 'model', 'created_at'],
         orderBy: { created_at: 'DESC' },
       },
     );
