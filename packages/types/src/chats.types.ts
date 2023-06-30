@@ -10,3 +10,9 @@ export type Message = {
   question: string;
   bot_answer: string;
 };
+
+export type ResponseMessage = Message & {
+  id: string;
+  created_at: string;
+  updated_at: string;
+};

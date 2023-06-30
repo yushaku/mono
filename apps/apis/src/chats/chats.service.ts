@@ -120,8 +120,8 @@ export class ChatsService implements OnModuleDestroy {
     return this.messageRepo.find(
       { chat_id },
       {
-        orderBy: { created_at: 'DESC' },
-        fields: ['question', 'bot_answer', 'created_at', 'updated_at'],
+        orderBy: { created_at: 'ASC' },
+        fields: ['id', 'question', 'bot_answer', 'created_at', 'updated_at'],
       },
     );
   }
