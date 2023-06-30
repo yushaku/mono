@@ -22,7 +22,7 @@ import { TokenPayload } from 'types';
 export class ChatsController {
   constructor(private readonly chatsService: ChatsService) {}
 
-  @Get('ask')
+  @Post('ask')
   async askStream(
     @Res() response: Response,
     @Query() { prompt, chat_id }: { prompt: string; chat_id: string },
@@ -57,5 +57,10 @@ export class ChatsController {
   @Delete(':id')
   async delete(@Param('id') id: string) {
     this.chatsService.delete(id);
+  }
+
+  @Get(':id')
+  async getMessage(@Param('id') id: string) {
+    return this.chatsService.getMessages(id);
   }
 }

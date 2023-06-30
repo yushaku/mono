@@ -1,5 +1,5 @@
 import { BaseEntity } from './base.entity';
-import { Entity, Property, UuidType } from '@mikro-orm/core';
+import { Entity, Property, TextType, UuidType } from '@mikro-orm/core';
 
 @Entity({ tableName: 'message' })
 export class MessageEntity extends BaseEntity {
@@ -9,7 +9,7 @@ export class MessageEntity extends BaseEntity {
   @Property({ fieldName: 'question', type: String, nullable: true })
   question: string;
 
-  @Property({ fieldName: 'bot_answer', type: String, nullable: true })
+  @Property({ fieldName: 'bot_answer', type: TextType, nullable: true })
   bot_answer: string;
 
   @Property({ fieldName: 'feed_back', type: String, nullable: true })
