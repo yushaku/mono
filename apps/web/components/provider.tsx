@@ -14,9 +14,9 @@ function Providers({ children }: React.PropsWithChildren) {
         defaultOptions: {
           queries: {
             retry: 2,
-            refetchOnMount: "always",
-            refetchOnWindowFocus: "always",
-            refetchOnReconnect: "always",
+            // refetchOnMount: "always",
+            // refetchOnWindowFocus: "always",
+            // refetchOnReconnect: "always",
             cacheTime: 1000 * 60 * 15, // 15 mins
             // refetchInterval: 1000 * 30, //30 seconds
             // staleTime: 1000 * 30, //30 seconds

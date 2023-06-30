@@ -16,7 +16,7 @@ export const Navbar = () => {
     <nav
       className={`${
         isAuthPage ? "hidden" : "block"
-      } w-24 rounded-3xl bg-white dark:bg-dark px-4 ml-6 my-[2dvh] h-[96dvh] flex flex-col items-center justify-between`}
+      } w-20 rounded-3xl bg-white dark:bg-dark px-4 ml-6 my-[2dvh] h-[96dvh] flex flex-col items-center justify-between`}
     >
       <section className="py-4 my-8">
         <Link href="/" className="flexCenter">
@@ -34,13 +34,13 @@ export const Navbar = () => {
             const isSelected = pathName.includes(href);
 
             const selectElement = isSelected
-              ? "bg-strokeColor translate-x-12 rounded-full "
+              ? "bg-strokeColor translate-x-9 rounded-full "
               : "rounded-lg ";
 
             return (
               <li
                 key={index}
-                className={`${selectElement} w-full animationShow px-3 py-3`}
+                className={`${selectElement} w-full animationShow p-3`}
               >
                 <Link
                   href={href}

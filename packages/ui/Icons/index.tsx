@@ -35,3 +35,4 @@ export * from "./IconUpload";
 export * from "./IconWarning";
 export * from "./IconWaveLine";
 export * from "./IconWrite";
+export * from "./IconLoading";

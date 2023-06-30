@@ -10,6 +10,40 @@
     scroll-behavior: smooth;
     box-sizing: border-box;
   }
+  textarea {
+    @apply block w-full 
+    rounded-lg border border-gray-300 
+    bg-gray-50 
+    p-2.5 
+    text-sm text-gray-900 
+    focus:border-blue-500 focus:ring-blue-500 
+    dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500;
+  }
+
+  p {
+    @apply text-grayColor;
+  }
+
+  pre {
+    @apply bg-dark my-3 p-3 text-white;
+  }
+
+  /* code { */
+  /*   @apply text-textColor rounded-sm bg-orange-200 px-1; */
+  /* } */
+
+  ol {
+    @apply list-decimal;
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  ol,
+  ul {
+    @apply py-2 pl-4;
+  }
 }
 
 @layer components {

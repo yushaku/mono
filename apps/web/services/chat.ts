@@ -1,16 +1,28 @@
 import { axiosClient } from ".";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getSession } from "next-auth/react";
 import toast from "react-hot-toast";
-import { Chats } from "types";
+import { Stream } from "stream";
+import { Chats, ResponseMessage } from "types";
 
-export const fetchStreamData = (
+export const fetchStreamData = async (
   prompt: string,
+  chat_id: string,
   signal: AbortSignal,
   callback: (msg: string) => void
 ) => {
-  fetch(`http://localhost:8005/api/openai/askStream?prompt=${prompt}`, {
-    signal,
-  })
+  const session: any = await getSession();
+
+  fetch(
+    `http://localhost:8005/api/chats/ask?chat_id=${chat_id}&prompt=${prompt}`,
+    {
+      signal,
+      method: "POST",
+      headers: new Headers({
+        Authorization: `Bearer ${session?.access_token ?? ""}`,
+      }),
+    }
+  )
     .then((response) => {
       const reader = response.body.getReader();
 
@@ -33,8 +45,8 @@ export const fetchStreamData = (
             }
             try {
               const parsed = JSON.parse(message);
-              const work = parsed.choices[0].delta.content;
-              callback(work);
+              const word = parsed.choices[0].delta.content;
+              callback(word);
             } catch (error) {
               console.error("Error parsing AI response:", error);
             }
@@ -42,6 +54,47 @@ export const fetchStreamData = (
         }
       };
       processStream();
+    })
+    .catch((error) => {
+      console.error("Error fetching stream data:", error);
+    });
+};
+
+export const askGPT = (
+  prompt: string,
+  chat_id: string,
+  signal: AbortSignal,
+  callback: (msg: string) => void
+) => {
+  axiosClient
+    .post(`/chats/ask?chat_id=${chat_id}&prompt=${prompt}`, {
+      signal,
+      responseType: "stream",
+    })
+    .then((response) => {
+      const stream = response.data as Stream;
+      console.log(typeof stream);
+
+      stream.on("data", (chunk) => {
+        const value = new TextDecoder("utf-8").decode(chunk);
+        const lines = value
+          .toString()
+          .split("\n")
+          .filter((line: any) => line.trim() !== "");
+        for (const line of lines) {
+          const message = line.replace(/^data: /, "");
+          if (message === "[DONE]") {
+            return;
+          }
+          try {
+            const parsed = JSON.parse(message);
+            const word = parsed.choices[0].delta.content;
+            callback(word);
+          } catch (error) {
+            console.error("Error parsing AI response:", error);
+          }
+        }
+      });
     })
     .catch((error) => {
       console.error("Error fetching stream data:", error);
@@ -113,4 +166,16 @@ export const useDeleteChat = () => {
       },
     }
   );
+};
+
+export const getMessages = async (chat_id: string) => {
+  const res = await axiosClient.get(`${chatPath}/${chat_id}`);
+  const messageList = res.data ?? [];
+  return messageList as ResponseMessage[];
+};
+
+export const useGetMessage = (chat_id: string) => {
+  return useQuery([chatPath, chat_id], async () => {
+    return await getMessages(chat_id);
+  });
 };

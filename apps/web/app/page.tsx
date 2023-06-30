@@ -25,12 +25,6 @@ export default function Page() {
     }
   };
 
-  const handleSend = async () => {
-    fetchStreamData(prompt, signal, (msg: string) => {
-      resultRef.current.innerText += msg;
-    });
-  };
-
   return (
     <div className="p-8 rounded-md">
       <h1 className="text-2xl text-primaryColor font-bold mb-6">
@@ -50,10 +44,7 @@ export default function Page() {
       ></textarea>
 
       <div className="flex justify-center mt-4">
-        <button
-          onClick={handleSend}
-          className="w-1/2 px-4 py-2 rounded-md bg-black text-white hover:bg-gray-900 focus:outline-none mr-2 disabled:cursor-not-allowed"
-        >
+        <button className="w-1/2 px-4 py-2 rounded-md bg-black text-white hover:bg-gray-900 focus:outline-none mr-2 disabled:cursor-not-allowed">
           Generate
         </button>
         <button
