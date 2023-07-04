@@ -1,6 +1,6 @@
 "use client";
 
-import { Card } from "@/components/Card";
+import { Card } from "@/components/chats/Card";
 import { useDeleteContent, useGetfolderContent } from "@/services";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";

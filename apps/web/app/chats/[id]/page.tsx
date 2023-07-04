@@ -63,7 +63,7 @@ const ConversationPage = () => {
   };
 
   return (
-    <section className="relative h-full">
+    <section id="chat_section" className="relative h-full">
       <article className="mt-2 px-12 pb-12 mx-auto max-w-3xl">
         <div className="grid grid-cols-1 gap-4">
           {messageList?.map((el) => {

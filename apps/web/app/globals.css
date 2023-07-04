@@ -23,27 +23,6 @@
   p {
     @apply text-grayColor;
   }
-
-  pre {
-    @apply bg-dark my-3 p-3 text-white;
-  }
-
-  /* code { */
-  /*   @apply text-textColor rounded-sm bg-orange-200 px-1; */
-  /* } */
-
-  ol {
-    @apply list-decimal;
-  }
-
-  ul {
-    @apply list-disc;
-  }
-
-  ol,
-  ul {
-    @apply py-2 pl-4;
-  }
 }
 
 @layer components {
@@ -57,6 +36,27 @@
 
   .animationShow {
     @apply transition-all duration-300 ease-in-out;
+  }
+
+  #chat_section pre {
+    @apply bg-dark my-3 p-3 text-white;
+  }
+
+  /* code { */
+  /*   @apply text-textColor rounded-sm bg-orange-200 px-1; */
+  /* } */
+
+  #chat_section ol {
+    @apply list-decimal;
+  }
+
+  #chat_section ul {
+    @apply list-disc;
+  }
+
+  #chat_section ol,
+  ul {
+    @apply py-2 pl-4;
   }
 }
 
