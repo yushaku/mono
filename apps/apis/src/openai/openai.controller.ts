@@ -1,10 +1,20 @@
 import { CreateBotDto } from './dto/bot.dto';
 import { OpenaiService } from './openai.service';
 import { JwtUser } from '@/common/decorators';
-import { Body, Controller, Delete, Get, Patch, Post } from '@nestjs/common';
+import { JwtAuthGuard } from '@/common/guards';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Patch,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { TokenPayload } from 'types';
 
 @Controller('bots')
+@UseGuards(JwtAuthGuard)
 export class OpenaiController {
   constructor(private readonly openaiService: OpenaiService) {}
 

@@ -81,7 +81,7 @@ export class OpenaiService {
   }
 
   async createBot(data: CreateBotDto & { team_id: string }) {
-    const bot = this.botRepo.create(data);
+    const bot = this.botRepo.create({ ...data });
     await this.botRepo.persistAndFlush(bot);
     return bot;
   }

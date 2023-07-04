@@ -1,5 +1,5 @@
 import { BaseEntity } from './base.entity';
-import { Entity, Property, UuidType } from '@mikro-orm/core';
+import { Entity, JsonType, Property, UuidType } from '@mikro-orm/core';
 
 @Entity({ tableName: 'bot' })
 export class BotEntity extends BaseEntity {
@@ -21,8 +21,8 @@ export class BotEntity extends BaseEntity {
   @Property({ fieldName: 'is_deleted', type: Boolean, default: false })
   is_deleted?: boolean;
 
-  @Property({ fieldName: 'knowledge_base', type: Object, nullable: false })
-  knowledge_base: Array<string>;
+  @Property({ fieldName: 'knowledge_base', type: JsonType, nullable: false })
+  knowledge_base?: Array<string>;
 
   @Property({ fieldName: 'relevance_score', type: String, default: 'Balanced' })
   relevance_score: 'Factual' | 'Balanced' | 'Creative';
