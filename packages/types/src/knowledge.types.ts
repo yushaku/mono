@@ -2,6 +2,12 @@ export type CreateProjectDto = {
   title: string;
 };
 
+export type ProjectDetail = {
+  id: string;
+  title: string;
+  subproject_count: number;
+};
+
 export type UpdateProjectDto = CreateProjectDto & {
   id: string;
 };

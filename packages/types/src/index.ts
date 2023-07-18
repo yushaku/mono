@@ -7,3 +7,4 @@ export * from "./bots.types";
 
 export type Action = "delete" | "update" | "pin";
 export type MenuFeatures = { icon: JSX.Element; title: Action }[];
+export type FlattenType<T> = Pick<T, keyof T>;
