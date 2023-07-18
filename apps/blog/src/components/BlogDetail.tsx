@@ -7,7 +7,7 @@ export const Heading2 = ({ plainText }: { plainText: string }) => {
   return (
     <h2
       id={rnrSlugify(plainText)}
-      className="text-primaryColor mb-4 mt-8 text-2xl font-semibold"
+      className="text-primaryColor dark:text-white mb-4 mt-8 text-2xl font-semibold"
     >
       {plainText}
     </h2>
@@ -18,7 +18,7 @@ export const Heading3 = ({ plainText }: { plainText: string }) => {
   return (
     <h3
       id={rnrSlugify(plainText)}
-      className="text-primaryColor mb-3 mt-7 text-lg font-semibold"
+      className="text-primaryColor dark:text-white mb-3 mt-7 text-lg font-semibold"
     >
       {plainText}
     </h3>
@@ -27,7 +27,9 @@ export const Heading3 = ({ plainText }: { plainText: string }) => {
 
 export const Paragraph = ({ plainText }: { plainText: string }) => {
   return (
-    <p className="text-textColor/80 dark:text-strokeColor my-6">{plainText}</p>
+    <p className="text-textColor/80 dark:text-strokeColor/90 my-6">
+      {plainText}
+    </p>
   );
 };
 

@@ -1,6 +1,5 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
 import {
   TwitterShareButton,
   TwitterIcon,
@@ -9,11 +8,12 @@ import {
   FacebookIcon,
   FacebookShareButton,
 } from "next-share";
-import { IconCopy, IconMoon, IconSun } from "ui";
-import { toast } from "react-hot-toast";
+import { useTheme } from "next-themes";
 import Prism from "prismjs";
 import "prismjs/themes/prism-tomorrow.css";
-import { useTheme } from "next-themes";
+import React, { useEffect, useRef } from "react";
+import { toast } from "react-hot-toast";
+import { IconCopy, IconMoon, IconSun } from "ui";
 
 export const TwitterShareBtn = ({ url }: { url: string }) => {
   return (
@@ -87,7 +87,7 @@ export const ContentWarper = ({
           </TwitterShareButton>
         </li>
         <li
-          className="flexCenter bg-strokeColor/20 dark:hover:bg-primaryColor h-8 w-8 cursor-pointer rounded-full border"
+          className="flexCenter bg-strokeColor/20 dark:hover:bg-primaryColor h-8 w-8 cursor-pointer rounded-full border border-grayColor/70"
           onClick={() => {
             navigator.clipboard.writeText(path);
             toast.success("Copied!");
@@ -101,7 +101,7 @@ export const ContentWarper = ({
         </li>
 
         <li
-          className="flexCenter bg-strokeColor/20 dark:hover:bg-primaryColor h-8 w-8 cursor-pointer rounded-full border"
+          className="flexCenter bg-strokeColor/20 dark:hover:bg-primaryColor h-8 w-8 cursor-pointer rounded-full border border-grayColor/70"
           onClick={() => {
             setTheme(theme === "dark" ? "light" : "dark");
           }}
