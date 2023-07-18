@@ -7,11 +7,11 @@ type Props = React.HTMLAttributes<HTMLSpanElement> & {};
 export const SocialMedia = ({ className, ...props }: Props) => {
   return (
     <span className={`flex gap-4 ${className}`} {...props}>
-      <Link href={""}>
+      <Link href="https://www.linkedin.com/in/levanson180200/">
         <IconLinkedin />
       </Link>
 
-      <Link href={""}>
+      <Link href="https://github.com/yushaku">
         <IconGithub />
       </Link>
     </span>

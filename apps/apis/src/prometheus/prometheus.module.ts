@@ -1,5 +1,5 @@
-import { Module } from '@nestjs/common';
 import { PrometheusService } from './prometheus.service';
+import { Module } from '@nestjs/common';
 
 @Module({
   providers: [PrometheusService],

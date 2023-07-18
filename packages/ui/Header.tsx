@@ -1,13 +1,13 @@
 "use client";
 
+import { Button, IconMenu } from ".";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Button, IconMenu } from ".";
 
 type Props = {
   isAuth?: boolean;
-  ontoggleSideBar: () => void;
+  ontoggleSideBar?: () => void;
   topItems: {
     href: string;
     title: string;
@@ -59,7 +59,7 @@ export const Header = ({
   const dynamicHeaderStyle = scrollDirection === "up" ? "top-0" : "-top-[11vh]";
   const transparentStyle = !transparent
     ? "bg-transparent shadow-md mt-0"
-    : `shadow-lg bg-white/70 dark:bg-black/50`;
+    : `shadow-lg bg-white/70 dark:bg-dark-100/90`;
 
   return (
     <header

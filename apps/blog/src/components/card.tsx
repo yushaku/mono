@@ -1,7 +1,7 @@
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
 import moment from "moment";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 type Props = React.HTMLAttributes<HTMLElement> & {
   name: string;
@@ -14,7 +14,7 @@ type Props = React.HTMLAttributes<HTMLElement> & {
 
 export const Card = ({ name, date, imageUrl, slug, summary }: Props) => {
   return (
-    <article className="dark:shadow-darkShadow group max-w-[350px] rounded-lg shadow-lg">
+    <article className="group max-w-[350px] rounded-lg shadow-lg dark:shadow-card">
       <Link href={`/${slug}`}>
         <div className="relative h-[200px] w-full overflow-hidden rounded-t-lg">
           <Image
@@ -33,7 +33,7 @@ export const Card = ({ name, date, imageUrl, slug, summary }: Props) => {
             <span>yushaku</span>
             <span className="ml-4">{moment(date).format("LL")}</span>
           </p>
-          <h3 className="text-textColor dark:text-strokeColor/80 group-hover:text-primaryColor my-2 text-xl font-semibold">
+          <h3 className="text-textColor dark:text-strokeColor dark:group-hover:text-secondColor group-hover:text-primaryColor my-2 text-xl font-semibold">
             {name}
           </h3>
           <p className="text-grayColor line-clamp-4 text-sm">{summary}</p>
@@ -45,7 +45,7 @@ export const Card = ({ name, date, imageUrl, slug, summary }: Props) => {
 
 export const BigCard = ({ name, date, imageUrl, slug, summary }: Props) => {
   return (
-    <article className="dark:shadow-darkShadow group relative mb-6 w-full overflow-hidden rounded-lg shadow-lg">
+    <article className="group relative mb-6 w-full overflow-hidden rounded-lg shadow-lg dark:shadow-card">
       <Link href={`/${slug}`}>
         <div className=" h-[424px] w-full">
           <Image

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { collectDefaultMetrics, Registry, Histogram, Gauge } from 'prom-client';
+
 export type PrometheusHistogram = Histogram<string>;
 
 export type MapHistogram = {

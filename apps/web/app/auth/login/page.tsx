@@ -1,14 +1,14 @@
 "use client";
 
-import { UserLoginDto } from "types";
 import { useFormik } from "formik";
-import { Button, FormInput, IconGoogle } from "ui";
-import Link from "next/link";
-import React from "react";
-import * as Yup from "yup";
-import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import React from "react";
+import toast from "react-hot-toast";
+import { UserLoginDto } from "types";
+import { Button, FormInput, IconGoogle } from "ui";
+import * as Yup from "yup";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -94,7 +94,7 @@ const LoginPage = () => {
 
           <Button
             type="button"
-            Icon={IconGoogle}
+            Icon={<IconGoogle/>}
             title="Sign in with Google"
             onClick={() => handleGoogleAuth()}
           />

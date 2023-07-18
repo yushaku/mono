@@ -1,6 +1,6 @@
 import { HealthIndicator } from '../type/health-indicator.interface';
 import { BaseHealthIndicator } from './base-health.indicator';
-import { FilesService } from '@/files/files.service';
+import { KnowledgeService } from '@/knowledge/knowledge.service';
 import { PrometheusService } from '@/prometheus/prometheus.service';
 import { HealthIndicatorResult } from '@nestjs/terminus';
 
@@ -12,7 +12,7 @@ export class FileModuleHealthIndicator
   protected readonly help = 'Status of ' + this.name;
 
   constructor(
-    private service: FilesService,
+    private service: KnowledgeService,
     protected promClientService: PrometheusService,
   ) {
     super();

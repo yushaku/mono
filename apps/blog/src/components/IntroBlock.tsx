@@ -1,12 +1,12 @@
-import { TableOfContent } from "@/app/[slug]/page";
-import { topics } from "@/utils/constants";
-import Link from "next/link";
-import React from "react";
-import { Result } from "types";
-import { IconArrowRight, IconDot, SocialMedia } from "ui";
 import { ListItem } from "./ListItem";
 import { TopicTitle } from "./TopicTitle";
+import { TableOfContent } from "@/app/[slug]/page";
+import { topics } from "@/utils/constants";
 import Image from "next/image";
+import Link from "next/link";
+import React, { ReactNode } from "react";
+import { Result } from "types";
+import { IconArrowRight, IconDot, SocialMedia } from "ui";
 
 export const IntroBlock = () => {
   return (
@@ -37,10 +37,10 @@ export const Warper = ({
   children,
   className,
 }: {
-  children: React.ReactNode;
+  children: any;
   className?: string;
 }) => {
-  const classes = `mx-auto mb-10 py-6 flex max-w-[350px] flex-col items-center justify-center gap-y-4 rounded-lg px-6 text-center shadow-lg dark:shadow-darkShadow ${
+  const classes = `mx-auto mb-10 py-6 flex max-w-[350px] flex-col items-center justify-center gap-y-4 rounded-lg px-6 text-center shadow-lg dark:shadow-card ${
     className ?? ""
   }`;
   return <article className={classes}>{children}</article>;
@@ -62,13 +62,10 @@ export const BlogOutline = ({ outline }: { outline: TableOfContent[] }) => {
                   <IconDot
                     width="15px"
                     height="15px"
-                    className="animationShow stroke-primaryColor mr-1 group-hover:mr-3"
+                    className="animationShow stroke-primaryColor dark:stroke-teal-200 mr-1 group-hover:mr-3"
                   />
                 ) : (
-                  <IconArrowRight
-                    className="animationShow mr-2 rotate-180 group-hover:mr-4"
-                    color="#234f66"
-                  />
+                  <IconArrowRight className="animationShow mr-2 rotate-180 w-4 h-4 stroke-primaryColor dark:stroke-teal-200 group-hover:mr-4" />
                 )}
                 <span className="group-hover:text-primaryColor dark:group-hover:text-secondColor animationShow group-hover:font-medium">
                   {el.title}
@@ -95,10 +92,7 @@ export const CategoryList = () => {
                 href={`/category/${el.href}`}
                 className="flex items-center py-3 "
               >
-                <IconArrowRight
-                  className="animationShow mr-2 rotate-180 group-hover:mr-4"
-                  color="#234f66"
-                />
+                <IconArrowRight className="animationShow mr-2 rotate-180 w-4 h-4 stroke-primaryColor dark:stroke-teal-200 group-hover:mr-4" />
                 <span className="group-hover:text-primaryColor animationShow group-hover:font-bold">
                   {el.title}
                 </span>

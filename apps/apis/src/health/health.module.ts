@@ -1,12 +1,13 @@
-import { Module } from '@nestjs/common';
+import { PrometheusModule } from '../prometheus/prometheus.module';
 import { HealthController } from './health.controller';
 import { HealthService } from './health.service';
+import { KnowledgeModule } from '@/knowledge/knowledge.module';
+import { OpenaiModule } from '@/openai/openai.module';
+import { Module } from '@nestjs/common';
 import { TerminusModule } from '@nestjs/terminus';
-import { PrometheusModule } from '../prometheus/prometheus.module';
-import { FilesModule } from '@/files/files.module';
 
 @Module({
-  imports: [TerminusModule, PrometheusModule, FilesModule],
+  imports: [TerminusModule, PrometheusModule, KnowledgeModule, OpenaiModule],
   controllers: [HealthController],
   providers: [HealthService],
   exports: [HealthService],

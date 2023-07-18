@@ -1,4 +1,4 @@
-import axiosClient from "./axiosClient";
+import { axiosClient } from ".";
 import { User, UserLoginDto } from "types";
 
 export const login = async (userInfo: UserLoginDto) => {

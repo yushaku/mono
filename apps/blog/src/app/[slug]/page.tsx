@@ -1,4 +1,12 @@
 import {
+  Render,
+  blockEnum,
+  indexGenerator,
+  rnrSlugify,
+  withContentValidation as custom,
+} from "@9gustin/react-notion-render";
+import "@9gustin/react-notion-render/dist/index.css";
+import {
   BlockCode,
   Heading2,
   Heading3,
@@ -7,17 +15,9 @@ import {
   numberList,
   quoteBlock,
 } from "@/components/BlogDetail";
-import { BlogOutline, IntroBlock } from "@/components/IntroBlock";
 import { ContentWarper } from "@/components/ContentWarper";
+import { BlogOutline, IntroBlock } from "@/components/IntroBlock";
 import { fetchPageBlocks, fetchPageBySlug } from "@/utils/notion";
-import {
-  Render,
-  blockEnum,
-  indexGenerator,
-  rnrSlugify,
-  withContentValidation as custom,
-} from "@9gustin/react-notion-render";
-import "@9gustin/react-notion-render/dist/index.css";
 import moment from "moment";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -49,7 +49,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <section className="relative grid grid-cols-2 gap-10 lg:grid-cols-3">
         <article className="col-span-2 overflow-y-scroll">
           <div className="grid gap-4">
-            <h3 className="text-textColor dark:text-strokeColor text-[36px] font-bold">
+            <h3 className="green_text_gradient text-[36px] font-bold">
               {post.properties.Name.title[0].plain_text}
             </h3>
             <p className="text-grayColor flex items-center gap-3">

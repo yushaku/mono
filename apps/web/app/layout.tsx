@@ -1,10 +1,11 @@
-import Providers from "@/utils/provider";
+import "./globals.css";
+import { Navbar } from "@/components/Navbar";
+import Providers from "@/components/provider";
 import React from "react";
 import { Toaster } from "react-hot-toast";
-import "./globals.css";
 
 export const metadata = {
-  title: "YuPoller",
+  title: "Tigon AI",
   description: "I do not know what i am doing",
 };
 
@@ -17,7 +18,13 @@ export default function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning={true}>
         <Toaster />
-        <Providers>{children}</Providers>
+
+        <Providers>
+          <section className="flex dark:bg-dark-300 bg-strokeColor">
+            <Navbar />
+            {children}
+          </section>
+        </Providers>
       </body>
     </html>
   );

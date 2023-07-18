@@ -1,11 +1,11 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
 import { ButtonSwitch, SocialMedia } from ".";
-import { useTheme } from "next-themes";
 import { IconMoon } from "./Icons/IconMoon";
 import { IconSun } from "./Icons/IconSun";
+import { useTheme } from "next-themes";
+import Link from "next/link";
+import React from "react";
 
 type Props = {
   ontoggleSideBar: () => void;
@@ -23,7 +23,7 @@ export const Sidebar = ({ topItems, ontoggleSideBar, showSidebar }: Props) => {
   return (
     <section>
       <div
-        className={`${positionStyle} animationShow dark:shadow-darkShadow fixed top-0 z-50 flex h-screen w-[300px] flex-col justify-between bg-white px-8 py-10 shadow-lg dark:bg-[#202124]`}
+        className={`${positionStyle} animationShow dark:shadow-darkShadow fixed top-0 z-50 flex h-screen w-[300px] flex-col justify-between bg-white px-8 py-10 shadow-lg dark:bg-dark-100`}
       >
         <ul className="flex flex-col gap-6">
           <h3 className="text-primaryColor dark:text-secondColor mb-4 text-xl font-semibold">

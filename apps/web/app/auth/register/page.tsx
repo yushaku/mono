@@ -1,15 +1,17 @@
 "use client";
 
-import { User } from "types";
 import { useFormik } from "formik";
-import { Button, FormInput, IconGoogle } from "ui";
-import Link from "next/link";
-import React, { useState } from "react";
-import * as Yup from "yup";
-import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { User } from "types";
+import { Button, FormInput, IconGoogle } from "ui";
+import * as Yup from "yup";
 
 const RegisterPage = () => {
+  const router = useRouter();
   const [isAgree, setIsAgree] = useState(false);
 
   const handleGoogleAuth = () => {
@@ -36,13 +38,13 @@ const RegisterPage = () => {
           email: values.email,
           password: values.password,
           name: values.name,
-          redirect: false,
+          redirect: true,
         });
-
         if (result?.error) {
           toast.error(result?.error);
         } else {
-          toast.success("Login successful");
+          router.replace("/");
+          toast.success("Register successful");
         }
       },
     });

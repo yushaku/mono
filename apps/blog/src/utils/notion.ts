@@ -1,12 +1,10 @@
-/* eslint-disable turbo/no-undeclared-env-vars */
-import "server-only";
-
 import { Client } from "@notionhq/client";
 import {
   BlockObjectResponse,
   PageObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 import { cache } from "react";
+import "server-only";
 import { BlogList, Result } from "types";
 
 export const notion = new Client({
@@ -46,6 +44,7 @@ export const fetchPagesByCategory = cache(async (category: string) => {
       ],
     },
   });
+
   return post as unknown as BlogList;
 });
 

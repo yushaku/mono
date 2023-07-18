@@ -33,6 +33,7 @@ export default async function Category({
             );
           })}
         </div>
+
         <TopicTitle title="Latest Posts" className="my-12" />
 
         <ul className="flex flex-wrap justify-center gap-6">

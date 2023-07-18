@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 type Props = React.InputHTMLAttributes<HTMLInputElement> & {
@@ -13,6 +15,34 @@ export const CheckBox = ({ title, ...props }: Props) => {
         {...props}
       />
       <p className="text-grayColor">{title}</p>
+    </label>
+  );
+};
+
+export const InputCheckbox = ({
+  title,
+  name,
+  value,
+  isChecked,
+  onClick,
+}: {
+  title: string;
+  name: string;
+  value?: string;
+  isChecked: boolean;
+  onClick?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}) => {
+  return (
+    <label className="flex justify-start items-start">
+      <input
+        name={name}
+        type="checkbox"
+        onChange={onClick}
+        checked={isChecked}
+        value={value ? value : title}
+        className="w-6 h-6 accent-primaryColor rounded"
+      />
+      <span className="select-none ml-4 text-textColor baseText">{title}</span>
     </label>
   );
 };
