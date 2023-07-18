@@ -1,7 +1,7 @@
 "use client";
 
 import { BotCard } from "@/components/bots/BotItem";
-import { botPath, getBotList } from "@/services/bots.service";
+import { botPath, getBotList } from "@/services";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { Action } from "types";
