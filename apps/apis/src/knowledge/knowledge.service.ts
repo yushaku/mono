@@ -8,7 +8,6 @@ import { ForbiddenException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as fs from 'fs';
 import * as _ from 'lodash';
-import puppeteer from 'puppeteer';
 import { CreateProjectDto, UpdateProjectDto } from 'types';
 
 @Injectable()
@@ -116,17 +115,17 @@ export class KnowledgeService {
 
   // CRAWL WEBSITE
 
-  async CrawlWebsite(url: string) {
-    const browser = await puppeteer.launch({ headless: true });
-    const page = await browser.newPage();
-    await page.goto(url);
-
-    const element = await page.content();
-
-    const stream = fs.createWriteStream(`./aaa.html`);
-    stream.write(element);
-    await browser.close();
-  }
+  // async CrawlWebsite(url: string) {
+  //   const browser = await puppeteer.launch({ headless: true });
+  //   const page = await browser.newPage();
+  //   await page.goto(url);
+  //
+  //   const element = await page.content();
+  //
+  //   const stream = fs.createWriteStream(`./aaa.html`);
+  //   stream.write(element);
+  //   await browser.close();
+  // }
 
   // CONTENT ENTITY
 
