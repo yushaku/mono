@@ -70,7 +70,7 @@ export const ContentWarper = ({
 
   return (
     <div className="relative">
-      <ul className="top-1/5 fixed left-0 z-20 flex flex-col gap-2 rounded-r-lg bg-white px-2 py-4 lg:left-10 lg:bg-transparent">
+      <ul className="top-1/5 fixed left-0 z-20 flex flex-col gap-2 rounded-r-lg bg-white/20 px-2 py-4 lg:left-10 lg:bg-transparent">
         <li>
           <FacebookShareButton url={path} quote={title} hashtag={"#yushaku"}>
             <FacebookIcon size={32} round />
