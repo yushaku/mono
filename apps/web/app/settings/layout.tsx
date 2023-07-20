@@ -21,7 +21,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <IconArrowRight className="stroke-primaryColor rotate-180 w-4 h-4" />
       </div>
 
-      <article className="my-[2dvh] h-[96dvh] p-4 bg-white w-1/4 rounded-2xl">
+      <article className="my-[2dvh] h-[96dvh] pr-4 bg-white w-1/4 rounded-2xl">
         <ul className="mt-4 flex flex-col gap-3">
           {settingPages.map((el, index) => {
             const isSelected = pathName === `/settings${el.href}`;

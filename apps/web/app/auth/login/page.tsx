@@ -39,7 +39,7 @@ const LoginPage = () => {
         if (result?.error) {
           toast.error(result?.error);
         } else {
-          router.replace("/");
+          router.push("/");
           toast.success("Login successful");
         }
       },
@@ -94,7 +94,7 @@ const LoginPage = () => {
 
           <Button
             type="button"
-            Icon={<IconGoogle/>}
+            Icon={<IconGoogle />}
             title="Sign in with Google"
             onClick={() => handleGoogleAuth()}
           />
