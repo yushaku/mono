@@ -1,63 +1,34 @@
-import { IconButton } from "../Button";
-import { IconAdd } from "../Icons";
-import { AutocompleteInput, FormInput, RadioButton } from "../form";
-import { CreateBotDto, UpdateBotDto } from "@/types";
-import { colors } from "@/utils/colors";
-import {
-  AutocompleteType,
-  botKnowledgeBase,
-  languages_list,
-  mocDesiredTypes,
-  mocUnanswerableQueries,
-} from "@/utils/constant";
-import { FormikErrors, FormikTouched } from "formik";
-import React, { Dispatch, ReactElement, SetStateAction } from "react";
+import { FormikErrors } from "formik";
+import React, { ReactElement } from "react";
+import { CreateBotDto, UpdateBotDto } from "types";
 
 type Props = {
   errors: FormikErrors<CreateBotDto | UpdateBotDto>;
-  touched: FormikTouched<CreateBotDto | UpdateBotDto>;
   formValue: CreateBotDto | UpdateBotDto;
-  language?: AutocompleteType;
-  setLanguage?: Dispatch<SetStateAction<AutocompleteType>>;
 };
 
-export const PersonalityStep = ({
-  errors,
-  touched,
-  language,
-  formValue,
-  setLanguage,
-}: Props) => {
+export const PersonalityStep = ({ errors, formValue }: Props) => {
   return (
     <section>
       <PersonalityBot title="Ai Information">
         <article className="grid grid-cols-1 md:grid-cols-3 gap-[30px] mt-4">
-          <FormInput<CreateBotDto>
-            errors={errors}
-            touched={touched}
-            type="text"
-            name="nickname"
-            label="AI's Nickname"
-            placeholder="Eg. Story Ai"
-          />
-
-          <FormInput<CreateBotDto>
-            errors={errors}
-            touched={touched}
-            type="text"
-            name="job_position"
-            label="AI's Job Title/Position"
-            placeholder="Eg. Assistant"
-          />
-
-          <FormInput<CreateBotDto>
-            errors={errors}
-            touched={touched}
-            type="text"
-            name="organization_name"
-            label="Organization Name"
-            placeholder="Eg. Story Ai LLC"
-          />
+          {/* <FormInput<CreateBotDto> */}
+          {/*   errors={errors.description} */}
+          {/*   touched={touched} */}
+          {/*   type="text" */}
+          {/*   name="job_position" */}
+          {/*   label="AI's Job Title/Position" */}
+          {/*   placeholder="Eg. Assistant" */}
+          {/* /> */}
+          {/**/}
+          {/* <FormInput<CreateBotDto> */}
+          {/*   errors={errors} */}
+          {/*   touched={touched} */}
+          {/*   type="text" */}
+          {/*   name="organization_name" */}
+          {/*   label="Organization Name" */}
+          {/*   placeholder="Eg. Story Ai LLC" */}
+          {/* /> */}
         </article>
       </PersonalityBot>
 
@@ -65,20 +36,21 @@ export const PersonalityStep = ({
         title="Knowledge Base Strictness"
         description="How much should the AI stick to the source knowledge."
       >
-        <ul className="mt-4 flex flex-wrap gap-5">
-          {botKnowledgeBase.map(({ title, icon }, index) => {
-            const isChecked = title === formValue.knowledge_base;
-            return (
-              <RadioButton
-                isChecked={isChecked}
-                key={index}
-                title={title}
-                name="knowledge_base"
-                icon={icon}
-              />
-            );
-          })}
-        </ul>
+        <div></div>
+        {/* <ul className="mt-4 flex flex-wrap gap-5"> */}
+        {/*   {botKnowledgeBase.map(({ title, icon }, index) => { */}
+        {/*     const isChecked = title === formValue.knowledge_base; */}
+        {/*     return ( */}
+        {/*       <RadioButton */}
+        {/*         isChecked={isChecked} */}
+        {/*         key={index} */}
+        {/*         title={title} */}
+        {/*         name="knowledge_base" */}
+        {/*         icon={icon} */}
+        {/*       /> */}
+        {/*     ); */}
+        {/*   })} */}
+        {/* </ul> */}
       </PersonalityBot>
 
       <PersonalityBot
@@ -86,29 +58,17 @@ export const PersonalityStep = ({
         description="Choose the types of output the AI should focus on."
       >
         <ul className="mt-4 flex flex-wrap gap-5">
-          {mocDesiredTypes.map((title, index) => {
-            const isChecked = formValue.desired_output_type === title;
-            return (
-              <RadioButton
-                key={index}
-                title={title}
-                isChecked={isChecked}
-                name="desired_output_type"
-              />
-            );
-          })}
-
-          <li>
-            <IconButton
-              w="full"
-              title="Add Output Type"
-              icon={<IconAdd color={colors.secondary} />}
-              color={colors.secondary}
-              bg={colors.lightPrimary}
-              sxTitle={{ fontSize: "16px" }}
-              styles={{ padding: "14px" }}
-            />
-          </li>
+          {/* {mocDesiredTypes.map((title, index) => { */}
+          {/*   const isChecked = formValue.desired_output_type === title; */}
+          {/*   return ( */}
+          {/*     <RadioButton */}
+          {/*       key={index} */}
+          {/*       title={title} */}
+          {/*       isChecked={isChecked} */}
+          {/*       name="desired_output_type" */}
+          {/*     /> */}
+          {/*   ); */}
+          {/* })} */}
         </ul>
       </PersonalityBot>
 
@@ -118,17 +78,17 @@ export const PersonalityStep = ({
                     query."
       >
         <ul className="mt-4 flex flex-wrap gap-5">
-          {mocUnanswerableQueries.map((title, index) => {
-            const isChecked = formValue.unanswerable_query === title;
-            return (
-              <RadioButton
-                key={index}
-                title={title}
-                isChecked={isChecked}
-                name="unanswerable_query"
-              />
-            );
-          })}
+          {/* {mocUnanswerableQueries.map((title, index) => { */}
+          {/*   const isChecked = formValue.unanswerable_query === title; */}
+          {/*   return ( */}
+          {/*     <RadioButton */}
+          {/*       key={index} */}
+          {/*       title={title} */}
+          {/*       isChecked={isChecked} */}
+          {/*       name="unanswerable_query" */}
+          {/*     /> */}
+          {/*   ); */}
+          {/* })} */}
 
           {/* <li className="lg:w-[528px]">
             <FormInput<CreateBotDto>
@@ -141,21 +101,6 @@ export const PersonalityStep = ({
           </li> */}
         </ul>
       </PersonalityBot>
-
-      {language && setLanguage && (
-        <PersonalityBot
-          title="Language Selection"
-          description="Choose the language(s) the AI should use."
-        >
-          <div className="lg:w-[528px]">
-            <AutocompleteInput
-              rangeValue={languages_list}
-              selected={language}
-              setSelected={setLanguage}
-            />
-          </div>
-        </PersonalityBot>
-      )}
     </section>
   );
 };

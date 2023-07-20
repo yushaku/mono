@@ -22,8 +22,8 @@ export const ProcessStep = ({
     return (
       <li className={`flex items-center ${endComponentWidth} ${afterStyled}`}>
         <span className="relative flexCenter w-[34px] h-[32px] bg-blackColor rounded-full">
-          <span className="relative -top-2 scale-[40%]">1</span>
-          <span className="absolute top-10 text-grayColor text-lg">
+          <span className="text-secondColor scale-105">{step}</span>
+          <span className="absolute top-10 text-textColor text-lg">
             {title}
           </span>
         </span>
@@ -31,10 +31,12 @@ export const ProcessStep = ({
     );
   else if (isPass)
     return (
-      <li className={`flex items-center ${endComponentWidth} ${afterStyled}`}>
-        <span className="relative flexCenter w-[34px] h-[32px] bg-blackColor rounded-full">
-          2
-          <span className="absolute top-10 text-textColor text-lg">
+      <li
+        className={`flex items-center ${endComponentWidth} ${afterStyled} after:border-grayColor`}
+      >
+        <span className="relative flexCenter w-[34px] h-[32px] bg-grayColor rounded-full">
+          <span className="text-secondColor scale-105">{step}</span>
+          <span className="absolute top-10 text-grayColor text-lg">
             {title}
           </span>
         </span>

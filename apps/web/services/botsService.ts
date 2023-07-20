@@ -1,7 +1,7 @@
 import { axiosClient, httpClient, httpServer } from ".";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { Bot } from "types";
+import { Bot, CreateBotDto } from "types";
 
 export const botPath = "/bots";
 
@@ -30,9 +30,9 @@ export const useCreateBot = () => {
 
   return useMutation(
     [botPath],
-    async (data: { title: string }) => {
+    async (data: CreateBotDto) => {
       const res = await axiosClient.post(botPath, data);
-      return res.data.data as any;
+      return res.data as any;
     },
     {
       onSuccess: () => {

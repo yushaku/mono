@@ -1,12 +1,15 @@
 "use client";
 
+import { Button } from "@/../../packages/ui";
 import { BotCard } from "@/components/bots/BotItem";
 import { botPath, getBotList } from "@/services";
 import { useQuery } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { Action } from "types";
 
 const Bots = () => {
+  const router = useRouter();
   const { data: botyList } = useQuery({
     queryKey: [botPath],
     queryFn: () => getBotList(),
@@ -31,6 +34,12 @@ const Bots = () => {
           );
         })}
       </ul>
+
+      <Button
+        onClick={() => router.push("/bots/create")}
+        title="Create new bot"
+        className="border rounded-xl w-1/5 h-12 flexCenter hover:bg-primaryColor hover:text-white"
+      />
     </div>
   );
 };

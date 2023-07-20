@@ -1,15 +1,21 @@
-import { FormikErrors, FormikTouched } from "formik";
+import { FormikErrors } from "formik";
 import React from "react";
-import { CreateBotDto } from "types";
+import { CreateBotDto, UpdateBotDto } from "types";
 import { FormInput, InputRadio } from "ui";
 
 type Props = {
   isShowGpts: boolean;
-  errors: FormikErrors<CreateBotDto>;
-  touched: FormikTouched<CreateBotDto>;
+  errors: any;
+  values: CreateBotDto | UpdateBotDto;
+  onChange: (e: React.ChangeEvent<any>) => void;
 };
 
-export const GeneralStep = ({ isShowGpts, errors, touched }: Props) => {
+export const GeneralStep = ({
+  isShowGpts,
+  errors,
+  values,
+  onChange,
+}: Props) => {
   const isFreePlan = true;
 
   return (
@@ -17,6 +23,9 @@ export const GeneralStep = ({ isShowGpts, errors, touched }: Props) => {
       <div className="flex flex-col md:w-1/2 gap-5">
         <FormInput<CreateBotDto>
           type="text"
+          errors={errors.name}
+          value={values.name}
+          onChange={onChange}
           name="name"
           label="Bot Name*"
           placeholder="Eg. Factual Story Ai"
@@ -24,6 +33,9 @@ export const GeneralStep = ({ isShowGpts, errors, touched }: Props) => {
 
         <FormInput<CreateBotDto>
           type="text"
+          errors={errors.description}
+          value={values.description}
+          onChange={onChange}
           name="description"
           label="Bot Description*"
           placeholder="Eg. Factual Story Ai"

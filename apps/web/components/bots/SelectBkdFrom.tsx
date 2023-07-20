@@ -1,11 +1,11 @@
 import { Field } from "formik";
 import React, { SetStateAction, useEffect, useState } from "react";
-import { CreateBotDto, ProjectDetail } from "types";
+import { CreateBotDto, Project } from "types";
 import { InputCheckbox } from "ui";
 
 interface Props {
-  projectList: ProjectDetail[];
-  selected?: ProjectDetail[];
+  projectList: Project[];
+  selected?: Project[];
   formValue: CreateBotDto;
   setValues: (
     values: SetStateAction<CreateBotDto>,
@@ -30,7 +30,6 @@ export const SelectBkdFrom = ({
     setIsCheckAll(!isCheckAll);
     const listId = projectList.map((li) => li.id);
     setIsCheck(listId);
-    setValues({ ...formValue, project_list: listId });
     if (isCheckAll) {
       setIsCheck([]);
     }
@@ -50,7 +49,7 @@ export const SelectBkdFrom = ({
         className="mb-8 flex justify-start items-start"
         htmlFor="allFolder"
       >
-        <Field
+        <input
           type="checkbox"
           id="allFolder"
           className="w-6 h-6 accent-primaryColor"

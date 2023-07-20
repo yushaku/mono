@@ -6,10 +6,14 @@ export type Bot = {
   description: string;
   model: "GPT-3.5-TURBO" | "GPT-4";
   created_at: string;
+  knowledge_base: Array<string>;
+  relevance_score: "Factual" | "Balanced" | "Creative";
 };
 
 export type CreateBotDto = FlattenType<
-  Omit<Bot, "id" | "created_at" | "modified_at" | "gpt"> & {
-    gpt_name: "GPT-3.5" | "GPT-4";
-  }
+  Omit<Bot, "id" | "created_at" | "modified_at">
 >;
+
+export type UpdateBotDto = CreateBotDto & {
+  id: string;
+};

@@ -1,6 +1,5 @@
 "use client";
 
-import { Field } from "formik";
 import Link from "next/link";
 
 type Props = {
@@ -19,7 +18,7 @@ export const InputRadio = ({ name, title, description, isDisable }: Props) => {
       }`}
     >
       <div className="flex gap-4 ">
-        <Field
+        <input
           type="radio"
           name={name}
           value={title}
@@ -33,7 +32,7 @@ export const InputRadio = ({ name, title, description, isDisable }: Props) => {
         <p className="baseText">{description}</p>
         {isDisable && (
           <Link
-            href="#"
+            href="/settings/billing"
             className="block p-0 mt-3 baseText text-textColor hover:text-primaryColor"
           >
             Upgrade to Premium
