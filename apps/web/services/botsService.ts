@@ -1,9 +1,26 @@
 import { axiosClient, httpClient, httpServer } from ".";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { Bot, CreateBotDto } from "types";
+import { Bot, CreateBotDto, UserProfile } from "types";
 
 export const botPath = "/bots";
+
+export const useGetProfile = () => {
+  return useQuery(
+    ["/user"],
+    async () => {
+      const res = await httpClient().get("/user");
+      const botList = res.data ?? [];
+      return botList as UserProfile;
+    },
+    {
+      cacheTime: Infinity,
+      staleTime: Infinity,
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+    }
+  );
+};
 
 export const useGetBots = () => {
   return useQuery([botPath], async () => {

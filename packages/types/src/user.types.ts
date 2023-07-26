@@ -12,3 +12,8 @@ export type User = {
 export type UserAuth = {};
 
 export type UserLoginDto = Omit<User, "name">;
+export type UserProfile = Omit<User, "password"> & {
+  avata?: string;
+  created_at: string;
+  updated_at: string;
+};
