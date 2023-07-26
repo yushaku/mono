@@ -7,7 +7,7 @@
     "build": "turbo run build",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "dev:apis": "pnpm --filter apis start:dev",
+    "dev:apis": "pnpm --filter apis dev",
     "dev:web": "pnpm --filter web dev",
     "dev:blog": "pnpm --filter blog dev",
     "dev:story": "pnpm --filter story storybook"

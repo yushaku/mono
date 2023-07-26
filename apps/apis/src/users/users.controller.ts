@@ -49,7 +49,6 @@ export class UsersController {
       expires: new Date(Date.now() + 30 * 60 * 1000),
     });
     res.redirect(this.config.get('CLIENT_URL') ?? 'http://localhost:3000');
-    return { access_token };
   }
 
   @Post('login')
@@ -64,8 +63,9 @@ export class UsersController {
       sameSite: this.isDevelopment ? 'lax' : 'strict',
       secure: this.isDevelopment ? false : true,
       expires: new Date(Date.now() + 30 * 60 * 1000),
+      path: '/',
     });
-    return { access_token };
+    res.status(200).json({ access_token });
   }
 
   @Post('register')
@@ -76,12 +76,12 @@ export class UsersController {
     const access_token = await this.usersService.register(userDto);
     res.cookie('access_token', access_token, {
       httpOnly: true,
-      sameSite: this.isDevelopment ? 'lax' : 'strict',
+      sameSite: this.isDevelopment ? 'none' : 'strict',
       secure: this.isDevelopment ? false : true,
       expires: new Date(Date.now() + 30 * 60 * 1000),
+      path: '/',
     });
-
-    return { access_token };
+    res.status(200).json({ access_token });
   }
 
   @Post('logout')

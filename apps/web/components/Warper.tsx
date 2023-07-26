@@ -9,7 +9,7 @@ export const Warper = ({ children }: React.PropsWithChildren) => {
       <Navbar topItems={topBar} />
 
       <div className="mx-auto w-full bg-strokeColor my-4 mr-4 rounded-lg dark:bg-dark px-6">
-        <TopPage />
+        <TopPage title="" />
 
         <hr className="my-2" />
 

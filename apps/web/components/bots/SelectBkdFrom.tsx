@@ -1,9 +1,8 @@
-import { Field } from "formik";
 import React, { SetStateAction, useEffect, useState } from "react";
 import { CreateBotDto, Project } from "types";
 import { InputCheckbox } from "ui";
 
-interface Props {
+type Props = {
   projectList: Project[];
   selected?: Project[];
   formValue: CreateBotDto;
@@ -11,7 +10,7 @@ interface Props {
     values: SetStateAction<CreateBotDto>,
     shouldValidate?: boolean
   ) => void;
-}
+};
 
 export const SelectBkdFrom = ({
   projectList,
@@ -60,7 +59,7 @@ export const SelectBkdFrom = ({
       </label>
 
       <ul className="flex flex-wrap gap-10 md:gap-5">
-        {projectList.map(({ title, id, subproject_count }) => {
+        {projectList.map(({ title, id }) => {
           return (
             <li key={id} className="w-[25%] flex gap-2">
               <InputCheckbox
@@ -70,7 +69,7 @@ export const SelectBkdFrom = ({
                 isChecked={isCheck.includes(id)}
                 onClick={handleClick}
               />
-              <span>( {subproject_count} )</span>
+              <span>( 0 )</span>
             </li>
           );
         })}

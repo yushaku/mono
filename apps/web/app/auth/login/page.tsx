@@ -1,7 +1,7 @@
 "use client";
 
+import { login } from "@/services";
 import { useFormik } from "formik";
-import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -30,17 +30,12 @@ const LoginPage = () => {
         password: Yup.string().required("This field is required"),
       }),
       onSubmit: async (values) => {
-        const result = await signIn("credentials", {
-          email: values.email,
-          password: values.password,
-          redirect: false,
-        });
-
-        if (result?.error) {
-          toast.error(result?.error);
-        } else {
+        const user = await login(values);
+        if (user.access_token) {
           router.push("/");
           toast.success("Login successful");
+        } else {
+          toast.error("wrong user email or password");
         }
       },
     });

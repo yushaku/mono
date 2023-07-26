@@ -1,6 +1,5 @@
 import { axiosClient } from ".";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getSession } from "next-auth/react";
 import toast from "react-hot-toast";
 import { Stream } from "stream";
 import { Chats, ResponseMessage } from "types";
@@ -11,16 +10,11 @@ export const fetchStreamData = async (
   signal: AbortSignal,
   callback: (msg: string) => void
 ) => {
-  const session: any = await getSession();
-
   fetch(
     `http://localhost:8005/api/chats/ask?chat_id=${chat_id}&prompt=${prompt}`,
     {
       signal,
       method: "POST",
-      headers: new Headers({
-        Authorization: `Bearer ${session?.access_token ?? ""}`,
-      }),
     }
   )
     .then((response) => {

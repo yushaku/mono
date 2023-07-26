@@ -44,6 +44,7 @@ export const Navbar = () => {
               >
                 <Link
                   href={href}
+                  prefetch
                   className="flex items-center bg-white p-4 rounded-full"
                 >
                   <Icon

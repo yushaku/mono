@@ -1,7 +1,7 @@
 "use client";
 
+import { register } from "@/services";
 import { useFormik } from "formik";
-import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -34,17 +34,16 @@ const RegisterPage = () => {
         name: Yup.string(),
       }),
       onSubmit: async (values) => {
-        const result = await signIn("credentials", {
+        const user = await register({
           email: values.email,
           password: values.password,
           name: values.name,
-          redirect: true,
         });
-        if (result?.error) {
-          toast.error(result?.error);
+        if (user.access_token) {
+          router.push("/");
+          toast.success("Login successful");
         } else {
-          router.replace("/");
-          toast.success("Register successful");
+          toast.error("wrong user email or password");
         }
       },
     });
@@ -115,7 +114,7 @@ const RegisterPage = () => {
 
           <Button
             type="button"
-            Icon={IconGoogle}
+            Icon={<IconGoogle />}
             title="Sign up with Google"
             onClick={() => handleGoogleAuth()}
           />
