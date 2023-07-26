@@ -15,7 +15,7 @@ export const TopPage = ({ title = "header" }: { title: string }) => {
       <h3 className="text-primaryColor text-2xl font-semibold">{title}</h3>
       <div className="flex items-center">
         <button
-          className="relative w-16 h-12"
+          className="relative w-16 h-10"
           onClick={async () => {
             await logout();
             router.push("/auth/login");

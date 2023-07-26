@@ -3,7 +3,7 @@ import { Button } from "ui";
 
 const SettingBilling = () => {
   return (
-    <div className="max-h-[85vh] text-center overflow-auto scrollbar-hide pb-4">
+    <div className="h-[85dvh] text-center overflow-hidden scrollbar-hide pb-4">
       <h4 className="text-[22px] text-textColor font-semibold mb-[10px]">
         Pricing
       </h4>
@@ -12,12 +12,12 @@ const SettingBilling = () => {
         ensuring that you find the perfect solution for your organization.
       </p>
 
-      <article className="grid grid-cols-1 md:grid-cols-3 md:gap-5 md:px-0 gap-10 lg:gap-[50px] lg:px-[60px] mt-6">
+      <article className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-5 md:px-0 gap-10 lg:gap-[50px] lg:px-[60px] mt-6">
         {mocPricingData.map((priceItem, index) => {
           return (
             <div
               key={index}
-              className="group border relative text-center p-5 rounded-3xl animationShow hover:shadow-xl min-h-[550px] md:min-h-[650px] lg:min-h-[550px]"
+              className="group animationShow hover:shadow-xl border relative text-center p-5 rounded-3xl min-h-[550px] md:min-h-[650px] lg:min-h-[550px]"
             >
               <h2 className="text-lg group-hover:text-primaryColor animationShow font-semibold mb-1 text-textColor ">
                 {priceItem.type}
