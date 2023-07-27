@@ -29,24 +29,28 @@ export class UsersService {
     if (!user) throw new NotFoundException("User's email does not exist");
 
     await this.verifyPassword(userDto.password, user.password);
-    const accessToken = this.common.createAccessToken({
+    const token = this.common.genToken({
       user_id: user.id,
       team_id: user.team_id ?? '',
     });
 
-    return accessToken;
+    return token;
+  }
+
+  async checkRefreshToken(refresh_token: string) {
+    return this.common.veryfyReFreshToken(refresh_token);
   }
 
   async googleAuth(user: CreateUserDto) {
     const existedUser = await this.getByEmail(user.email);
     if (!existedUser) return this.register(user);
 
-    const accessToken = this.common.createAccessToken({
+    const token = this.common.genToken({
       user_id: existedUser.id,
       team_id: existedUser.team_id ?? '',
     });
 
-    return accessToken;
+    return token;
   }
 
   async register(userDto: CreateUserDto) {
@@ -65,11 +69,11 @@ export class UsersService {
       password: hash,
     });
 
-    const accessToken = this.common.createAccessToken({
+    const token = this.common.genToken({
       user_id: user.id,
       team_id: user.team_id ?? '',
     });
-    return accessToken;
+    return token;
   }
 
   private async verifyPassword(
@@ -95,7 +99,7 @@ export class UsersService {
   async getById(id: string) {
     const user = await this.usersRepo.findOne(
       { id },
-      { fields: ['name', 'email','avatar', 'created_at', 'updated_at'] },
+      { fields: ['name', 'email', 'avatar', 'created_at', 'updated_at'] },
     );
     if (!user) throw new NotFoundException("User's id does not exist");
     return user;
@@ -118,5 +122,12 @@ export class UsersService {
     const team = this.teamRepo.create({ name, vip_plan: 'Free' });
     await this.teamRepo.persistAndFlush(team);
     return team.id;
+  }
+
+  async getTeamMember(team_id: string) {
+    return this.usersRepo.find(
+      { team_id },
+      { fields: ['avatar', 'name', 'created_at', 'role', 'updated_at'] },
+    );
   }
 }

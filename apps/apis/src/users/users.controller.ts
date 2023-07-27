@@ -1,5 +1,4 @@
 import { CreateUserDto } from './dto/createUser.dto';
-import { InviteUserDto } from './dto/inviteUser.dto';
 import { UserDto } from './dto/user.dto';
 import { UsersService } from './users.service';
 import { JwtUser } from '@/common/decorators';
@@ -15,7 +14,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { RequestWithUser } from 'types';
 
 @Controller('user')
@@ -36,18 +35,30 @@ export class UsersController {
     return;
   }
 
-  @Get('google/redirect')
-  @UseGuards(GoogleOAuthGuard)
-  async googleAuthRedirect(@Req() req: RequestWithUser, @Res() res: Response) {
-    const user = req.user as CreateUserDto;
-    const access_token = await this.usersService.googleAuth(user);
-
+  setToken(res: Response, { access_token, refresh_token }) {
     res.cookie('access_token', access_token, {
       httpOnly: true,
       sameSite: this.isDevelopment ? 'lax' : 'strict',
       secure: this.isDevelopment ? false : true,
-      expires: new Date(Date.now() + 30 * 60 * 1000),
+      path: '/',
     });
+    res.cookie('refresh_token', refresh_token, {
+      httpOnly: true,
+      sameSite: this.isDevelopment ? 'lax' : 'strict',
+      secure: this.isDevelopment ? false : true,
+      path: '/',
+    });
+
+    res.status(200).json({ access_token });
+  }
+
+  @Get('google/redirect')
+  @UseGuards(GoogleOAuthGuard)
+  async googleAuthRedirect(@Req() req: RequestWithUser, @Res() res: Response) {
+    const user = req.user as CreateUserDto;
+    const token = await this.usersService.googleAuth(user);
+
+    this.setToken(res, token);
     res.redirect(this.config.get('CLIENT_URL') ?? 'http://localhost:3000');
   }
 
@@ -57,15 +68,8 @@ export class UsersController {
     @Body() userDto: Required<UserDto>,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const access_token = await this.usersService.login(userDto);
-    res.cookie('access_token', access_token, {
-      httpOnly: true,
-      sameSite: this.isDevelopment ? 'lax' : 'strict',
-      secure: this.isDevelopment ? false : true,
-      expires: new Date(Date.now() + 30 * 60 * 1000),
-      path: '/',
-    });
-    res.status(200).json({ access_token });
+    const token = await this.usersService.login(userDto);
+    this.setToken(res, token);
   }
 
   @Post('register')
@@ -73,15 +77,8 @@ export class UsersController {
     @Body() userDto: CreateUserDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const access_token = await this.usersService.register(userDto);
-    res.cookie('access_token', access_token, {
-      httpOnly: true,
-      sameSite: this.isDevelopment ? 'none' : 'strict',
-      secure: this.isDevelopment ? false : true,
-      expires: new Date(Date.now() + 30 * 60 * 1000),
-      path: '/',
-    });
-    res.status(200).json({ access_token });
+    const token = await this.usersService.register(userDto);
+    this.setToken(res, token);
   }
 
   @Post('logout')
@@ -90,21 +87,23 @@ export class UsersController {
     res.clearCookie('access_token').send({ status: 'logout successfully' });
   }
 
+  @Post('refresh')
+  @HttpCode(200)
+  async checkRefreshToken(
+    @Req() req: Request,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const refresh_token = req.cookies?.refresh_token;
+    const access_token = await this.usersService.checkRefreshToken(
+      refresh_token,
+    );
+    this.setToken(res, { access_token, refresh_token });
+    res.status(200).json({ access_token });
+  }
+
   @Get()
   @UseGuards(JwtAuthGuard)
   async getProfile(@JwtUser('user_id') id: string) {
-    const user = await this.usersService.getById(id);
-    return user;
-  }
-
-  @Post('invite')
-  async inviteUser(
-    @JwtUser('team_id') team_id: string,
-    @Body() users: InviteUserDto[],
-  ) {
-    return this.usersService.inviteUser({
-      team_id,
-      users,
-    });
+    return this.usersService.getById(id);
   }
 }

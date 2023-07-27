@@ -14,3 +14,8 @@ export const register = async (user: User) => {
 export const logout = async () => {
   return axiosClient.post("/user/logout");
 };
+
+export const getRefreshtoken = async () => {
+  const res = await axiosClient.post("/user/refresh");
+  return res.data as { access_token: string };
+};

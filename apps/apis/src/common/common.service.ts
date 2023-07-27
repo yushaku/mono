@@ -16,4 +16,28 @@ export class CommonService {
       expiresIn: this.configService.get('JWT_EXPIRED_TIME'),
     });
   }
+
+  public createRefreshToken(payload: TokenPayload) {
+    return this.jwtService.sign(payload, {
+      secret: this.configService.get('JWT_SECRET'),
+      expiresIn: this.configService.get('REFRESH_EXPIRED_TIME'),
+    });
+  }
+
+  public genToken(payload: TokenPayload) {
+    return {
+      access_token: this.createAccessToken(payload),
+      refresh_token: this.createRefreshToken(payload),
+    };
+  }
+
+  public async veryfyReFreshToken(refresh_token: string) {
+    const payload: TokenPayload = await this.jwtService.verifyAsync(
+      refresh_token,
+      {
+        secret: this.configService.get('JWT_SECRET'),
+      },
+    );
+    return this.createAccessToken(payload);
+  }
 }

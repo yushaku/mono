@@ -1,4 +1,5 @@
-import axios from "axios";
+import { getRefreshtoken } from ".";
+import axios, { AxiosResponse } from "axios";
 import toast from "react-hot-toast";
 
 export const httpClient = () => {
@@ -12,29 +13,12 @@ export const httpClient = () => {
   });
 
   client.interceptors.response.use(
-    (response) => {
-      return response;
-    },
-    (error) => {
-      throw error;
-    }
-  );
-
-  return client;
-};
-
-export const httpServer = () => {
-  const client = axios.create({
-    baseURL: process.env.API_URL || "http://localhost:8005/api",
-    withCredentials: process.env.WORKING_ENV !== "product" ? false : true,
-    headers: {
-      Accept: "*",
-      "Content-Type": "application/json",
-    },
-  });
-
-  client.interceptors.response.use(
-    (response) => {
+    async (response: AxiosResponse) => {
+      if (response.data.status === 401) {
+        toast.error("unauthorized");
+        const { access_token } = await getRefreshtoken();
+        if (!access_token) window.location.replace("/auth/login");
+      }
       return response;
     },
     (error) => {

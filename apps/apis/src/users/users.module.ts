@@ -1,3 +1,4 @@
+import { TeamController } from './team.controller';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { TeamEntity, UserEntity } from '@/databases/entities';
@@ -6,7 +7,7 @@ import { Module } from '@nestjs/common';
 
 @Module({
   imports: [MikroOrmModule.forFeature([UserEntity, TeamEntity])],
-  controllers: [UsersController],
+  controllers: [UsersController, TeamController],
   providers: [UsersService],
   exports: [UsersService],
 })
