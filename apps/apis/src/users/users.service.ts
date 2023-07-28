@@ -1,7 +1,7 @@
 import { CreateUserDto } from './dto/createUser.dto';
 import { InviteUserDto } from './dto/inviteUser.dto';
 import { UserDto } from './dto/user.dto';
-import { CommonService } from '@/common/common.service';
+import { JWTService } from '@/common/jwt.service';
 import { TeamEntity, UserEntity } from '@/databases/entities';
 import { EntityRepository } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
@@ -21,7 +21,7 @@ export class UsersService {
     private usersRepo: EntityRepository<UserEntity>,
     @InjectRepository(TeamEntity)
     private teamRepo: EntityRepository<TeamEntity>,
-    private common: CommonService,
+    private common: JWTService,
   ) {}
 
   async login(userDto: Required<UserDto>) {

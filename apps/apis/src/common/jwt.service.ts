@@ -4,7 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { TokenPayload } from 'types';
 
 @Injectable({ scope: Scope.REQUEST })
-export class CommonService {
+export class JWTService {
   constructor(
     private jwtService: JwtService,
     private configService: ConfigService,

@@ -1,9 +1,10 @@
-import { CommonService } from './common.service';
-import { MailService } from './mail/mail.service';
+import { JWTService } from './jwt.service';
 import { MinioService } from './minio.service';
+import { QueueService } from './queue.service';
 import { GoogleStrategy, JwtStrategy } from './strategy';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { BullModule } from '@nestjs/bull';
 import { Global, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
@@ -38,18 +39,29 @@ import { join } from 'path';
         template: {
           dir: join(__dirname, 'templates'),
           adapter: new HandlebarsAdapter(),
-          options: { strict: false },
+          options: { strict: true },
+        },
+      }),
+    }),
+    BullModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (config: ConfigService) => ({
+        prefix: 'queue',
+        redis: {
+          host: config.get('REDIS_HOST'),
+          port: config.get('REDIS_PORT'),
         },
       }),
     }),
   ],
   providers: [
-    CommonService,
+    JWTService,
     MinioService,
-    MailService,
+    QueueService,
     JwtStrategy,
     GoogleStrategy,
   ],
-  exports: [JwtModule, CommonService, MinioService, MailService],
+  exports: [JWTService, MinioService, QueueService],
 })
 export class CommonModule {}
