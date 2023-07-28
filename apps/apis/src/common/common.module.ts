@@ -1,10 +1,14 @@
 import { CommonService } from './common.service';
+import { MailService } from './mail/mail.service';
 import { MinioService } from './minio.service';
 import { GoogleStrategy, JwtStrategy } from './strategy';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { Global, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { join } from 'path';
 
 @Global()
 @Module({
@@ -19,8 +23,33 @@ import { PassportModule } from '@nestjs/passport';
         signOptions: { expiresIn: config.get('JWT_EXPIRED_TIME') },
       }),
     }),
+    MailerModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (config: ConfigService) => ({
+        transport: {
+          secure: false,
+          host: config.get('MAIL_HOST'),
+          auth: {
+            user: config.get('MAIL_USER'),
+            pass: config.get('MAIL_PASSWORD'),
+          },
+        },
+        template: {
+          dir: join(__dirname, 'templates'),
+          adapter: new HandlebarsAdapter(),
+          options: { strict: false },
+        },
+      }),
+    }),
   ],
-  providers: [CommonService, MinioService, JwtStrategy, GoogleStrategy],
-  exports: [JwtModule, CommonService, MinioService],
+  providers: [
+    CommonService,
+    MinioService,
+    MailService,
+    JwtStrategy,
+    GoogleStrategy,
+  ],
+  exports: [JwtModule, CommonService, MinioService, MailService],
 })
 export class CommonModule {}
