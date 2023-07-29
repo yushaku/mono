@@ -4,7 +4,7 @@ import { TableOfContent } from "@/app/[slug]/page";
 import { topics } from "@/utils/constants";
 import Image from "next/image";
 import Link from "next/link";
-import React, { ReactNode } from "react";
+import React from "react";
 import { Result } from "types";
 import { IconArrowRight, IconDot, SocialMedia } from "ui";
 
@@ -23,7 +23,7 @@ export const IntroBlock = () => {
       <h3 className="text-primaryColor dark:text-secondColor text-xl font-semibold">
         Dev &quot;phèn&quot;
       </h3>
-      <p className="text-grayColor text-sm">
+      <p className="text-grayColor dark:text-strokeColor text-sm">
         From &quot;Phèn&quot; developer Become better Full-stack developer.
         Following our tips, tricks and real life experiences.
       </p>
@@ -65,7 +65,7 @@ export const BlogOutline = ({ outline }: { outline: TableOfContent[] }) => {
                     className="animationShow stroke-primaryColor dark:stroke-teal-200 mr-1 group-hover:mr-3"
                   />
                 ) : (
-                  <IconArrowRight className="animationShow mr-2 rotate-180 w-4 h-4 stroke-primaryColor dark:stroke-teal-200 group-hover:mr-4" />
+                  <IconArrowRight className="animationShow mr-2 rotate-180 w-3 h-3 stroke-primaryColor dark:stroke-teal-200 group-hover:mr-4" />
                 )}
                 <span className="group-hover:text-primaryColor dark:group-hover:text-secondColor animationShow group-hover:font-medium">
                   {el.title}
@@ -93,7 +93,7 @@ export const CategoryList = () => {
                 className="flex items-center py-3 "
               >
                 <IconArrowRight className="animationShow mr-2 rotate-180 w-4 h-4 stroke-primaryColor dark:stroke-teal-200 group-hover:mr-4" />
-                <span className="group-hover:text-primaryColor animationShow group-hover:font-bold">
+                <span className="group-hover:text-primaryColor dark:group-hover:text-teal-200 animationShow group-hover:font-bold">
                   {el.title}
                 </span>
               </Link>

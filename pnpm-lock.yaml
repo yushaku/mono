@@ -265,6 +265,9 @@ importers:
       '@vercel/analytics':
         specifier: ^1.0.1
         version: 1.0.1
+      animejs:
+        specifier: ^3.2.1
+        version: 3.2.1
       eslint:
         specifier: ^7.32.0
         version: 7.32.0
@@ -302,6 +305,9 @@ importers:
         specifier: workspace:^
         version: link:../../packages/ui
     devDependencies:
+      '@types/animejs':
+        specifier: ^3.1.7
+        version: 3.1.7
       '@types/node':
         specifier: 20.3.1
         version: 20.3.1
@@ -2443,6 +2449,10 @@ packages:
       - typescript
     dev: true
 
+  /@types/animejs@3.1.7:
+    resolution: {integrity: sha512-kFSyjM+fLo3oE9noWEtUvF82ttN8fTrKohiEMIrSzEzEjnsCmtO0rBCUQBlSPEb2w8vfN+v4/Zo0tK21Bgmq4g==}
+    dev: true
+
   /@types/argparse@1.0.38:
     resolution: {integrity: sha512-ebDJ9b0e702Yr7pWgB0jzm+CX4Srzz8RcXtLJDJB+BSccqMa36uyH/zUsSYao5+BD1ytv3k3rPYCq4mAE1hsXA==}
     dev: false
@@ -3283,6 +3293,10 @@ packages:
     dependencies:
       esprima: 1.2.5
       estraverse: 1.9.3
+    dev: false
+
+  /animejs@3.2.1:
+    resolution: {integrity: sha512-sWno3ugFryK5nhiDm/2BKeFCpZv7vzerWUcUPyAZLDhMek3+S/p418ldZJbJXo5ZUOpfm2kP2XRO4NJcULMy9A==}
     dev: false
 
   /ansi-align@3.0.1:

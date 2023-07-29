@@ -38,4 +38,13 @@ export const topics = [
     title: "Javascript",
     href: "Javascript",
   },
+  {
+    title: "Nodejs",
+    href: "Nodejs",
+  },
+
+  {
+    title: "Nvim",
+    href: "Nvim",
+  },
 ];
