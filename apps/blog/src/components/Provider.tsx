@@ -11,7 +11,7 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <ThemeProvider attribute="class">
-      <section className="dark:bg-dark-100">
+      <section className="dark:bg-dark-200">
         <Header
           topItems={topItems}
           ontoggleSideBar={() => setShowSidebar(!showSidebar)}

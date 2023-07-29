@@ -59,7 +59,7 @@ export const BigCard = ({ name, date, imageUrl, slug, summary }: Props) => {
           />
         </div>
 
-        <div className=" absolute bottom-8 left-8 rounded-md bg-white/5 px-2 py-4 backdrop-blur-sm">
+        <div className="absolute w-11/12 bottom-8 right-1/2 translate-x-1/2 rounded-md bg-gray-500/25 px-2 py-4 backdrop-blur-md">
           <p className="text-strokeColor text-sm">
             <span>yushaku</span>
             <span className="ml-4">{moment(date).format("LL")}</span>

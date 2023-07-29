@@ -15,7 +15,7 @@ module.exports = {
         primaryColor: "#234f66",
         secondColor: "#64ffda",
         tertiary: "#151030",
-        grayColor: "#627480",
+        grayColor: { DEFAULT: "#627480", 100: "#2d3748" },
         textColor: "#051320",
         strokeColor: "#F1F2F3",
         tagColor: "#F6F7F8",
@@ -23,7 +23,7 @@ module.exports = {
         dark: {
           DEFAULT: "#323337",
           100: "#24283b",
-          200: "#151718",
+          200: "#141922",
           300: "#050816",
           400: "#0f2243",
           500: "#0a0f2f",

@@ -40,7 +40,7 @@ export const Warper = ({
   children: any;
   className?: string;
 }) => {
-  const classes = `mx-auto mb-10 py-6 flex max-w-[350px] flex-col items-center justify-center gap-y-4 rounded-lg px-6 text-center shadow-lg dark:shadow-card ${
+  const classes = `mx-auto mb-10 py-6 flex border border-strokeColor dark:border-[#202533] max-w-[350px] flex-col items-center justify-center gap-y-4 rounded-lg px-6 text-center shadow-lg dark:shadow-card ${
     className ?? ""
   }`;
   return <article className={classes}>{children}</article>;
@@ -49,7 +49,7 @@ export const Warper = ({
 export const BlogOutline = ({ outline }: { outline: TableOfContent[] }) => {
   return (
     <Warper className="sticky top-20">
-      <TopicTitle title="Page Outline" />
+      <TopicTitle title="Table of Contents" />
       <ul className="w-full">
         {outline.map((el) => {
           return (
@@ -60,8 +60,8 @@ export const BlogOutline = ({ outline }: { outline: TableOfContent[] }) => {
               <Link href={`#${el.href}`} className="flex items-center py-2">
                 {el.type === "heading_3" ? (
                   <IconDot
-                    width="15px"
-                    height="15px"
+                    width="10px"
+                    height="10px"
                     className="animationShow stroke-primaryColor dark:stroke-teal-200 mr-1 group-hover:mr-3"
                   />
                 ) : (

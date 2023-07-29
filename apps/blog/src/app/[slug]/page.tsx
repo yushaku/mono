@@ -16,7 +16,7 @@ import {
   quoteBlock,
 } from "@/components/BlogDetail";
 import { ContentWarper } from "@/components/ContentWarper";
-import { BlogOutline, IntroBlock } from "@/components/IntroBlock";
+import { BlogOutline } from "@/components/IntroBlock";
 import { fetchPageBlocks, fetchPageBySlug } from "@/utils/notion";
 import moment from "moment";
 import Image from "next/image";
@@ -86,7 +86,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
         </article>
 
         <article className="relative col-span-2 md:col-span-1">
-          <IntroBlock />
           <BlogOutline outline={tablecontent} />
         </article>
       </section>
