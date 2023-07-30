@@ -10,6 +10,7 @@ const nextConfig = {
   env: {
     NOTION_DATABSE: process.env.NOTION_DATABSE,
     NOTION_SECRET: process.env.NOTION_SECRET,
+    BLOG_URL: process.env.BLOG_URL,
   },
 };
 

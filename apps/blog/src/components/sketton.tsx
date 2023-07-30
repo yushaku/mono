@@ -2,10 +2,7 @@ import React from "react";
 
 const CardSkeleton = () => {
   return (
-    <div
-      id="ArticleContainerItem"
-      className="relative rounded-2xl w-[200px] h-[300px] "
-    >
+    <div className="relative rounded-2xl w-[200px] h-[300px] ">
       <section
         id="ArticleItem"
         className="absolute flex flex-col items-center justify-center 

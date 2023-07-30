@@ -10,6 +10,7 @@ export const IconArrowRight = (props: Props) => {
       width={20}
       height={20}
       viewBox="0 0 9 18"
+      stroke="#000000"
       {...props}
     >
       <path

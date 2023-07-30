@@ -9,6 +9,7 @@ import {
   FacebookShareButton,
 } from "next-share";
 import { useTheme } from "next-themes";
+import { usePathname } from "next/navigation";
 import Prism from "prismjs";
 import "prismjs/themes/prism-tomorrow.css";
 import React, { useEffect, useRef } from "react";
@@ -60,8 +61,10 @@ export const ContentWarper = ({
   children: React.ReactNode;
 }) => {
   const { theme, setTheme } = useTheme();
+  const pathname = usePathname();
 
-  const path = location.href;
+  const path = process.env.BLOG_URL + pathname;
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       Prism.highlightAll();
