@@ -23,7 +23,7 @@ export const Sidebar = ({ topItems, ontoggleSideBar, showSidebar }: Props) => {
   return (
     <section>
       <div
-        className={`${positionStyle} animationShow dark:shadow-darkShadow fixed top-0 z-50 flex h-screen w-[300px] flex-col justify-between bg-white px-8 py-10 shadow-lg dark:bg-dark-100`}
+        className={`${positionStyle} animationShow dark:shadow-darkShadow fixed top-0 z-50 flex h-screen w-[300px] flex-col justify-between bg-white px-8 py-10 shadow-lg dark:bg-dark-200`}
       >
         <ul className="flex flex-col gap-6">
           <h3 className="text-primaryColor dark:text-secondColor mb-4 text-xl font-semibold">
@@ -63,7 +63,7 @@ export const Sidebar = ({ topItems, ontoggleSideBar, showSidebar }: Props) => {
       </div>
 
       <div
-        className={`fixed top-0 z-10 h-screen w-screen bg-white/30 ${
+        className={`fixed top-0 z-30 h-screen w-screen bg-white/30 dark:bg-dark/50 ${
           showSidebar ? "block" : "hidden"
         }`}
         onClick={ontoggleSideBar}

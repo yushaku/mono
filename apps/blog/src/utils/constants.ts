@@ -1,9 +1,5 @@
 export const topItems = [
   {
-    title: "Home",
-    href: "/",
-  },
-  {
     title: "Article",
     href: "/category/React",
   },
