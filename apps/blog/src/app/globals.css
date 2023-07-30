@@ -109,6 +109,29 @@
   overflow: hidden;
 }
 
+/* Stack session */
+
+#card:hover ~ #card {
+  transform: translateX(130px);
+}
+
+#card:hover #card-header_title {
+  background: #11998e;
+  background: -webkit-linear-gradient(to left, #11998e, #38ef7d);
+  background: linear-gradient(to left, #11998e, #38ef7d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#tags a:hover {
+  background: linear-gradient(90deg, #39caee, #6e2bff);
+  text-shadow: none;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  border-color: white;
+}
+
 ::-webkit-scrollbar-track {
   background-color: transparent;
 }

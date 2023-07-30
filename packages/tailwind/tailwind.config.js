@@ -34,6 +34,8 @@ module.exports = {
         darkShadow: "-2px 5px 10px rgba(255, 255, 255, 0.1)",
         inner: "inset 0 2px 4px 0 rgb(0 0 0 / 0.05)",
         card: "0px 35px 120px -15px #211e35",
+        dark_stack: "-1rem 0 1rem #131313",
+        light_stack: "-1rem 0 1rem #6e6e6e",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

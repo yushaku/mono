@@ -74,6 +74,15 @@ export const BlogOutline = ({ outline }: { outline: TableOfContent[] }) => {
             </li>
           );
         })}
+
+        <li className="group pl-0">
+          <Link href="#related_posts" className="flex items-center py-2">
+            <IconArrowRight className="animationShow mr-2 rotate-180 w-3 h-3 stroke-primaryColor dark:stroke-teal-200 group-hover:mr-4" />
+            <span className="group-hover:text-primaryColor dark:group-hover:text-secondColor animationShow group-hover:font-medium">
+              Related Posts
+            </span>
+          </Link>
+        </li>
       </ul>
     </Warper>
   );

@@ -17,8 +17,9 @@ import {
 } from "@/components/BlogDetail";
 import { ContentWarper } from "@/components/ContentWarper";
 import { BlogOutline } from "@/components/IntroBlock";
-import { fetchPageBlocks, fetchPageBySlug } from "@/utils/notion";
+import { fetchPageBlocks, fetchPageBySlug, fetchPages } from "@/utils/notion";
 import moment from "moment";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
@@ -29,8 +30,11 @@ export type TableOfContent = {
   type: blockEnum;
 };
 
+const ReadMoreSection = dynamic(() => import("@/components/Readmore"));
+
 export default async function Page({ params }: { params: { slug: string } }) {
   const post = await fetchPageBySlug(params.slug);
+  const blogList = await fetchPages();
   if (!post) notFound();
 
   const blocks = await fetchPageBlocks(post.id);
@@ -46,9 +50,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <ContentWarper title={post.properties.Name.title[0].plain_text}>
-      <section className="relative grid grid-cols-2 gap-10 lg:grid-cols-3">
+      <section className="relative grid grid-cols-1 md:grid-cols-2 md:gap-10 lg:grid-cols-3">
         <article className="col-span-2 overflow-y-scroll">
-          <div className="grid gap-4">
+          <div className="grid gap-4 mb-4">
             <h3 className="green_text_gradient text-[36px] font-bold">
               {post.properties.Name.title[0].plain_text}
             </h3>
@@ -70,6 +74,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
             </div>
           </div>
 
+          <article className="md:hidden">
+            <BlogOutline outline={tablecontent} />
+          </article>
+
           <Render
             blocks={blocks}
             useStyles
@@ -85,9 +93,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
           />
         </article>
 
-        <article className="relative col-span-2 md:col-span-1">
+        <article className="hidden md:block relative col-span-2 md:col-span-1">
           <BlogOutline outline={tablecontent} />
         </article>
+
+        <div className="col-span-3">
+          <ReadMoreSection blogPost={blogList} />
+        </div>
       </section>
     </ContentWarper>
   );
