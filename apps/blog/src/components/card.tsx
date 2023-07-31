@@ -14,11 +14,11 @@ type Props = React.HTMLAttributes<HTMLElement> & {
 
 export const Card = ({ name, date, imageUrl, slug, summary }: Props) => {
   return (
-    <article className="group max-w-[350px] rounded-lg shadow-lg dark:shadow-card">
+    <article className="group w-[330px] rounded-lg shadow-lg dark:shadow-card">
       <Link href={`/${slug}`}>
         <div className="relative h-[200px] w-full overflow-hidden rounded-t-lg">
           <Image
-            src={imageUrl}
+            src={imageUrl ?? "/workspace.jpg"}
             alt={name}
             loading="lazy"
             placeholder="empty"
@@ -36,7 +36,7 @@ export const Card = ({ name, date, imageUrl, slug, summary }: Props) => {
           <h3 className="text-textColor dark:text-strokeColor dark:group-hover:text-secondColor group-hover:text-primaryColor my-2 text-xl font-semibold">
             {name}
           </h3>
-          <p className="text-grayColor line-clamp-4 text-sm">{summary}</p>
+          <p className="text-grayColor line-clamp-3 text-sm">{summary}</p>
         </div>
       </Link>
     </article>
@@ -49,7 +49,7 @@ export const BigCard = ({ name, date, imageUrl, slug, summary }: Props) => {
       <Link href={`/${slug}`}>
         <div className=" h-[424px] w-full">
           <Image
-            src={imageUrl}
+            src={imageUrl ?? "/workspace.jpg"}
             alt={name}
             loading="lazy"
             placeholder="empty"

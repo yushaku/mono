@@ -40,7 +40,7 @@ export const Warper = ({
   children: any;
   className?: string;
 }) => {
-  const classes = `mx-auto mb-10 py-6 flex border border-strokeColor dark:border-[#202533] max-w-[350px] flex-col items-center justify-center gap-y-4 rounded-lg px-6 text-center shadow-lg dark:shadow-card ${
+  const classes = `mx-auto h-fit mb-10 py-6 flex border border-strokeColor dark:border-[#202533] max-w-[350px] flex-col items-center justify-center gap-y-4 rounded-lg px-6 text-center shadow-lg dark:shadow-card ${
     className ?? ""
   }`;
   return <article className={classes}>{children}</article>;
@@ -55,7 +55,9 @@ export const BlogOutline = ({ outline }: { outline: TableOfContent[] }) => {
           return (
             <li
               key={el.id}
-              className={`group ${el.type === "heading_3" ? "pl-3" : "pl-0"}`}
+              className={`group text-start ${
+                el.type === "heading_3" ? "pl-3" : "pl-0"
+              }`}
             >
               <Link href={`#${el.href}`} className="flex items-center py-2">
                 {el.type === "heading_3" ? (
@@ -119,8 +121,9 @@ export const RelatePosts = ({ blogList }: { blogList: Result[] }) => {
     <Warper>
       <TopicTitle title="Popular Posts" />
 
-      <ul className="divide-y">
-        {blogList.map((el) => {
+      <ul className="divide-y divide-grayColor">
+        {blogList.map((el, index) => {
+          if (index > 4) return;
           return (
             <li key={el.id}>
               <ListItem

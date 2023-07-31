@@ -91,11 +91,11 @@ export const callout = ({ config, plainText }: DropedProps) => {
 
 export const quoteBlock = ({ plainText }: DropedProps) => {
   return (
-    <div className="relative m-4 border-l-[3px] border-[#4c3cff] bg-[#4c3cff]/10 p-4">
+    <div className="relative mx-3 my-8 border-l-[3px] border-[#617bff] bg-dark-100/80 rounded-r-lg p-4">
       <IconInfo
-        width="25px"
-        height="25px"
-        className="absolute -left-3 -top-3 rounded-full bg-white stroke-[#4c3cff] p-1"
+        width="35px"
+        height="35px"
+        className="absolute -left-4 -top-3 rounded-full bg-dark stroke-white p-1"
       />
       <p>{plainText}</p>
     </div>

@@ -11,9 +11,9 @@ export default async function Home() {
     <section className="grid grid-cols-1 gap-x-10 px-6 md:grid-cols-2 md:px-3 lg:grid-cols-3 lg:p-0">
       <div className="md:col-span-2">
         <BigCard
-          summary={firstResult.properties.tldr.rich_text[0].plain_text}
+          summary={firstResult.properties?.tldr?.rich_text[0]?.plain_text}
           author={firstResult.created_by.id}
-          imageUrl={firstResult.cover.external.url}
+          imageUrl={firstResult.cover?.external?.url}
           slug={firstResult.properties.slug.rich_text[0].plain_text}
           name={firstResult.properties.Name.title[0].plain_text}
           date={firstResult.created_time}
@@ -21,14 +21,14 @@ export default async function Home() {
 
         <TopicTitle title="Latest Posts" className="my-12" />
 
-        <ul className="flex flex-wrap justify-center gap-6 md:flex-nowrap">
+        <ul className="w-full flex flex-wrap justify-center gap-6">
           {blogList.results.map((el) => {
             return (
               <li key={el.id}>
                 <Card
-                  summary={el.properties.tldr.rich_text[0].plain_text}
+                  summary={el.properties?.tldr?.rich_text[0]?.plain_text}
                   author={el.created_by.id}
-                  imageUrl={el.cover.external.url}
+                  imageUrl={el.cover?.external?.url}
                   slug={el.properties.slug.rich_text[0].plain_text}
                   name={el.properties.Name.title[0].plain_text}
                   date={el.created_time}
@@ -43,7 +43,7 @@ export default async function Home() {
         <TopicTitle title="Relate Topics" className="my-12 text-2xl" />
       </div>
 
-      <div className="col-span-1 flex flex-wrap md:col-span-2 lg:col-span-1">
+      <div className="col-span-1 flex flex-wrap md:col-span-2 lg:col-span-1 h-fit">
         <IntroBlock />
         <RelatePosts blogList={blogList.results} />
         <CategoryList />

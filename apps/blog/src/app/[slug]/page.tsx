@@ -63,7 +63,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
             </p>
             <div className="relative h-[410px] w-full">
               <Image
-                src={post.cover.external.url}
+                src={post.cover?.external?.url ?? "/workspace.jpg"}
                 alt="dsfsdf"
                 loading="lazy"
                 placeholder="empty"
