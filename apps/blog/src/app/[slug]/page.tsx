@@ -16,7 +16,7 @@ import {
   quoteBlock,
 } from "@/components/BlogDetail";
 import { ContentWarper } from "@/components/ContentWarper";
-import { BlogOutline } from "@/components/IntroBlock";
+import BlogOutline from "@/components/Outline";
 import { fetchPageBlocks, fetchPageBySlug, fetchPages } from "@/utils/notion";
 import moment from "moment";
 import dynamic from "next/dynamic";
@@ -31,6 +31,7 @@ export type TableOfContent = {
 };
 
 const ReadMoreSection = dynamic(() => import("@/components/Readmore"));
+// const BlogOutline = dynamic(() => import("@/components/Outline"));
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const post = await fetchPageBySlug(params.slug);

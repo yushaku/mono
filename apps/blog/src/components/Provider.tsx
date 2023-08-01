@@ -13,7 +13,7 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
   const [showSidebar, setShowSidebar] = useState(false);
 
   return (
-    <ThemeProvider attribute="class">
+    <ThemeProvider attribute="class" defaultTheme="dark">
       <section className="dark:bg-dark-200">
         <StarrySky />
 

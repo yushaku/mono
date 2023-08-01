@@ -46,50 +46,6 @@ export const Warper = ({
   return <article className={classes}>{children}</article>;
 };
 
-export const BlogOutline = ({ outline }: { outline: TableOfContent[] }) => {
-  return (
-    <Warper className="sticky top-20">
-      <TopicTitle title="Table of Contents" />
-      <ul className="w-full">
-        {outline.map((el) => {
-          return (
-            <li
-              key={el.id}
-              className={`group text-start ${
-                el.type === "heading_3" ? "pl-3" : "pl-0"
-              }`}
-            >
-              <Link href={`#${el.href}`} className="flex items-center py-2">
-                {el.type === "heading_3" ? (
-                  <IconDot
-                    width="10px"
-                    height="10px"
-                    className="animationShow stroke-primaryColor dark:stroke-teal-200 mr-1 group-hover:mr-3"
-                  />
-                ) : (
-                  <IconArrowRight className="animationShow mr-2 rotate-180 w-3 h-3 stroke-primaryColor dark:stroke-teal-200 group-hover:mr-4" />
-                )}
-                <span className="group-hover:text-primaryColor dark:group-hover:text-secondColor animationShow group-hover:font-medium">
-                  {el.title}
-                </span>
-              </Link>
-            </li>
-          );
-        })}
-
-        <li className="group pl-0">
-          <Link href="#related_posts" className="flex items-center py-2">
-            <IconArrowRight className="animationShow mr-2 rotate-180 w-3 h-3 stroke-primaryColor dark:stroke-teal-200 group-hover:mr-4" />
-            <span className="group-hover:text-primaryColor dark:group-hover:text-secondColor animationShow group-hover:font-medium">
-              Related Posts
-            </span>
-          </Link>
-        </li>
-      </ul>
-    </Warper>
-  );
-};
-
 export const CategoryList = () => {
   return (
     <Warper className="w-[350px]">

@@ -23,10 +23,6 @@ export const topics = [
     href: "React",
   },
   {
-    title: "Nest js",
-    href: "Nest",
-  },
-  {
     title: "Typescript",
     href: "Typescript",
   },
