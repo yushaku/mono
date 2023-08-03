@@ -21,10 +21,9 @@ export const Card = ({ name, date, imageUrl, slug, summary }: Props) => {
             src={imageUrl ?? "/workspace.jpg"}
             alt={name}
             loading="lazy"
-            placeholder="empty"
+            placeholder="blur"
             object-fit="cover"
-            quality={100}
-            fill={true}
+            fill
           />
         </div>
 

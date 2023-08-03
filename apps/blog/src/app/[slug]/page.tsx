@@ -67,10 +67,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 src={post.cover?.external?.url ?? "/workspace.jpg"}
                 alt="dsfsdf"
                 loading="lazy"
-                placeholder="empty"
+                placeholder="blur"
                 object-fit="cover"
-                quality={100}
-                fill={true}
+                fill
               />
             </div>
           </div>

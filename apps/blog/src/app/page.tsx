@@ -25,12 +25,6 @@ export default async function Home() {
 
         <ul className="w-full flex flex-wrap justify-center gap-6">
           {blogList.results.map((el) => {
-            if (
-              el.properties.Name.title[0].plain_text ===
-              "download file with nestjs"
-            ) {
-              console.log(JSON.stringify(el));
-            }
             return (
               <li key={el.id}>
                 <Card
