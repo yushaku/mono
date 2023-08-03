@@ -126,6 +126,9 @@ interface Cover {
   external: {
     url: string;
   };
+  file: {
+    url: string;
+  };
 }
 
 interface Createdby {

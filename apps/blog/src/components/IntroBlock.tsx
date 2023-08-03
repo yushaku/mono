@@ -84,7 +84,7 @@ export const RelatePosts = ({ blogList }: { blogList: Result[] }) => {
             <li key={el.id}>
               <ListItem
                 slug={el.properties.slug.id}
-                imageUrl={el.cover.external.url}
+                imageUrl={el.cover?.external?.url ?? el.cover?.file.url}
                 name={el.properties.Name.title[0].plain_text}
                 date={el.created_time}
                 category={el.properties.category.select.name}

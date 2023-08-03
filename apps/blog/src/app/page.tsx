@@ -13,7 +13,9 @@ export default async function Home() {
         <BigCard
           summary={firstResult.properties?.tldr?.rich_text[0]?.plain_text}
           author={firstResult.created_by.id}
-          imageUrl={firstResult.cover?.external?.url}
+          imageUrl={
+            firstResult.cover?.external?.url ?? firstResult.cover?.file.url
+          }
           slug={firstResult.properties.slug.rich_text[0].plain_text}
           name={firstResult.properties.Name.title[0].plain_text}
           date={firstResult.created_time}
@@ -23,12 +25,18 @@ export default async function Home() {
 
         <ul className="w-full flex flex-wrap justify-center gap-6">
           {blogList.results.map((el) => {
+            if (
+              el.properties.Name.title[0].plain_text ===
+              "download file with nestjs"
+            ) {
+              console.log(JSON.stringify(el));
+            }
             return (
               <li key={el.id}>
                 <Card
                   summary={el.properties?.tldr?.rich_text[0]?.plain_text}
                   author={el.created_by.id}
-                  imageUrl={el.cover?.external?.url}
+                  imageUrl={el.cover?.external?.url ?? el.cover?.file.url}
                   slug={el.properties.slug.rich_text[0].plain_text}
                   name={el.properties.Name.title[0].plain_text}
                   date={el.created_time}

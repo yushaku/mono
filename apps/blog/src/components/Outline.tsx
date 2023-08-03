@@ -4,7 +4,7 @@ import { Warper } from "./IntroBlock";
 import { TopicTitle } from "./TopicTitle";
 import { TableOfContent } from "@/app/[slug]/page";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IconDot, IconArrowRight } from "ui";
 
 const BlogOutline = ({ outline }: { outline: TableOfContent[] }) => {
@@ -17,6 +17,35 @@ const BlogOutline = ({ outline }: { outline: TableOfContent[] }) => {
     a?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const headingElements = outline.map(({ href }) =>
+        document.getElementById(href)
+      );
+      const visibleHeadings = headingElements.filter((el) =>
+        isElementInViewport(el)
+      );
+      if (visibleHeadings.length > 0) {
+        setActive(visibleHeadings[0].id);
+      }
+    };
+
+    document.addEventListener("scroll", handleScroll);
+
+    return () => document.removeEventListener("scroll", handleScroll);
+  }, [outline]);
+
+  const isElementInViewport = (el: HTMLElement) => {
+    const rect = el.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <=
+        (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  };
+
   return (
     <Warper className="sticky top-20">
       <TopicTitle title="Table of Contents" />
@@ -24,13 +53,13 @@ const BlogOutline = ({ outline }: { outline: TableOfContent[] }) => {
         {outline.map((el) => {
           const styledActive =
             active === el.href
-              ? "text-primaryColor dark:text-secondColor"
-              : "group-hover:text-primaryColor dark:group-hover:text-secondColor";
+              ? "text-primaryColor dark:text-secondColor bg-secondColor/10 rounded-r-lg"
+              : "hover:text-primaryColor dark:hover:text-secondColor";
 
           return (
             <li
               key={el.id}
-              className={`group text-start ${
+              className={`group ${styledActive} text-start ${
                 el.type === "heading_3" ? "pl-3" : "pl-0"
               }`}
             >
@@ -51,9 +80,7 @@ const BlogOutline = ({ outline }: { outline: TableOfContent[] }) => {
                     stroke-primaryColor dark:stroke-teal-200 group-hover:mr-4"
                   />
                 )}
-                <span
-                  className={`${styledActive} animationShow group-hover:font-medium`}
-                >
+                <span className={`animationShow group-hover:font-medium`}>
                   {el.title}
                 </span>
               </Link>

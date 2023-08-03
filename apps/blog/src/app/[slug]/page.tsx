@@ -94,7 +94,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           />
         </article>
 
-        <article className="hidden md:block relative col-span-2 md:col-span-1">
+        <article className="hidden md:block col-span-1">
           <BlogOutline outline={tablecontent} />
         </article>
 
