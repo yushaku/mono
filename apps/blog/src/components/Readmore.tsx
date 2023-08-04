@@ -17,11 +17,10 @@ const ReadMoreSection = async ({ blogPost }: { blogPost: BlogList }) => {
           <Image
             src={"/developer.png"}
             alt="logo"
+            object-fit="cover"
             loading="lazy"
             placeholder="empty"
-            object-fit="cover"
-            quality={100}
-            fill={true}
+            fill
           />
         </div>
       </section>
@@ -64,6 +63,7 @@ const StackItem = ({ title, tags, postSlug, createdAt, tlir }: any) => {
                 width={30}
                 height={30}
                 loading="lazy"
+                placeholder="empty"
                 className="rounded-full"
               />
             </span>

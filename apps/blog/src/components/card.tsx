@@ -21,7 +21,7 @@ export const Card = ({ name, date, imageUrl, slug, summary }: Props) => {
             src={imageUrl ?? "/workspace.jpg"}
             alt={name}
             loading="lazy"
-            placeholder="blur"
+            placeholder="empty"
             object-fit="cover"
             fill
           />
@@ -51,10 +51,9 @@ export const BigCard = ({ name, date, imageUrl, slug, summary }: Props) => {
             src={imageUrl ?? "/workspace.jpg"}
             alt={name}
             loading="lazy"
-            placeholder="empty"
             object-fit="cover"
-            quality={100}
-            fill={true}
+            placeholder="empty"
+            fill
           />
         </div>
 

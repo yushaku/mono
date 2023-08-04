@@ -1,20 +1,9 @@
 import {
-  Render,
   blockEnum,
   indexGenerator,
   rnrSlugify,
-  withContentValidation as custom,
 } from "@9gustin/react-notion-render";
 import "@9gustin/react-notion-render/dist/index.css";
-import {
-  BlockCode,
-  Heading2,
-  Heading3,
-  Paragraph,
-  callout,
-  numberList,
-  quoteBlock,
-} from "@/components/BlogDetail";
 import { ContentWarper } from "@/components/ContentWarper";
 import BlogOutline from "@/components/Outline";
 import { fetchPageBlocks, fetchPageBySlug, fetchPages } from "@/utils/notion";
@@ -31,7 +20,7 @@ export type TableOfContent = {
 };
 
 const ReadMoreSection = dynamic(() => import("@/components/Readmore"));
-// const BlogOutline = dynamic(() => import("@/components/Outline"));
+const BlogContent = dynamic(() => import("@/components/BlogContent"));
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const post = await fetchPageBySlug(params.slug);
@@ -67,30 +56,18 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 src={post.cover?.external?.url ?? "/workspace.jpg"}
                 alt="dsfsdf"
                 loading="lazy"
-                placeholder="blur"
+                placeholder="empty"
                 object-fit="cover"
                 fill
               />
             </div>
           </div>
 
-          <article className="md:hidden">
+          <article id="show_outline_in_moblie" className="md:hidden">
             <BlogOutline outline={tablecontent} />
           </article>
 
-          <Render
-            blocks={blocks}
-            useStyles
-            blockComponentsMapper={{
-              heading_2: custom(Heading2),
-              heading_3: custom(Heading3),
-              code: custom(BlockCode),
-              paragraph: custom(Paragraph),
-              callout: custom(callout),
-              numbered_list_item: custom(numberList),
-              quote: custom(quoteBlock),
-            }}
-          />
+          <BlogContent blocks={blocks} />
         </article>
 
         <article className="hidden md:block col-span-1">

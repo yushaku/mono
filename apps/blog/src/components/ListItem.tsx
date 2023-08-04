@@ -27,9 +27,8 @@ export const ListItem = ({
             alt={name}
             loading="lazy"
             placeholder="empty"
-            quality={100}
-            fill={true}
             object-fit="cover"
+            fill
           />
         </div>
         <div className="flex-1 text-left">
