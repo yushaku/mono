@@ -3,7 +3,6 @@ import {
   indexGenerator,
   rnrSlugify,
 } from "@9gustin/react-notion-render";
-import "@9gustin/react-notion-render/dist/index.css";
 import { ContentWarper } from "@/components/ContentWarper";
 import BlogOutline from "@/components/Outline";
 import { fetchPageBlocks, fetchPageBySlug, fetchPages } from "@/utils/notion";
@@ -53,7 +52,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
             </p>
             <div className="relative h-[410px] w-full">
               <Image
-                src={post.cover?.external?.url ?? "/workspace.jpg"}
+                src={
+                  post.cover?.external?.url ??
+                  post.cover?.file.url ??
+                  "/workspace.jpg"
+                }
                 alt="dsfsdf"
                 loading="lazy"
                 placeholder="empty"
@@ -67,7 +70,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
             <BlogOutline outline={tablecontent} />
           </article>
 
-          <BlogContent blocks={blocks} />
+          <article id="blog_content">
+            <BlogContent blocks={blocks} />
+          </article>
         </article>
 
         <article className="hidden md:block col-span-1">

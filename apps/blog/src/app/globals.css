@@ -35,6 +35,11 @@
   }
 }
 
+#blog_content ul {
+  list-style-type: disc !important;
+  margin: 0 16px;
+}
+
 .black_gradient {
   background: #000000; /* fallback for old browsers */
   background: -webkit-linear-gradient(

@@ -1,16 +1,17 @@
 "use client";
 
 import {
-  TwitterShareButton,
-  TwitterIcon,
-  LinkedinIcon,
-  LinkedinShareButton,
   FacebookIcon,
   FacebookShareButton,
+  LinkedinIcon,
+  LinkedinShareButton,
+  TwitterIcon,
+  TwitterShareButton,
 } from "next-share";
 import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
 import Prism from "prismjs";
+import "prismjs/components/prism-typescript";
 import "prismjs/themes/prism-tomorrow.css";
 import React, { useEffect, useRef } from "react";
 import { toast } from "react-hot-toast";

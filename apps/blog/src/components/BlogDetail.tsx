@@ -1,5 +1,6 @@
 import { rnrSlugify } from "@9gustin/react-notion-render";
 import { DropedProps } from "@9gustin/react-notion-render/dist/hoc/withContentValidation";
+import { log } from "console";
 import React from "react";
 import { IconCopy, IconInfo } from "ui";
 
@@ -62,18 +63,34 @@ export const numberList = ({ config }: DropedProps) => {
     <ol className="list-decimal">
       {config.block.items.map((el, num) => {
         return (
-          <ul key={el.id} className="list-decimal">
+          <li key={el.id}>
             {el.content.text.map((te, index) => {
               return (
-                <li key={index}>
+                <span key={index}>
                   <span className="text-primaryColor dark:text-secondColor mr-2 text-sm">
-                    {num}.
+                    {num + 1}.
                   </span>
                   {te.plain_text}
-                </li>
+                </span>
               );
             })}
-          </ul>
+          </li>
+        );
+      })}
+    </ol>
+  );
+};
+
+export const dotList = ({ config }: DropedProps) => {
+  return (
+    <ol className="list-disc">
+      {config.block.items.map((el) => {
+        return (
+          <li key={el.id}>
+            {el.content.text.map((te, index) => {
+              return <span key={index}>{te.plain_text}</span>;
+            })}
+          </li>
         );
       })}
     </ol>

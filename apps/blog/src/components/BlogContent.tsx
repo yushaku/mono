@@ -11,6 +11,7 @@ import {
   Render,
   withContentValidation as custom,
 } from "@9gustin/react-notion-render";
+import "@9gustin/react-notion-render/dist/index.css";
 import React from "react";
 
 const BlogContent = ({ blocks }: { blocks: any }) => {
@@ -25,6 +26,7 @@ const BlogContent = ({ blocks }: { blocks: any }) => {
         paragraph: custom(Paragraph),
         callout: custom(callout),
         numbered_list_item: custom(numberList),
+        // bulleted_list_item: custom(dotList),
         quote: custom(quoteBlock),
       }}
     />
