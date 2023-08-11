@@ -1,11 +1,21 @@
 import { CategoryList, IntroBlock, RelatePosts } from "@/components/IntroBlock";
+import { Pagination } from "@/components/Pagination";
 import { TopicTitle } from "@/components/TopicTitle";
 import { BigCard, Card } from "@/components/card";
-import { fetchPages } from "@/utils/notion";
+import { fetchPages, fetchRecommendPage } from "@/utils/notion";
 
-export default async function Home() {
-  const blogList = await fetchPages();
-  const firstResult = blogList.results.shift();
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
+}) {
+  const page = searchParams.page;
+  const limit =
+    typeof searchParams.limit === "string" ? Number(searchParams.limit) : 10;
+  const blogList = await fetchPages(page, limit);
+  const recommend = await fetchRecommendPage();
+
+  const firstResult = blogList.results.pop();
 
   return (
     <section className="grid grid-cols-1 gap-x-10 px-6 md:grid-cols-2 md:px-3 lg:grid-cols-3 lg:p-0">
@@ -39,6 +49,8 @@ export default async function Home() {
             );
           })}
         </ul>
+
+        <Pagination id={firstResult.id} hasMore={blogList.has_more} />
       </div>
 
       <div className="md:hidden">
@@ -47,7 +59,7 @@ export default async function Home() {
 
       <div className="col-span-1 flex flex-wrap md:col-span-2 lg:col-span-1 h-fit">
         <IntroBlock />
-        <RelatePosts blogList={blogList.results} />
+        <RelatePosts blogList={recommend.results} />
         <CategoryList />
       </div>
     </section>

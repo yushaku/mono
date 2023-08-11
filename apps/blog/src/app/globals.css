@@ -40,6 +40,11 @@
   margin: 0 16px;
 }
 
+#blog_content a {
+  color: #fdba74;
+  text-decoration: underline;
+}
+
 .black_gradient {
   background: #000000; /* fallback for old browsers */
   background: -webkit-linear-gradient(
