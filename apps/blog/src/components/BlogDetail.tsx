@@ -1,6 +1,6 @@
+import { CopyBtn } from "./CopyBtn";
 import { rnrSlugify } from "@9gustin/react-notion-render";
 import { DropedProps } from "@9gustin/react-notion-render/dist/hoc/withContentValidation";
-import { log } from "console";
 import React from "react";
 import { IconCopy, IconInfo } from "ui";
 
@@ -46,12 +46,7 @@ export const BlockCode = ({ plainText, language }: DropedProps) => {
           <span className="inline-block h-3 w-3 rounded-full bg-green-400"></span>
           <span className="inline-block h-3 w-3 rounded-full bg-red-400"></span>
         </p>
-        <span
-          // onClick={() => navigator.clipboard.writeText(plainText)}
-          className="hidden cursor-pointer rounded-md border border-[#cdcdcd]/40 group-hover:block"
-        >
-          <IconCopy className="h-7 w-7" color="#cdcdcd" />
-        </span>
+        <CopyBtn plainText={plainText} />
       </div>
       <code>{plainText}</code>
     </pre>
