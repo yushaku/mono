@@ -1,5 +1,6 @@
 "use client";
 
+import "dracula-prism/dist/css/dracula-prism.min.css";
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -11,8 +12,9 @@ import {
 import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
 import Prism from "prismjs";
-import "prismjs/components/prism-typescript";
-import "prismjs/themes/prism-tomorrow.css";
+import "prismjs/components/prism-solidity.min";
+import "prismjs/components/prism-typescript.min";
+// import "prismjs/themes/prism-tomorrow.css";
 import React, { useEffect, useRef } from "react";
 import { toast } from "react-hot-toast";
 import { IconCopy, IconMoon, IconSun } from "ui";

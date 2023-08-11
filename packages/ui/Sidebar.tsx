@@ -1,11 +1,9 @@
 "use client";
 
 import { ButtonSwitch, SocialMedia } from ".";
-import { IconMoon } from "./Icons/IconMoon";
-import { IconSun } from "./Icons/IconSun";
+import { IconMoon, IconSun } from "./Icons";
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import React from "react";
 
 type Props = {
   ontoggleSideBar: () => void;
@@ -45,19 +43,11 @@ export const Sidebar = ({ topItems, ontoggleSideBar, showSidebar }: Props) => {
         <div className="flexCenter justify-between">
           <SocialMedia />
           <span className="flexCenter gap-2">
-            <IconSun
-              color={theme === "dark" ? "#ffffff" : "#000000"}
-              width="20px"
-              height="20px"
-            />
+            <IconSun color="#234f66" width="20px" height="20px" />
             <ButtonSwitch
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             />
-            <IconMoon
-              color={theme === "dark" ? "#ffffff" : "#000000"}
-              width="20px"
-              height="20px"
-            />
+            <IconMoon color="#234f66" width="20px" height="20px" />
           </span>
         </div>
       </div>

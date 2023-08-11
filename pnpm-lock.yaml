@@ -268,6 +268,9 @@ importers:
       animejs:
         specifier: ^3.2.1
         version: 3.2.1
+      dracula-prism:
+        specifier: ^2.1.13
+        version: 2.1.13
       eslint:
         specifier: ^7.32.0
         version: 7.32.0
@@ -4924,6 +4927,10 @@ packages:
   /dotenv@16.0.3:
     resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
     engines: {node: '>=12'}
+    dev: false
+
+  /dracula-prism@2.1.13:
+    resolution: {integrity: sha512-mgm8Nr/X0RGUz/wpha88dKN/xw0QIGK8BQmWXrzgtOp9be+qcKiFEa2J5SQ3+/WNvL5sPPtNQXPL+Vy//Q8+dg==}
     dev: false
 
   /eastasianwidth@0.2.0:
