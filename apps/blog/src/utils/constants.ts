@@ -5,11 +5,11 @@ export const topItems = [
   },
   {
     title: "Contact",
-    href: "",
+    href: "/contract",
   },
   {
     title: "About us",
-    href: "",
+    href: "/about",
   },
 ];
 
