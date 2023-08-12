@@ -8,12 +8,15 @@ type Props<TType> = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
   errors?: string;
   name: keyof TType;
+  isTextArea?: boolean;
 };
 
 export function FormInput<TType>({
   errors,
   type,
   label,
+  placeholder,
+  isTextArea,
   className,
   ...props
 }: Props<TType>) {
@@ -33,11 +36,16 @@ export function FormInput<TType>({
         </label>
       )}
 
-      <input
-        type={isShowPassword ? "text" : type}
-        className={classes}
-        {...props}
-      />
+      {isTextArea ? (
+        <textarea className={classes} placeholder={placeholder} />
+      ) : (
+        <input
+          type={isShowPassword ? "text" : type}
+          placeholder={placeholder}
+          className={classes}
+          {...props}
+        />
+      )}
 
       {type === "password" && (
         <span

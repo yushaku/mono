@@ -1,45 +1,139 @@
-import { Meteors } from "@/components/Meteors";
-import React from "react";
+"use client";
 
+import { Meteors } from "@/components/Meteors";
+import emailjs from "@emailjs/browser";
+import { useFormik } from "formik";
+import Image from "next/image";
+import React from "react";
+import { toast } from "react-hot-toast";
+import { Button, FormInput, IconSend } from "ui";
+import * as Yup from "yup";
+
+type FormContact = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  message: string;
+};
+
+const { YOUR_SERVICE_ID, YOUR_TEMPLATE_ID, PUBLIC_API_KEY } = process.env;
 const MeteorPreview = () => {
+  const { handleSubmit, handleChange, isValid, isSubmitting, values, errors } =
+    useFormik({
+      validateOnChange: false,
+      initialValues: {
+        email: "",
+        firstName: "",
+        lastName: "",
+        message: "",
+      },
+      validationSchema: Yup.object().shape({
+        email: Yup.string()
+          .email("Please enter your email")
+          .required("This field is required"),
+        firstName: Yup.string().required("Please let me know your name"),
+        lastName: Yup.string(),
+        message: Yup.string().required("You don't have any thing to say?"),
+      }),
+      onSubmit: (values, { resetForm }) => {
+        console.log(values);
+        emailjs
+          .send(YOUR_SERVICE_ID, YOUR_TEMPLATE_ID, values, PUBLIC_API_KEY)
+          .then(() => {
+            toast.success("thanks! your email has be sended");
+            resetForm();
+          })
+          .catch(() => toast.error("send email failed"));
+      },
+    });
+
+  const animation = "animate-fade-down animate-once animate-duration-1000";
+
   return (
-    <section className="h-[40rem]">
-      <div className=" h-3/4 md:h-1/2 w-3/4  relative max-w-sm">
-        <div className="absolute inset-0 h-full w-full bg-gradient-to-r from-blue-500 to-teal-500 transform scale-[0.80] bg-red-500 rounded-full blur-3xl" />
-        <div className="relative shadow-xl bg-gray-900 border border-gray-800  px-4 py-8 h-full overflow-hidden rounded-2xl flex flex-col justify-end items-start">
-          <div className="h-5 w-5 rounded-full border flex items-center justify-center mb-4 border-gray-500">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              className="h-2 w-2 text-gray-300"
+    <section className="max-w-[1000px]">
+      <article className="relative">
+        <div className="absolute hidden dark:block inset-0 h-full w-full bg-gradient-to-r from-blue-500 to-teal-500 transform scale-[0.70] bg-red-500 rounded-full blur-3xl" />
+
+        <div className="relative shadow-xl dark:bg-gray-900/80 border dark:border-gray-800 py-8 px-8 h-full overflow-hidden rounded-2xl flex items-center">
+          <Meteors number={10} />
+
+          <div>
+            <h1
+              className={`text-2xl font-bold text-primaryColor dark:text-secondColor ${animation} animate-delay-300`}
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M4.5 4.5l15 15m0 0V8.25m0 11.25H8.25"
+              Just say hello!!!
+            </h1>
+
+            <p
+              className={`font-normal text-base text-slate-500 mb-4 ${animation} animate-delay-500`}
+            >
+              Let me know more about you
+            </p>
+
+            <div className={`${animation} animate-delay-600`}>
+              <label className="flex gap-3">
+                <FormInput<FormContact>
+                  errors={errors.firstName}
+                  value={values.firstName}
+                  onChange={handleChange}
+                  name="firstName"
+                  placeholder="First name"
+                  className="dark:bg-[#4f5c88]/60 dark:text-white dark:border-none"
+                />
+
+                <FormInput<FormContact>
+                  errors={errors.lastName}
+                  value={values.lastName}
+                  onChange={handleChange}
+                  name="lastName"
+                  placeholder="Last name"
+                  className="dark:bg-[#4f5c88]/60 dark:text-white dark:border-none"
+                />
+              </label>
+
+              <FormInput<FormContact>
+                errors={errors.email}
+                value={values.email}
+                onChange={handleChange}
+                name="email"
+                className="dark:bg-[#4f5c88]/60 dark:text-white dark:border-none"
+                placeholder="Your email"
               />
-            </svg>
+
+              <FormInput<FormContact>
+                errors={errors.message}
+                value={values.message}
+                isTextArea={true}
+                onChange={handleChange}
+                name="message"
+                className="h-32 dark:bg-[#4f5c88]/60 dark:text-white dark:border-none"
+                placeholder="Message"
+              />
+
+              <Button
+                type="submit"
+                title="Send"
+                Icon={
+                  <IconSend className="dark:stroke-white stroke-primaryColor" />
+                }
+                disabled={!isValid || isSubmitting}
+                className={`mt-4 border border-gray-700 hover:bg-primaryColor ${animation} animate-delay-700`}
+                onClick={() => handleSubmit()}
+              />
+            </div>
           </div>
 
-          <h1 className="font-bold text-xl text-white mb-0 mt-4 relative z-50">
-            Meteors because they are cool
-          </h1>
-
-          <p className="font-normal text-base text-slate-500 mb-4 relative z-50">
-            I dont know what to write so I will just paste something cool here.
-            One more sentence because lorem ipsum is just unacceptable.
-          </p>
-
-          <button className="border px-4 py-1 rounded-lg !text-sm  border-gray-500 text-gray-300">
-            Explore &rarr;
-          </button>
-
-          <Meteors number={10} />
+          <div className="hidden md:block">
+            <Image
+              placeholder="empty"
+              src="/coder.png"
+              alt="coder form"
+              width={500}
+              height={600}
+            />
+          </div>
         </div>
-      </div>
+      </article>
     </section>
   );
 };

@@ -8,8 +8,8 @@ export const topItems = [
     href: "/contract",
   },
   {
-    title: "About us",
-    href: "/about",
+    title: "About me",
+    href: "https://yu-portfolio.vercel.app/",
   },
 ];
 
