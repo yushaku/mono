@@ -27,14 +27,13 @@ const CardSkeleton = () => {
   );
 };
 
-export const LoadingSkeleton = () => {
+export const LoadingSkeleton = ({ num = 3 }) => {
   return (
-    <div className="container mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-        <CardSkeleton />
-        <CardSkeleton />
-        {/* <CardSkeleton /> */}
-        {/* <CardSkeleton /> */}
+    <div className="">
+      <div className="flex flex-wrap justify-between gap-4 items-center">
+        {[...Array(num)].map((_it, index) => {
+          return <CardSkeleton key={index} />;
+        })}
       </div>
     </div>
   );
