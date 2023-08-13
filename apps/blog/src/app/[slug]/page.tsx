@@ -5,7 +5,12 @@ import {
 } from "@9gustin/react-notion-render";
 import { ContentWarper } from "@/components/ContentWarper";
 import BlogOutline from "@/components/Outline";
-import { fetchPageBlocks, fetchPageBySlug, fetchPages } from "@/utils/notion";
+import {
+  fetchPageBlocks,
+  fetchPageBySlug,
+  fetchPages,
+  fetchRecommendPage,
+} from "@/utils/notion";
 import moment from "moment";
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -23,7 +28,7 @@ const BlogContent = dynamic(() => import("@/components/BlogContent"));
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const post = await fetchPageBySlug(params.slug);
-  const blogList = await fetchPages();
+  const recommend = await fetchPages(10);
   if (!post) notFound();
 
   const blocks = await fetchPageBlocks(post.id);
@@ -80,7 +85,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         </article>
 
         <div className="col-span-3">
-          <ReadMoreSection blogPost={blogList} />
+          <ReadMoreSection blogPost={recommend} />
         </div>
       </section>
     </ContentWarper>

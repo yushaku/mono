@@ -12,7 +12,7 @@ export default async function Home({
   const page = searchParams.page;
   const limit =
     typeof searchParams.limit === "string" ? Number(searchParams.limit) : 10;
-  const blogList = await fetchPages(page, limit);
+  const blogList = await fetchPages(limit, page);
   const recommend = await fetchRecommendPage();
 
   const firstResult = blogList.results.pop();

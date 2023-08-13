@@ -11,23 +11,21 @@ export const notion = new Client({
   auth: process.env.NOTION_SECRET,
 });
 
-export const fetchPages = cache(
-  async (page: string | undefined, limit: number) => {
-    const post = await notion.databases.query({
-      database_id: process.env.NOTION_DATABASE,
-      filter: {
-        property: "status",
-        select: {
-          equals: "published",
-        },
+export const fetchPages = cache(async (limit?: number, page?: string) => {
+  const post = await notion.databases.query({
+    database_id: process.env.NOTION_DATABASE,
+    filter: {
+      property: "status",
+      select: {
+        equals: "published",
       },
-      start_cursor: page,
-      page_size: limit,
-    });
+    },
+    start_cursor: page,
+    page_size: limit,
+  });
 
-    return post as unknown as BlogList;
-  }
-);
+  return post as unknown as BlogList;
+});
 
 export const fetchPagesByCategory = cache(async (category: string) => {
   const post = await notion.databases.query({
