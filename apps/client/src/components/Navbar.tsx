@@ -1,5 +1,3 @@
-"use client";
-
 import { topBar } from "@/utils/constants";
 import { useTheme } from "next-themes";
 import Image from "next/image";
@@ -10,13 +8,10 @@ import { IconTheme } from "ui";
 export const Navbar = () => {
   const { theme, setTheme } = useTheme();
   const pathName = usePathname();
-  const isAuthPage = pathName.includes("/auth/");
 
   return (
     <nav
-      className={`${
-        isAuthPage ? "hidden" : "block"
-      } w-20 rounded-3xl bg-white dark:bg-dark px-4 ml-6 my-[2dvh] h-[96dvh] flex flex-col items-center justify-between`}
+      className={`w-20 rounded-3xl bg-white dark:bg-dark px-4 ml-6 my-[2dvh] h-[96dvh] flex flex-col items-center justify-between`}
     >
       <section className="py-4 my-8">
         <Link href="/" className="flexCenter">

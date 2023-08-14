@@ -11,3 +11,7 @@ export default function Home() {
     </main>
   );
 }
+
+Home.auth = {
+  required: true,
+};
