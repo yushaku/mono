@@ -7,7 +7,11 @@ This is an official starter Turborepo.
 Run the following command:
 
 ```sh
+# init monorepo
 npx create-turbo@latest
+
+# create nextjs app
+pnpm create next-app --tailwind <app_name>
 ```
 
 ## What's inside?
