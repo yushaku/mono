@@ -1,3 +1,4 @@
+import { ChatLayout } from "@/components/layout";
 import React from "react";
 import { IconArrowRight } from "ui";
 
@@ -12,7 +13,7 @@ const ChatPage = async () => {
   );
 };
 
-ChatPage.auth = {
-  required: true,
-};
+ChatPage.auth = { required: true };
+ChatPage.Layout = ChatLayout;
+
 export default ChatPage;

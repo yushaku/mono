@@ -1,9 +1,9 @@
-import Layout from "@/components/auth/layout";
+import AuthLayout from "@/components/layout/Authlayout";
 import { login } from "@/services";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { ReactElement } from "react";
+import React from "react";
 import toast from "react-hot-toast";
 import { UserLoginDto } from "types";
 import { Button, FormInput, IconGoogle } from "ui";
@@ -40,81 +40,75 @@ const LoginPage = () => {
     });
 
   return (
-    <Layout>
-      <div>
-        <p className="text-grayColor mb-[30px] mt-[42px] hidden text-right md:block">
-          Don&rsquo;t have an account?{" "}
-          <Link href="/auth/register" className="text-primaryColor font-bold">
-            Sign up
+    <div>
+      <p className="text-grayColor mb-[30px] mt-[42px] hidden text-right md:block">
+        Don&rsquo;t have an account?{" "}
+        <Link href="/auth/register" className="text-primaryColor font-bold">
+          Sign up
+        </Link>
+      </p>
+
+      <h3 className="text-primaryColor mb-[40px] text-[28px] font-bold">
+        Log in
+      </h3>
+
+      <div className="grid w-full grid-cols-1 gap-5">
+        <FormInput<UserLoginDto>
+          errors={errors.email}
+          onChange={handleChange}
+          value={values.email}
+          type="email"
+          name="email"
+          label="Email"
+          placeholder="Eg. abc@gmail.com"
+        />
+
+        <FormInput<UserLoginDto>
+          errors={errors.password}
+          value={values.password}
+          onChange={handleChange}
+          type="password"
+          name="password"
+          label="Password"
+          placeholder="Eg.12*****"
+        />
+
+        <div className="mb-[40px] flex justify-between">
+          <Link href="#" className="baseText">
+            Forgot Password?
           </Link>
-        </p>
+        </div>
 
-        <h3 className="text-primaryColor mb-[40px] text-[28px] font-bold">
-          Log in
-        </h3>
-
-        <div className="grid w-full grid-cols-1 gap-5">
-          <FormInput<UserLoginDto>
-            errors={errors.email}
-            onChange={handleChange}
-            value={values.email}
-            type="email"
-            name="email"
-            label="Email"
-            placeholder="Eg. abc@gmail.com"
+        <div className="flex flex-col gap-5">
+          <Button
+            type="submit"
+            title="Log in"
+            disabled={!isValid || isSubmitting}
+            className="bg-primaryColor text-white"
+            onClick={() => handleSubmit()}
           />
 
-          <FormInput<UserLoginDto>
-            errors={errors.password}
-            value={values.password}
-            onChange={handleChange}
-            type="password"
-            name="password"
-            label="Password"
-            placeholder="Eg.12*****"
+          <Button
+            type="button"
+            className="border border-gray-300"
+            Icon={<IconGoogle />}
+            title="Sign in with Google"
+            onClick={() => handleGoogleAuth()}
           />
 
-          <div className="mb-[40px] flex justify-between">
-            <Link href="#" className="baseText">
-              Forgot Password?
+          <p className="text-grayColor mt-[22px] text-center md:hidden">
+            Don&rsquo;t have an account?{" "}
+            <Link href="/auth/register" className="text-primaryColor font-bold">
+              Sign up
             </Link>
-          </div>
-
-          <div className="flex flex-col gap-5">
-            <Button
-              type="submit"
-              title="Log in"
-              disabled={!isValid || isSubmitting}
-              className="bg-primaryColor text-white"
-              onClick={() => handleSubmit()}
-            />
-
-            <Button
-              type="button"
-              className="border border-gray-300"
-              Icon={<IconGoogle />}
-              title="Sign in with Google"
-              onClick={() => handleGoogleAuth()}
-            />
-
-            <p className="text-grayColor mt-[22px] text-center md:hidden">
-              Don&rsquo;t have an account?{" "}
-              <Link
-                href="/auth/register"
-                className="text-primaryColor font-bold"
-              >
-                Sign up
-              </Link>
-            </p>
-          </div>
+          </p>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 };
 
-LoginPage.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
-};
+LoginPage.auth = { required: false };
+LoginPage.Layout = AuthLayout;
 
 export default LoginPage;

@@ -3,6 +3,7 @@
 import { CrawlWebsiteForm } from "@/components/knowledge/CrawlWebsite";
 import { FileDropZone } from "@/components/knowledge/FileDropZone";
 import { TextEditor } from "@/components/knowledge/TextEdittor";
+import { KLLayout } from "@/components/layout/KLlayout";
 import { knowledgePath, getProject, useCreateContent } from "@/services";
 import { CreateDocBtn } from "@/utils/constants";
 import { useQuery } from "@tanstack/react-query";
@@ -119,8 +120,7 @@ const Knowledge = () => {
   );
 };
 
-Knowledge.auth = {
-  required: true,
-};
+Knowledge.auth = { required: true };
+Knowledge.Layout = KLLayout;
 
 export default Knowledge;

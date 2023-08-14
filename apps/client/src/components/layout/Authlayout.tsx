@@ -3,7 +3,7 @@ import React from "react";
 
 type Props = { children: React.ReactNode };
 
-const layout = ({ children }: Props) => {
+const AuthLayout = ({ children }: Props) => {
   return (
     <section className="grid h-[100dvh] w-[100vw] grid-cols-1 md:grid-cols-2">
       <div className="flex min-h-[250px] items-center justify-center bg-[#234f66]">
@@ -15,4 +15,4 @@ const layout = ({ children }: Props) => {
   );
 };
 
-export default layout;
+export default AuthLayout;

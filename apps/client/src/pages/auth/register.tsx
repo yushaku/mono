@@ -1,9 +1,9 @@
-import Layout from "@/components/auth/layout";
+import AuthLayout from "@/components/layout/Authlayout";
 import { register } from "@/services";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { ReactElement, useState } from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { User } from "types";
 import { Button, FormInput, IconGoogle } from "ui";
@@ -48,93 +48,91 @@ const RegisterPage = () => {
     });
 
   return (
-    <Layout>
-      <div>
-        <p className="text-grayColor mb-[30px] mt-[42px] hidden text-right md:block">
-          Already have an account?{" "}
-          <Link href="/auth/login" className="text-primaryColor font-bold">
-            Login
-          </Link>
-        </p>
-        <h3 className="text-textColor mb-5 text-[28px] font-bold md:mb-[40px]">
-          Sign up
-        </h3>
+    <div>
+      <p className="text-grayColor mb-[30px] mt-[42px] hidden text-right md:block">
+        Already have an account?{" "}
+        <Link href="/auth/login" className="text-primaryColor font-bold">
+          Login
+        </Link>
+      </p>
+      <h3 className="text-textColor mb-5 text-[28px] font-bold md:mb-[40px]">
+        Sign up
+      </h3>
 
-        <div className="grid w-full grid-cols-1 gap-5">
-          <FormInput<User>
-            errors={errors.name}
-            value={values.name}
-            onChange={handleChange}
-            type="text"
-            name="name"
-            label="Name"
-            placeholder="Eg. yushaku"
-          />
-          <FormInput<User>
-            onChange={handleChange}
-            errors={errors.email}
-            value={values.email}
-            type="email"
-            name="email"
-            label="Email"
-            placeholder="Eg. abc@gmail.com"
-          />
-          <FormInput<User>
-            onChange={handleChange}
-            errors={errors.password}
-            value={values.password}
-            type="password"
-            name="password"
-            label="Password"
-            placeholder="Eg.12*****"
-          />
+      <div className="grid w-full grid-cols-1 gap-5">
+        <FormInput<User>
+          errors={errors.name}
+          value={values.name}
+          onChange={handleChange}
+          type="text"
+          name="name"
+          label="Name"
+          placeholder="Eg. yushaku"
+        />
+        <FormInput<User>
+          onChange={handleChange}
+          errors={errors.email}
+          value={values.email}
+          type="email"
+          name="email"
+          label="Email"
+          placeholder="Eg. abc@gmail.com"
+        />
+        <FormInput<User>
+          onChange={handleChange}
+          errors={errors.password}
+          value={values.password}
+          type="password"
+          name="password"
+          label="Password"
+          placeholder="Eg.12*****"
+        />
 
-          <div className="mb-5 flex justify-between md:mb-[40px]">
-            <label className="flexCenter gap-2">
-              <input
-                type="checkbox"
-                className="accent-primaryColor h-5 w-5"
-                onChange={() => setIsAgree(!isAgree)}
-              />
-              <p className="text-grayColor">
-                I agree to the <LinkDocs title="Terms of Service" link="#" />{" "}
-                and <LinkDocs title="Privacy Policy" link="#" />.
-              </p>
-            </label>
-          </div>
-
-          <div className="flex flex-col gap-5">
-            <Button
-              type="submit"
-              disabled={!isValid || isSubmitting}
-              className="bg-primaryColor text-white"
-              onClick={() => handleSubmit()}
-              title="Sign Up"
+        <div className="mb-5 flex justify-between md:mb-[40px]">
+          <label className="flexCenter gap-2">
+            <input
+              type="checkbox"
+              className="accent-primaryColor h-5 w-5"
+              onChange={() => setIsAgree(!isAgree)}
             />
-
-            <Button
-              type="button"
-              Icon={<IconGoogle />}
-              className="border border-gray-300"
-              title="Sign up with Google"
-              onClick={() => handleGoogleAuth()}
-            />
-
-            <p className="text-grayColor mt-[22px] text-center md:hidden">
-              Don&rsquo;t have an account?{" "}
-              <Link
-                href="/auth/register"
-                className="text-primaryColor font-bold"
-              >
-                Sign up
-              </Link>
+            <p className="text-grayColor">
+              I agree to the <LinkDocs title="Terms of Service" link="#" /> and{" "}
+              <LinkDocs title="Privacy Policy" link="#" />.
             </p>
-          </div>
+          </label>
+        </div>
+
+        <div className="flex flex-col gap-5">
+          <Button
+            type="submit"
+            disabled={!isValid || isSubmitting}
+            className="bg-primaryColor text-white"
+            onClick={() => handleSubmit()}
+            title="Sign Up"
+          />
+
+          <Button
+            type="button"
+            Icon={<IconGoogle />}
+            className="border border-gray-300"
+            title="Sign up with Google"
+            onClick={() => handleGoogleAuth()}
+          />
+
+          <p className="text-grayColor mt-[22px] text-center md:hidden">
+            Don&rsquo;t have an account?{" "}
+            <Link href="/auth/register" className="text-primaryColor font-bold">
+              Sign up
+            </Link>
+          </p>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 };
+
+RegisterPage.auth = { required: false };
+RegisterPage.Layout = AuthLayout;
 
 export default RegisterPage;
 

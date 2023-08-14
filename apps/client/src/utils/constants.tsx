@@ -1,4 +1,4 @@
-import { ActionType } from "@/../../packages/types/src";
+import { ActionType, UserProfile } from "@/../../packages/types/src";
 import {
   IconBot,
   IconChat,
@@ -107,5 +107,27 @@ export const mocPricingData: PriceData[] = [
       "25,000 Documents",
       "Customize Widget Appearance",
     ],
+  },
+];
+
+export const userList: Array<UserProfile & { id: string; role: string }> = [
+  {
+    id: "djfhdsadfasdfsdfsdf",
+    name: "yusaku",
+    email: "yushaku@gmail.com",
+    role: "admin",
+    avata: "",
+    created_at: new Date().toString(),
+    updated_at: new Date().toString(),
+  },
+
+  {
+    id: "sfhsdkfhskdjfhksdfjhskdfhsdf",
+    name: "tigon",
+    email: "tigon@gmail.com",
+    role: "admin",
+    avata: "",
+    created_at: new Date().toString(),
+    updated_at: new Date().toString(),
   },
 ];

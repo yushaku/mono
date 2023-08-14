@@ -1,4 +1,5 @@
 import { BotCard } from "@/components/bots/BotItem";
+import { BotLayout } from "@/components/layout";
 import { botPath, getBotList } from "@/services";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -42,8 +43,7 @@ const Bots = () => {
   );
 };
 
-Bots.auth = {
-  required: true,
-};
+Bots.auth = { required: true };
+Bots.Layout = BotLayout;
 
 export default Bots;

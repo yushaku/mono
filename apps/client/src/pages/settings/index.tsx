@@ -1,10 +1,9 @@
-"use client";
-
+import { SettingLayout } from "@/components/layout/SettingLayout";
+import { userList } from "@/utils/constants";
 import moment from "moment";
 import Image from "next/image";
 import React from "react";
 import toast from "react-hot-toast";
-import { UserProfile } from "types";
 import { IconCopy } from "ui";
 
 const Settings = () => {
@@ -65,30 +64,7 @@ const Settings = () => {
   );
 };
 
-Settings.auth = {
-  required: true,
-};
+Settings.auth = { required: true };
+Settings.Layout = SettingLayout;
 
 export default Settings;
-
-const userList: Array<UserProfile & { id: string; role: string }> = [
-  {
-    id: "djfhdsadfasdfsdfsdf",
-    name: "yusaku",
-    email: "yushaku@gmail.com",
-    role: "admin",
-    avata: "",
-    created_at: new Date().toString(),
-    updated_at: new Date().toString(),
-  },
-
-  {
-    id: "sfhsdkfhskdjfhksdfjhskdfhsdf",
-    name: "tigon",
-    email: "tigon@gmail.com",
-    role: "admin",
-    avata: "",
-    created_at: new Date().toString(),
-    updated_at: new Date().toString(),
-  },
-];

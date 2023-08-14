@@ -3,7 +3,7 @@ import { SettingItems } from "@/components/settings/SettingItem";
 import React from "react";
 import { IconArrowRight } from "ui";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+export const SettingLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <section className="relative flex w-full ml-8">
       <div className="absolute top-[500px] -left-3 bg-white rounded-lg border-4 border-strokeColor animate-fade-left animate-once animate-duration-300 animate-ease-linear">
@@ -24,5 +24,3 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     </section>
   );
 };
-
-export default Layout;
