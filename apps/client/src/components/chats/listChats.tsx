@@ -1,14 +1,11 @@
-"use client";
-
 import { ListItem } from "../ListItem";
 import { SearchBox } from "../SearchBox";
 import {
-  getChats,
   useCreateChat,
   useDeleteChat,
+  useGetChats,
   useUpdateChat,
-} from "@/services/chat";
-import { useQuery } from "@tanstack/react-query";
+} from "@/services/chatService";
 import React, { useState } from "react";
 import { Action } from "types";
 import { DeleteDialog, FormDialog } from "ui";
@@ -24,10 +21,7 @@ export default function ListChats() {
   const { mutate: createChat } = useCreateChat();
   const { mutate: updateChatTitle } = useUpdateChat();
   const { mutate: deleteChat } = useDeleteChat();
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ["/chats"],
-    queryFn: () => getChats(),
-  });
+  const { data, isLoading, isFetching } = useGetChats();
 
   const handleAction = (type: Action, id: string, oldName: string) => {
     if (type === "update") {
@@ -60,9 +54,8 @@ export default function ListChats() {
   };
 
   return (
-    <article className="my-[2dvh] h-[96dvh] p-4 bg-white w-1/4 rounded-2xl">
+    <>
       <SearchBox onAddElement={() => setTitle("")} />
-
       <hr className="my-4" />
 
       <ul className="mt-4 flex flex-col gap-3">
@@ -96,6 +89,6 @@ export default function ListChats() {
         onSubmit={handleDelete}
         onCancel={handleCancel}
       />
-    </article>
+    </>
   );
 }

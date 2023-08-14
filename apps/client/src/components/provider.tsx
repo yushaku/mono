@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ThemeProvider } from "next-themes";
 import React, { useState } from "react";
 import { Toaster } from "react-hot-toast";
+import { RecoilRoot } from "recoil";
 
 function Providers({ children }: React.PropsWithChildren) {
   const [client] = useState(
@@ -33,7 +34,7 @@ function Providers({ children }: React.PropsWithChildren) {
     <QueryClientProvider client={client}>
       <ThemeProvider defaultTheme="light" attribute="class">
         <Toaster position="top-center" />
-        {children}
+        <RecoilRoot>{children}</RecoilRoot>
       </ThemeProvider>
 
       <ReactQueryDevtools initialIsOpen={false} />

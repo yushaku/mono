@@ -1,12 +1,9 @@
-"use client";
-
 import { CrawlWebsiteForm } from "@/components/knowledge/CrawlWebsite";
 import { FileDropZone } from "@/components/knowledge/FileDropZone";
 import { TextEditor } from "@/components/knowledge/TextEdittor";
 import { KLLayout } from "@/components/layout/KLlayout";
-import { knowledgePath, getProject, useCreateContent } from "@/services";
+import { useCreateContent, useGetProjects } from "@/services";
 import { CreateDocBtn } from "@/utils/constants";
-import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { ActionType, UpdateProjectDto as Project } from "types";
 import { AutocompleteInput } from "ui";
@@ -16,10 +13,7 @@ const Knowledge = () => {
   const [project, setProject] = useState<Project>({ title: "", id: "" });
 
   const { mutate: createContent } = useCreateContent();
-  const { data: projectList } = useQuery({
-    queryKey: [knowledgePath],
-    queryFn: () => getProject(),
-  });
+  const { data: projectList } = useGetProjects();
 
   useEffect(() => {
     const firstOne = projectList?.shift();

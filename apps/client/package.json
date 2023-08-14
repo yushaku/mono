@@ -24,20 +24,20 @@
     "react-markdown": "^8.0.7",
     "react-syntax-highlighter": "^15.5.0",
     "tailwind-config": "workspace:*",
-    "types": "workspace:^",
     "ui": "workspace:*",
+    "recoil": "^0.7.7",
     "yup": "^1.2.0"
   },
   "devDependencies": {
     "@tanstack/react-query-devtools": "^4.29.12",
     "@types/node": "^17.0.12",
+    "types": "workspace:^",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
     "@types/react-query": "^1.2.9",
     "@types/react-syntax-highlighter": "^15.5.7",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
-    "recoil": "^0.7.7",
     "typescript": "5.1.6"
   }
 }

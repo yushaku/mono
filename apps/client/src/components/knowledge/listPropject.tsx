@@ -59,11 +59,9 @@ export default function ListProject() {
   };
 
   return (
-    <article className="my-[2dvh] h-[96dvh] p-4 bg-white w-1/4 rounded-2xl">
+    <>
       <SearchBox onAddElement={() => setTitle("")} />
-
       <hr className="my-4" />
-
       <ul className="mt-4 flex flex-col gap-3">
         {isLoading || isFetching || !data ? (
           <li>loading....</li>
@@ -95,6 +93,6 @@ export default function ListProject() {
         onSubmit={handleDelete}
         onCancel={handleCancel}
       />
-    </article>
+    </>
   );
 }

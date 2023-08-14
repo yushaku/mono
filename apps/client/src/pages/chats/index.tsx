@@ -1,8 +1,7 @@
 import { ChatLayout } from "@/components/layout";
-import React from "react";
 import { IconArrowRight } from "ui";
 
-const ChatPage = async () => {
+const ChatPage = () => {
   return (
     <div className="flexCenter h-[87dvh]">
       <IconArrowRight className="w-8 h-8 stroke-primaryColor dark:stroke-secondColor animate-shake animate-infinite animate-duration-[1500ms] animate-delay-300" />

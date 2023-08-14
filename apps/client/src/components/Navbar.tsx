@@ -1,17 +1,30 @@
+import { isShowPanel } from "@/utils/atom";
 import { topBar } from "@/utils/constants";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IconTheme } from "ui";
+import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
+import { IconArrowRight, IconTheme } from "ui";
 
 export const Navbar = () => {
   const { theme, setTheme } = useTheme();
+  const [isShow, setIsShow] = useRecoilState(isShowPanel);
+  const router = useRouter();
   const pathName = usePathname();
+
+  const handleClick = (to: string) => {
+    if (pathName === to) {
+      setIsShow(!isShow);
+    } else {
+      router.push(to);
+    }
+  };
 
   return (
     <nav
-      className={`w-20 rounded-3xl bg-white dark:bg-dark px-4 ml-6 my-[2dvh] h-[96dvh] flex flex-col items-center justify-between`}
+      className={`w-20 rounded-3xl bg-white dark:bg-dark-100 ml-6 my-[2dvh] h-[96dvh] flex flex-col items-center`}
     >
       <section className="py-4 my-8">
         <Link href="/" className="flexCenter">
@@ -30,23 +43,30 @@ export const Navbar = () => {
 
             const selectElement = isSelected
               ? "bg-strokeColor translate-x-9 rounded-full "
-              : "rounded-lg ";
+              : "";
+
+            const selectLink = isSelected ? "gradient_bg" : "stroke-white";
+            const selectIcon = isSelected
+              ? "stroke-white"
+              : "stroke-primaryColor";
 
             return (
               <li
                 key={index}
+                onClick={() => handleClick(href)}
                 className={`${selectElement} w-full animationShow p-3`}
               >
-                <Link
-                  href={href}
-                  prefetch
-                  className="flex items-center bg-white p-4 rounded-full"
+                <button
+                  className={`${selectLink} relative flex items-center p-4 rounded-full`}
                 >
-                  <Icon
-                    className="stroke-primaryColor w-8 h-8"
-                    color="#234f66"
-                  />
-                </Link>
+                  <Icon className={`${selectIcon} stroke-[3px] w-8 h-8`} />
+                </button>
+
+                {isSelected ? (
+                  <span className="absolute bottom-1/3 -right-1 bg-white rounded-lg border-4 z-50 border-gray-200 animate-fade-right animate-once animate-duration-300 animate-ease-linear">
+                    <IconArrowRight className="stroke-primaryColor rotate-180 w-4 h-4" />
+                  </span>
+                ) : null}
               </li>
             );
           })}

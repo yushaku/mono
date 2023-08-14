@@ -1,16 +1,21 @@
 import { TopPage } from "@/components/TopPage";
 import ListProject from "@/components/knowledge/listPropject";
+import { isShowPanel } from "@/utils/atom";
 import React from "react";
-import { IconArrowRight } from "ui";
+import { useRecoilState } from "recoil";
 
 export const KLLayout = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <section className="relative flex w-full ml-8">
-      <div className="absolute top-[296px] -left-3 bg-white rounded-lg border-4 border-strokeColor animate-fade-left animate-once animate-duration-300 animate-ease-linear">
-        <IconArrowRight className="stroke-primaryColor rotate-180 w-4 h-4" />
-      </div>
+  const [isShow, setIsShow] = useRecoilState(isShowPanel);
 
-      <ListProject />
+  const styled = isShow ? "w-0" : "w-[350px] p-4";
+
+  return (
+    <section className="flex w-full ml-8">
+      <article
+        className={`${styled} overflow-hidden my-[2dvh] h-[96dvh] bg-white animationShow rounded-2xl`}
+      >
+        <ListProject />
+      </article>
 
       <article className="mx-4 my-4 w-full">
         <div className="bg-white dark:bg-dark rounded-2xl px-6">

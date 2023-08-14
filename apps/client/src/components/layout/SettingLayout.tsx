@@ -1,16 +1,19 @@
 import { TopPage } from "@/components/TopPage";
 import { SettingItems } from "@/components/settings/SettingItem";
+import { isShowPanel } from "@/utils/atom";
 import React from "react";
-import { IconArrowRight } from "ui";
+import { useRecoilState } from "recoil";
 
 export const SettingLayout = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <section className="relative flex w-full ml-8">
-      <div className="absolute top-[500px] -left-3 bg-white rounded-lg border-4 border-strokeColor animate-fade-left animate-once animate-duration-300 animate-ease-linear">
-        <IconArrowRight className="stroke-primaryColor rotate-180 w-4 h-4" />
-      </div>
+  const [isShow, setIsShow] = useRecoilState(isShowPanel);
 
-      <article className="my-[2dvh] h-[96dvh] pr-4 bg-white w-1/4 rounded-2xl">
+  const styled = isShow ? "w-0" : "w-[350px] px-4";
+
+  return (
+    <section className="flex w-full ml-8">
+      <article
+        className={`${styled} overflow-hidden animationShow my-[2dvh] h-[96dvh] bg-white w-1/4 rounded-2xl`}
+      >
         <SettingItems />
       </article>
 

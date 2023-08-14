@@ -6,8 +6,8 @@ import React from "react";
 
 const settingPages = [
   { href: "", title: "Group" },
-  { href: "/users", title: "User" },
-  { href: "/billing", title: "billing" },
+  { href: "users", title: "User" },
+  { href: "billing", title: "billing" },
 ];
 
 export const SettingItems = () => {

@@ -99,7 +99,7 @@ const chatPath = "/chats";
 
 export const useGetChats = () => {
   return useQuery([chatPath], async () => {
-    return await getChats();
+    return getChats();
   });
 };
 
