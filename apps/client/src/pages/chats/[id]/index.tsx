@@ -1,5 +1,5 @@
-import Layout from "./layout";
-import { BotAnswer, UserQuestion } from "@/components/chats/UserQuestion";
+import { UserQuestion, BotAnswer } from "@/components/chats/UserQuestion";
+import { ChatLayout } from "@/components/layout";
 import { fetchStreamData, useGetMessage } from "@/services/chatService";
 import { useFormik } from "formik";
 import Image from "next/image";
@@ -17,7 +17,7 @@ import * as Yup from "yup";
 let controller = null;
 
 const ConversationPage = () => {
-  const chat_id = usePathname().substring(7);
+  const chat_id = usePathname()?.substring(7);
   const { data: messageList } = useGetMessage(chat_id);
   const [message, setMessage] = useState({ question: "", bot_answer: "" });
 
@@ -62,7 +62,7 @@ const ConversationPage = () => {
   };
 
   return (
-    <Layout>
+    <div className="h-[87dvh] overflow-scroll">
       <section id="chat_section" className="relative h-full">
         <article className="mt-2 px-12 pb-12 mx-auto max-w-3xl">
           <div className="grid grid-cols-1 gap-4">
@@ -102,17 +102,17 @@ const ConversationPage = () => {
           <IconArrowDown />
         </button>
 
-        <article className="w-full max-w-3xl bg-white mx-auto shadow-xl border rounded-xl">
+        <article className="absolute bottom-0 right-1/2 translate-x-1/2 w-full max-w-3xl bg-white mx-auto shadow-xl border rounded-xl">
           <textarea
             name="prompt"
             value={values.prompt}
             onKeyDown={handleKeyDown}
             onChange={handleChange}
-            className="w-full p-3 h-24"
+            className="w-full p-3 h-24 focus:ring-blue-500 focus:border-blue-500 outline-0"
             placeholder="Ask Tigon..."
           ></textarea>
 
-          <div ref={endRef} className="flex justify-between p-3">
+          <div className="flex justify-between p-3">
             <div>
               <button className="p-1 border rounded-lg">
                 <IconSetting className="w-5 h-5 stroke-dark" />
@@ -138,9 +138,14 @@ const ConversationPage = () => {
             </div>
           </div>
         </article>
+
+        <div ref={endRef} id="element for scroll to end" />
       </section>
-    </Layout>
+    </div>
   );
 };
+
+ConversationPage.auth = { required: true };
+ConversationPage.Layout = ChatLayout;
 
 export default ConversationPage;

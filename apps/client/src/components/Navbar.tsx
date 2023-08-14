@@ -39,7 +39,7 @@ export const Navbar = () => {
 
         <ul className="flex flex-col gap-4 mt-12">
           {topBar.map(({ href, icon: Icon }, index) => {
-            const isSelected = pathName.includes(href);
+            const isSelected = pathName?.includes(href);
 
             const selectElement = isSelected
               ? "bg-strokeColor translate-x-9 rounded-full "
@@ -62,9 +62,13 @@ export const Navbar = () => {
                   <Icon className={`${selectIcon} stroke-[3px] w-8 h-8`} />
                 </button>
 
-                {isSelected ? (
-                  <span className="absolute bottom-1/3 -right-1 bg-white rounded-lg border-4 z-50 border-gray-200 animate-fade-right animate-once animate-duration-300 animate-ease-linear">
-                    <IconArrowRight className="stroke-primaryColor rotate-180 w-4 h-4" />
+                {isSelected && pathName !== "/bots" ? (
+                  <span className="absolute bottom-[32%] -right-1 bg-white rounded-full p-1 border-4 z-50 border-gray-200 animate-fade-right animate-once animate-duration-300 animate-ease-linear">
+                    <IconArrowRight
+                      className={`${
+                        isShow ? "" : "rotate-180"
+                      } stroke-primaryColor animationShow stroke-[4px] w-3 h-3`}
+                    />
                   </span>
                 ) : null}
               </li>
