@@ -1,3 +1,4 @@
+import { SettingLayout } from "@/components/layout";
 import { mocPricingData } from "@/utils/constants";
 import { Button } from "ui";
 
@@ -62,5 +63,8 @@ const SettingBilling = () => {
     </div>
   );
 };
+
+SettingBilling.auth = { required: true };
+SettingBilling.Layout = SettingLayout;
 
 export default SettingBilling;

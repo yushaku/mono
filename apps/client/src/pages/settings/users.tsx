@@ -1,3 +1,4 @@
+import { SettingLayout } from "@/components/layout";
 import React from "react";
 
 const UserSettingsPage = () => {
@@ -11,5 +12,8 @@ const UserSettingsPage = () => {
     </section>
   );
 };
+
+UserSettingsPage.auth = { required: true };
+UserSettingsPage.Layout = SettingLayout;
 
 export default UserSettingsPage;
