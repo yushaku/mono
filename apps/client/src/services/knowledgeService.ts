@@ -21,8 +21,8 @@ export const getProject = async () => {
   return messageList as Project[];
 };
 
-export const useGetProjects = async () => {
-  return useQuery([knowledgePath], () => {
+export const useGetProjects = () => {
+  return useQuery([knowledgePath], async () => {
     return getProject();
   });
 };

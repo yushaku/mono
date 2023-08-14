@@ -1,7 +1,6 @@
 import { BotCard } from "@/components/bots/BotItem";
 import { BotLayout } from "@/components/layout";
-import { botPath, getBotList } from "@/services";
-import { useQuery } from "@tanstack/react-query";
+import { useGetBots } from "@/services";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { Action } from "types";
@@ -9,10 +8,7 @@ import { Button } from "ui";
 
 const Bots = () => {
   const router = useRouter();
-  const { data: botyList } = useQuery({
-    queryKey: [botPath],
-    queryFn: () => getBotList(),
-  });
+  const { data: botyList } = useGetBots();
 
   const handleAction = (type: Action, id: string) => {};
 

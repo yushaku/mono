@@ -1,13 +1,11 @@
-"use client";
-
 import {
   GeneralStep,
   PersonalityStep,
   ProcessStep,
   SelectBkdFrom,
 } from "@/components/bots";
-import { getProject, knowledgePath, useCreateBot } from "@/services";
-import { useQuery } from "@tanstack/react-query";
+import { BotLayout } from "@/components/layout";
+import { useCreateBot, useGetProjects } from "@/services";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -30,11 +28,7 @@ const AddBots = () => {
   const [createState, setCreateState] = useState(0);
 
   const { mutate: createBot } = useCreateBot();
-  const { data: projectList } = useQuery({
-    queryKey: [knowledgePath],
-    queryFn: () => getProject(),
-  });
-
+  const { data: projectList } = useGetProjects();
   const { handleSubmit, handleChange, validateField, isValid, values, errors } =
     useFormik({
       validateOnChange: false,
@@ -132,5 +126,8 @@ const AddBots = () => {
     </section>
   );
 };
+
+AddBots.auth = { required: true };
+AddBots.Layout = BotLayout;
 
 export default AddBots;

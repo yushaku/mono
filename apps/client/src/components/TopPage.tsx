@@ -1,5 +1,3 @@
-"use client";
-
 import { logout, useGetProfile } from "@/services";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
