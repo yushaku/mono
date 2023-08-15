@@ -1,5 +1,5 @@
 import { CreateUserDto } from './dto/createUser.dto';
-import { UserDto } from './dto/user.dto';
+import { UpdatePasswordDto, UserDto } from './dto/user.dto';
 import { UsersService } from './users.service';
 import { JwtUser } from '@/common/decorators';
 import { GoogleOAuthGuard, JwtAuthGuard } from '@/common/guards';
@@ -8,7 +8,7 @@ import {
   Controller,
   Get,
   HttpCode,
-  Param,
+  Patch,
   Post,
   Query,
   Req,
@@ -35,23 +35,6 @@ export class UsersController {
   @UseGuards(GoogleOAuthGuard)
   googleLogin() {
     return;
-  }
-
-  setToken(res: Response, { access_token, refresh_token }) {
-    res.cookie('access_token', access_token, {
-      httpOnly: true,
-      sameSite: this.isDevelopment ? 'lax' : 'strict',
-      secure: this.isDevelopment ? false : true,
-      path: '/',
-    });
-    res.cookie('refresh_token', refresh_token, {
-      httpOnly: true,
-      sameSite: this.isDevelopment ? 'lax' : 'strict',
-      secure: this.isDevelopment ? false : true,
-      path: '/',
-    });
-
-    res.status(200).json({ access_token });
   }
 
   @Get('google/redirect')
@@ -83,6 +66,22 @@ export class UsersController {
     this.setToken(res, token);
   }
 
+  protected setToken(res: Response, { access_token, refresh_token }) {
+    res.cookie('access_token', access_token, {
+      httpOnly: true,
+      sameSite: this.isDevelopment ? 'lax' : 'strict',
+      secure: this.isDevelopment ? false : true,
+      path: '/',
+    });
+    res.cookie('refresh_token', refresh_token, {
+      httpOnly: true,
+      sameSite: this.isDevelopment ? 'lax' : 'strict',
+      secure: this.isDevelopment ? false : true,
+      path: '/',
+    });
+    res.status(200).json({ message: 'auth successfully' });
+  }
+
   @Get('confirm')
   async userConfirmInvite(
     @Query('token') token: string,
@@ -93,13 +92,9 @@ export class UsersController {
     res.redirect(process.env.CLIENT_ENDPOINT ?? 'http://localhost:3000/');
   }
 
-  @Post('verify')
-  async verifyEmail(
-    @Body() userDto: CreateUserDto,
-    @Res({ passthrough: true }) res: Response,
-  ) {
-    const token = await this.usersService.register(userDto);
-    this.setToken(res, token);
+  @Get('verify')
+  async verifyEmail(@Body() userDto: CreateUserDto) {
+    return;
   }
 
   @Post('logout')
@@ -126,5 +121,14 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   async getProfile(@JwtUser('user_id') id: string) {
     return this.usersService.getById(id);
+  }
+
+  @Patch('change_password')
+  @UseGuards(JwtAuthGuard)
+  async updatePassword(
+    @Body() data: UpdatePasswordDto,
+    @JwtUser('user_id') id: string,
+  ) {
+    return this.usersService.updatePassword(id, data);
   }
 }

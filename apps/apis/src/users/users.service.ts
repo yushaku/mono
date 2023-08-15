@@ -1,9 +1,9 @@
 import { CreateUserDto } from './dto/createUser.dto';
-import { InviteUserDto, inviteUserPayload } from './dto/inviteUser.dto';
-import { UserDto } from './dto/user.dto';
+import { inviteUserPayload } from './dto/inviteUser.dto';
+import { UpdatePasswordDto, UserDto } from './dto/user.dto';
 import { JWTService } from '@/common/jwt.service';
 import { TeamEntity, UserEntity } from '@/databases/entities';
-import { EntityRepository } from '@mikro-orm/core';
+import { EntityRepository, wrap } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { InjectQueue } from '@nestjs/bull';
 import {
@@ -15,6 +15,7 @@ import {
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { Queue } from 'bull';
+import { date } from 'joi';
 import * as uuid from 'uuid';
 
 @Injectable()
@@ -107,11 +108,8 @@ export class UsersService {
     plainTextPassword: string,
     hashedPassword: string,
   ) {
-    const isPasswordMatching = await bcrypt.compare(
-      plainTextPassword,
-      hashedPassword,
-    );
-    if (!isPasswordMatching) {
+    const isMatching = await bcrypt.compare(plainTextPassword, hashedPassword);
+    if (!isMatching) {
       throw new HttpException(
         'Wrong credentials provided',
         HttpStatus.BAD_REQUEST,
@@ -164,5 +162,17 @@ export class UsersService {
       { team_id },
       { fields: ['avatar', 'name', 'created_at', 'role', 'updated_at'] },
     );
+  }
+
+  async updatePassword(id: string, data: UpdatePasswordDto) {
+    const saltRounds = 10;
+    const user = (await this.usersRepo.findOne({ id })) as { password: string };
+
+    await this.verifyPassword(data.oldPassword, user.password);
+    const hash = await bcrypt.hash(data.newPassword, saltRounds);
+
+    wrap(user).assign({ password: hash });
+    await this.teamRepo.persistAndFlush(user);
+    return { message: 'update password successfully' };
   }
 }

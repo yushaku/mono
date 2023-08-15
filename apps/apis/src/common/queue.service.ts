@@ -12,7 +12,9 @@ export class QueueService {
   ) {
     const { data } = job;
     const { email, token, password } = data;
-    const url = `localhost:3000/user/confirm?token=${token}`;
+    console.log({ email, token, password });
+
+    const url = `localhost:8005/api/user/confirm?token=${token}`;
 
     await this.mailerService.sendMail({
       to: email,
