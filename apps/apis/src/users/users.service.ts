@@ -1,5 +1,5 @@
 import { CreateUserDto } from './dto/createUser.dto';
-import { InviteUserDto } from './dto/inviteUser.dto';
+import { InviteUserDto, inviteUserPayload } from './dto/inviteUser.dto';
 import { UserDto } from './dto/user.dto';
 import { JWTService } from '@/common/jwt.service';
 import { TeamEntity, UserEntity } from '@/databases/entities';
@@ -15,6 +15,7 @@ import {
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { Queue } from 'bull';
+import * as uuid from 'uuid';
 
 @Injectable()
 export class UsersService {
@@ -58,13 +59,17 @@ export class UsersService {
 
   async register(userDto: CreateUserDto) {
     const saltRounds = 10;
+    let team_id = userDto.team_id ?? '';
 
     const existedUser = await this.getByEmail(userDto.email);
     if (existedUser)
       throw new BadRequestException("email's user already existed");
 
     const hash = await bcrypt.hash(userDto.password, saltRounds);
-    const team_id = await this.createTeam({ name: userDto.name });
+
+    if (!userDto?.team_id) {
+      team_id = await this.createTeam({ name: userDto.name });
+    }
 
     const user = await this.create({
       ...userDto,
@@ -79,8 +84,23 @@ export class UsersService {
     return token;
   }
 
-  private async confirmInvite(token: string) {
-    return;
+  async confirmInvite(token: string) {
+    const { email, team_id, password } = await this.common.verifyInviteToken(
+      token,
+    );
+    const existedUser = await this.getByEmail(email);
+    if (!existedUser)
+      return this.register({
+        team_id,
+        email,
+        password,
+        name: email.split('@')[0],
+      });
+
+    return this.common.genToken({
+      user_id: existedUser.id,
+      team_id: existedUser.team_id ?? team_id,
+    });
   }
 
   private async verifyPassword(
@@ -121,16 +141,15 @@ export class UsersService {
     return userSchema;
   }
 
-  async inviteUser({
-    team_id,
-    users,
-  }: {
-    team_id: string;
-    users: InviteUserDto;
-  }) {
+  async inviteUser({ team_id, users }: inviteUserPayload) {
     users.emails.forEach((email) => {
-      const token = this.common.inviteToken({ team_id, email });
-      this.emailQueue.add({ email, token });
+      const password = uuid.v4();
+      const token = this.common.inviteToken({
+        team_id,
+        email,
+        password,
+      });
+      this.emailQueue.add({ email, token, password });
     });
   }
 

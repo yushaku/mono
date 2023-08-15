@@ -1,3 +1,4 @@
+import { Invitetoken } from '@/users/dto/inviteUser.dto';
 import { Injectable, Scope } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
@@ -41,10 +42,17 @@ export class JWTService {
     return this.createAccessToken(payload);
   }
 
-  public inviteToken(payload: { team_id: string; email: string }) {
+  public inviteToken(payload: Invitetoken) {
     return this.jwtService.sign(payload, {
       secret: this.configService.get('JWT_SECRET'),
       expiresIn: 60 * 5 * 1000,
     });
+  }
+
+  public async verifyInviteToken(token: string) {
+    const payload = await this.jwtService.verifyAsync(token, {
+      secret: this.configService.get('JWT_SECRET'),
+    });
+    return payload as Invitetoken;
   }
 }

@@ -83,13 +83,14 @@ export class UsersController {
     this.setToken(res, token);
   }
 
-  @Post('confirm')
+  @Get('confirm')
   async userConfirmInvite(
     @Query('token') token: string,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const tk = await this.usersService.register(userDto);
+    const tk = await this.usersService.confirmInvite(token);
     this.setToken(res, tk);
+    res.redirect(process.env.CLIENT_ENDPOINT ?? 'http://localhost:3000/');
   }
 
   @Post('verify')

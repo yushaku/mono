@@ -7,9 +7,11 @@ export class QueueService {
   constructor(private mailerService: MailerService) {}
 
   @Process()
-  async sendEmail(job: Job<{ email: string; token: string }>) {
+  async sendEmail(
+    job: Job<{ email: string; token: string; password: string }>,
+  ) {
     const { data } = job;
-    const { email, token } = data;
+    const { email, token, password } = data;
     const url = `localhost:3000/user/confirm?token=${token}`;
 
     await this.mailerService.sendMail({
@@ -18,8 +20,10 @@ export class QueueService {
       subject: 'Welcome to Nice App! Confirm your Email',
       template: './confirmation',
       context: {
-        name: email,
+        name: email.split('@')[0],
+        email,
         url,
+        password,
       },
     });
   }
