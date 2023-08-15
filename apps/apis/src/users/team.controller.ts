@@ -21,7 +21,7 @@ export class TeamController {
   @Post('invite')
   async inviteUser(
     @JwtUser('team_id') team_id: string,
-    @Body() users: InviteUserDto[],
+    @Body() users: InviteUserDto,
   ) {
     return this.usersService.inviteUser({ team_id, users });
   }

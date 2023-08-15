@@ -1,6 +1,6 @@
-import { IsString } from 'class-validator';
+import { IsArray } from 'class-validator';
 
 export class InviteUserDto {
-  @IsString()
-  email: string;
+  @IsArray()
+  emails: string[];
 }

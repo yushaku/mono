@@ -40,4 +40,11 @@ export class JWTService {
     );
     return this.createAccessToken(payload);
   }
+
+  public inviteToken(payload: { team_id: string; email: string }) {
+    return this.jwtService.sign(payload, {
+      secret: this.configService.get('JWT_SECRET'),
+      expiresIn: 60 * 5 * 1000,
+    });
+  }
 }

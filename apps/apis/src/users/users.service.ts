@@ -5,6 +5,7 @@ import { JWTService } from '@/common/jwt.service';
 import { TeamEntity, UserEntity } from '@/databases/entities';
 import { EntityRepository } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
+import { InjectQueue } from '@nestjs/bull';
 import {
   BadRequestException,
   HttpException,
@@ -13,6 +14,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
+import { Queue } from 'bull';
 
 @Injectable()
 export class UsersService {
@@ -21,6 +23,7 @@ export class UsersService {
     private usersRepo: EntityRepository<UserEntity>,
     @InjectRepository(TeamEntity)
     private teamRepo: EntityRepository<TeamEntity>,
+    @InjectQueue('email') private emailQueue: Queue,
     private common: JWTService,
   ) {}
 
@@ -76,6 +79,10 @@ export class UsersService {
     return token;
   }
 
+  private async confirmInvite(token: string) {
+    return;
+  }
+
   private async verifyPassword(
     plainTextPassword: string,
     hashedPassword: string,
@@ -114,8 +121,17 @@ export class UsersService {
     return userSchema;
   }
 
-  async inviteUser(userDto: { team_id: string; users: InviteUserDto[] }) {
-    return;
+  async inviteUser({
+    team_id,
+    users,
+  }: {
+    team_id: string;
+    users: InviteUserDto;
+  }) {
+    users.emails.forEach((email) => {
+      const token = this.common.inviteToken({ team_id, email });
+      this.emailQueue.add({ email, token });
+    });
   }
 
   async createTeam({ name }: { name: string }) {

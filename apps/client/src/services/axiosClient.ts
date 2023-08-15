@@ -23,7 +23,6 @@ export const httpClient = () => {
     },
     (error) => {
       toast.error(error?.message);
-      window.location.replace("/auth/login");
     }
   );
 

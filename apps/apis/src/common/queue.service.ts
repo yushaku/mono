@@ -1,27 +1,24 @@
-import { UserEntity } from '@/databases/entities';
 import { MailerService } from '@nestjs-modules/mailer';
-import { Process } from '@nestjs/bull';
-import { Injectable } from '@nestjs/common';
+import { Process, Processor } from '@nestjs/bull';
 import { Job } from 'bull';
 
-@Injectable()
+@Processor('email')
 export class QueueService {
   constructor(private mailerService: MailerService) {}
 
   @Process()
-  async sendEmail(job: Job<{ user: UserEntity; token: string }>) {
+  async sendEmail(job: Job<{ email: string; token: string }>) {
     const { data } = job;
-    const { user, token } = data;
-
-    const url = `example.com/auth/confirm?token=${token}`;
+    const { email, token } = data;
+    const url = `localhost:3000/user/confirm?token=${token}`;
 
     await this.mailerService.sendMail({
-      to: user.email,
+      to: email,
       from: '"Support Team" <support@example.com>',
       subject: 'Welcome to Nice App! Confirm your Email',
-      template: './confirmation', // `.hbs` extension is appended automatically
+      template: './confirmation',
       context: {
-        name: user.name,
+        name: email,
         url,
       },
     });

@@ -8,7 +8,9 @@ import {
   Controller,
   Get,
   HttpCode,
+  Param,
   Post,
+  Query,
   Req,
   Res,
   UseGuards,
@@ -74,6 +76,24 @@ export class UsersController {
 
   @Post('register')
   async register(
+    @Body() userDto: CreateUserDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const token = await this.usersService.register(userDto);
+    this.setToken(res, token);
+  }
+
+  @Post('confirm')
+  async userConfirmInvite(
+    @Query('token') token: string,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const tk = await this.usersService.register(userDto);
+    this.setToken(res, tk);
+  }
+
+  @Post('verify')
+  async verifyEmail(
     @Body() userDto: CreateUserDto,
     @Res({ passthrough: true }) res: Response,
   ) {
