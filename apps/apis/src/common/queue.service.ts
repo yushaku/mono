@@ -7,11 +7,10 @@ export class QueueService {
   constructor(private mailerService: MailerService) {}
 
   @Process()
-  async sendEmail(
+  async sendConfirmEmail(
     job: Job<{ email: string; token: string; password: string }>,
   ) {
-    const { data } = job;
-    const { email, token, password } = data;
+    const { email, token, password } = job.data;
     console.log({ email, token, password });
 
     const url = `localhost:8005/api/user/confirm?token=${token}`;
@@ -19,14 +18,32 @@ export class QueueService {
     await this.mailerService.sendMail({
       to: email,
       from: '"Support Team" <support@example.com>',
-      subject: 'Welcome to Nice App! Confirm your Email',
-      template: './confirmation',
+      subject: 'Invite You into openai my team',
+      template: './templates/confirmation',
       context: {
         name: email.split('@')[0],
         email,
         url,
         password,
       },
+    });
+  }
+
+  @Process()
+  async sendVerifyEmail(
+    job: Job<{ email: string; name: string; token: string }>,
+  ) {
+    const { email, token, name } = job.data;
+    console.log({ email, token, name });
+
+    const url = `localhost:8005/api/user/confirm?token=${token}`;
+
+    await this.mailerService.sendMail({
+      to: email,
+      from: '"Support Team" <support@example.com>',
+      subject: 'Welcome to Nice App! Verify your Email',
+      template: './templates/Verify',
+      context: { name, email, url },
     });
   }
 }

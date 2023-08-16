@@ -58,12 +58,9 @@ export class UsersController {
   }
 
   @Post('register')
-  async register(
-    @Body() userDto: CreateUserDto,
-    @Res({ passthrough: true }) res: Response,
-  ) {
-    const token = await this.usersService.register(userDto);
-    this.setToken(res, token);
+  async register(@Body() userDto: CreateUserDto) {
+    await this.usersService.register(userDto);
+    return { message: 'please confirm your email' };
   }
 
   protected setToken(res: Response, { access_token, refresh_token }) {
@@ -93,8 +90,13 @@ export class UsersController {
   }
 
   @Get('verify')
-  async verifyEmail(@Body() userDto: CreateUserDto) {
-    return;
+  async verifyEmail(
+    @Query('token') token: string,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const tk = await this.usersService.verifyEmail(token);
+    this.setToken(res, tk);
+    res.redirect(process.env.CLIENT_ENDPOINT ?? 'http://localhost:3000/');
   }
 
   @Post('logout')

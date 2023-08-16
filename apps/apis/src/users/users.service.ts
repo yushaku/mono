@@ -2,7 +2,7 @@ import { CreateUserDto } from './dto/createUser.dto';
 import { inviteUserPayload } from './dto/inviteUser.dto';
 import { UpdatePasswordDto, UserDto } from './dto/user.dto';
 import { JWTService } from '@/common/jwt.service';
-import { TeamEntity, UserEntity } from '@/databases/entities';
+import { TeamEntity, UserEntity, UserRole } from '@/databases/entities';
 import { EntityRepository, wrap } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { InjectQueue } from '@nestjs/bull';
@@ -15,7 +15,6 @@ import {
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { Queue } from 'bull';
-import { date } from 'joi';
 import * as uuid from 'uuid';
 
 @Injectable()
@@ -48,7 +47,7 @@ export class UsersService {
 
   async googleAuth(user: CreateUserDto) {
     const existedUser = await this.getByEmail(user.email);
-    if (!existedUser) return this.register(user);
+    if (!existedUser) return this.createAccount(user);
 
     const token = this.common.genToken({
       user_id: existedUser.id,
@@ -58,40 +57,53 @@ export class UsersService {
     return token;
   }
 
-  async register(userDto: CreateUserDto) {
-    const saltRounds = 10;
-    let team_id = userDto.team_id ?? '';
-
-    const existedUser = await this.getByEmail(userDto.email);
+  async register({ team_id, email, password }: CreateUserDto) {
+    const existedUser = await this.getByEmail(email);
     if (existedUser)
       throw new BadRequestException("email's user already existed");
 
-    const hash = await bcrypt.hash(userDto.password, saltRounds);
+    const token = this.common.emailToken({ team_id, email, password });
+    this.emailQueue.add('sendVerifyEmail', { email, token, password });
+  }
 
-    if (!userDto?.team_id) {
-      team_id = await this.createTeam({ name: userDto.name });
+  async verifyEmail(token: string) {
+    let role: UserRole = 'Member';
+    let {
+      email,
+      team_id,
+      password,
+      name = '',
+    } = await this.common.verifyEmailToken(token);
+
+    const saltRounds = 10;
+    const hash = await bcrypt.hash(password, saltRounds);
+
+    if (!team_id) {
+      team_id = await this.createTeam({ name });
+      role = 'Owner';
     }
 
     const user = await this.create({
-      ...userDto,
+      email,
       team_id,
+      name,
+      role,
       password: hash,
     });
 
-    const token = this.common.genToken({
+    return this.common.genToken({
       user_id: user.id,
-      team_id: user.team_id ?? '',
+      team_id: user.team_id!,
     });
-    return token;
   }
 
   async confirmInvite(token: string) {
-    const { email, team_id, password } = await this.common.verifyInviteToken(
+    const { email, team_id, password } = await this.common.verifyEmailToken(
       token,
     );
     const existedUser = await this.getByEmail(email);
     if (!existedUser)
-      return this.register({
+      return this.createAccount({
         team_id,
         email,
         password,
@@ -100,7 +112,7 @@ export class UsersService {
 
     return this.common.genToken({
       user_id: existedUser.id,
-      team_id: existedUser.team_id ?? team_id,
+      team_id: existedUser.team_id ?? team_id ?? '',
     });
   }
 
@@ -130,11 +142,38 @@ export class UsersService {
     return user;
   }
 
-  async create(user: CreateUserDto & { team_id: string }) {
-    const userSchema = this.usersRepo.create({
-      ...user,
-      role: 'Owner',
+  async createAccount(userDto: CreateUserDto) {
+    const saltRounds = 10;
+    let team_id = userDto.team_id ?? '';
+
+    const existedUser = await this.getByEmail(userDto.email);
+    if (existedUser)
+      throw new BadRequestException("email's user already existed");
+
+    const hash = await bcrypt.hash(userDto.password, saltRounds);
+
+    if (!userDto?.team_id) {
+      team_id = await this.createTeam({ name: userDto.name });
+    }
+
+    const user = await this.create({
+      ...userDto,
+      team_id,
+      password: hash,
     });
+
+    const token = this.common.genToken({
+      user_id: user.id,
+      team_id: user.team_id ?? '',
+    });
+    return token;
+  }
+
+  async create({
+    role = 'Member',
+    ...user
+  }: CreateUserDto & { team_id: string; role?: UserRole }) {
+    const userSchema = this.usersRepo.create({ ...user, role });
     await this.usersRepo.persistAndFlush(userSchema);
     return userSchema;
   }
@@ -142,12 +181,12 @@ export class UsersService {
   async inviteUser({ team_id, users }: inviteUserPayload) {
     users.emails.forEach((email) => {
       const password = uuid.v4();
-      const token = this.common.inviteToken({
+      const token = this.common.emailToken({
         team_id,
         email,
         password,
       });
-      this.emailQueue.add({ email, token, password });
+      this.emailQueue.add('sendConfirmEmail', { email, token, password });
     });
   }
 

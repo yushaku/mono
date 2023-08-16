@@ -11,7 +11,8 @@ export type inviteUserPayload = {
 };
 
 export type Invitetoken = {
-  team_id: string;
+  team_id?: string;
   email: string;
   password: string;
+  name?: string;
 };

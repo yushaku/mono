@@ -20,8 +20,10 @@ export class UserEntity extends BaseEntity {
   password: string;
 
   @Property({ fieldName: 'role', type: String, nullable: false })
-  role: 'Owner' | 'Member';
+  role: UserRole;
 
   @Property({ fieldName: 'is_confirm_email', type: Boolean, default: false })
   is_confirm_email?: boolean;
 }
+
+export type UserRole = 'Owner' | 'Member';

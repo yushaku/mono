@@ -42,14 +42,14 @@ export class JWTService {
     return this.createAccessToken(payload);
   }
 
-  public inviteToken(payload: Invitetoken) {
+  public emailToken(payload: Invitetoken) {
     return this.jwtService.sign(payload, {
       secret: this.configService.get('JWT_SECRET'),
       expiresIn: 60 * 5 * 1000,
     });
   }
 
-  public async verifyInviteToken(token: string) {
+  public async verifyEmailToken(token: string) {
     const payload = await this.jwtService.verifyAsync(token, {
       secret: this.configService.get('JWT_SECRET'),
     });
