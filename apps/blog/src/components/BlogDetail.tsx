@@ -94,8 +94,8 @@ export const dotList = ({ config }: DropedProps) => {
 
 export const callout = ({ config, plainText }: DropedProps) => {
   return (
-    <div className="bg-strokeColor/70 text-textColor m-4 flex items-center rounded-md p-4">
-      <span className="w-8">{config.block.content.icon.emoji}</span>
+    <div className="bg-strokeColor/70 text-textColor dark:bg-dark-100 dark:text-white m-4 flex items-center rounded-md p-4">
+      <span className="w-8 ml-4">{config.block.content.icon.emoji}</span>
       <p>{plainText}</p>
     </div>
   );
