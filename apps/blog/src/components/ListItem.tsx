@@ -2,13 +2,14 @@ import moment from "moment";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { multi_select } from "types";
 
 type Props = React.HTMLAttributes<HTMLElement> & {
   name: string;
   imageUrl: string;
   date: string;
   slug: string;
-  category: string;
+  category: multi_select[];
 };
 export const ListItem = ({
   name,
@@ -37,7 +38,9 @@ export const ListItem = ({
           </h3>
           <p className="flex items-center gap-4">
             <span className="text-primaryColor bg-primaryColor/20 dark:text-teal-200 overflow-hidden rounded-lg text-sm px-3 py-1">
-              {category}
+              {category.map((tag) => (
+                <span key={tag.id}>{tag.name}</span>
+              ))}
             </span>
             <span className="text-grayColor whitespace-nowrap text-[12px]">
               {moment(date).format("LL")}

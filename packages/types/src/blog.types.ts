@@ -24,11 +24,17 @@ export type Result = {
 
 interface Properties {
   slug: PlanText;
-  category: Category;
+  category: { multi_select: multi_select[] };
   status: Category;
   Date: Date2;
   Name: Name;
   tldr: PlanText;
+}
+
+export interface multi_select {
+  id: string;
+  name: string;
+  color: string;
 }
 
 interface Name {

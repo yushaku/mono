@@ -34,8 +34,8 @@ export const fetchPagesByCategory = cache(async (category: string) => {
       and: [
         {
           property: "category",
-          select: {
-            equals: category,
+          multi_select: {
+            contains: category,
           },
         },
         {

@@ -19,7 +19,7 @@ export const topics = [
     href: "Typescript",
   },
   {
-    title: "React js",
+    title: "React JS",
     href: "React",
   },
   {
@@ -29,5 +29,9 @@ export const topics = [
   {
     title: "Nvim",
     href: "Nvim",
+  },
+  {
+    title: "Solidity",
+    href: "Solidity",
   },
 ];

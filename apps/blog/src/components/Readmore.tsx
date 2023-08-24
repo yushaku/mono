@@ -2,7 +2,7 @@ import moment from "moment";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { BlogList } from "types";
+import { BlogList, multi_select } from "types";
 import { IconArrowRight } from "ui";
 
 const ReadMoreSection = async ({ blogPost }: { blogPost: BlogList }) => {
@@ -30,10 +30,9 @@ const ReadMoreSection = async ({ blogPost }: { blogPost: BlogList }) => {
           <StackItem
             key={el.id}
             title={el.properties.Name.title[0].plain_text}
-            tags={["js"]}
+            tags={el.properties.category.multi_select}
             postSlug={el.properties.slug.rich_text[0].plain_text}
             createdAt={el.created_time}
-            authorId={el.created_by.id}
             tlir={el.properties.tldr.rich_text[0].plain_text}
           />
         ))}
@@ -42,13 +41,25 @@ const ReadMoreSection = async ({ blogPost }: { blogPost: BlogList }) => {
   );
 };
 
-const StackItem = ({ title, tags, postSlug, createdAt, tlir }: any) => {
+const StackItem = ({
+  title,
+  tags,
+  postSlug,
+  createdAt,
+  tlir,
+}: {
+  title: string;
+  tags: multi_select[];
+  postSlug: string;
+  createdAt: string;
+  tlir: string;
+}) => {
   const formatCreatedAt = moment(createdAt).format("LL");
 
   return (
     <article
       id="card"
-      className="group relative p-6 rounded-2xl flex flex-col h-[340px] w-[280px] 
+      className="group relative p-6 rounded-2xl flex flex-col h-[340px] min-w-[280px] max-w-[300px]
       dark:bg-[#1a202c] bg-white dark:hover:bg-[#2d3748] hover:bg-strokeColor 
       hover:-translate-y-4 hover:-rotate-3 [&:not(:first-child)]:ml-[-130px] 
       dark:shadow-dark_stack shadow-light_stack duration-200"
@@ -85,8 +96,8 @@ const StackItem = ({ title, tags, postSlug, createdAt, tlir }: any) => {
       </Link>
 
       <div id="tags" className="flex gap-2 mt-4 mb-0 pt-2 pb-4">
-        {tags.map((tag: string, index: number) => (
-          <TagItem title={tag} key={index} />
+        {tags.map((tag) => (
+          <TagItem title={tag.name} key={tag.id} />
         ))}
       </div>
 

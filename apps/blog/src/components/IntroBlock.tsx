@@ -1,12 +1,11 @@
 import { ListItem } from "./ListItem";
 import { TopicTitle } from "./TopicTitle";
-import { TableOfContent } from "@/app/[slug]/page";
 import { topics } from "@/utils/constants";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Result } from "types";
-import { IconArrowRight, IconDot, SocialMedia } from "ui";
+import { IconArrowRight, SocialMedia } from "ui";
 
 export const IntroBlock = () => {
   return (
@@ -87,7 +86,7 @@ export const RelatePosts = ({ blogList }: { blogList: Result[] }) => {
                 imageUrl={el.cover?.external?.url ?? el.cover?.file.url}
                 name={el.properties.Name.title[0].plain_text}
                 date={el.created_time}
-                category={el.properties.category.select.name}
+                category={el.properties.category.multi_select}
               />
             </li>
           );
