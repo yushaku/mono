@@ -36,6 +36,8 @@ const BlogOutline = ({ outline }: { outline: TableOfContent[] }) => {
   }, [outline]);
 
   const isElementInViewport = (el: HTMLElement) => {
+    if (!el) return;
+
     const rect = el.getBoundingClientRect();
     return (
       rect.top >= 0 &&

@@ -9,13 +9,12 @@ export default async function Home({
 }: {
   searchParams: { [key: string]: string | undefined };
 }) {
-  const page = searchParams.page;
   const limit =
     typeof searchParams.limit === "string" ? Number(searchParams.limit) : 10;
-  const blogList = await fetchPages(limit, page);
+  const blogList = await fetchPages(limit);
   const recommend = await fetchRecommendPage();
 
-  const firstResult = blogList.results.pop();
+  const firstResult = blogList.results.shift();
 
   return (
     <section className="grid grid-cols-1 gap-x-10 px-6 md:grid-cols-2 md:px-3 lg:grid-cols-3 lg:p-0">
@@ -50,7 +49,7 @@ export default async function Home({
           })}
         </ul>
 
-        <Pagination id={firstResult.id} hasMore={blogList.has_more} />
+        <Pagination hasMore={blogList.has_more} limit={limit + 10} />
       </div>
 
       <div className="md:hidden">

@@ -16,8 +16,8 @@ export const IntroBlock = () => {
         loading="lazy"
         placeholder="empty"
         object-fit="cover"
-        quality={100}
-        fill={true}
+        sizes="326px"
+        fill
       />
       <h3 className="text-primaryColor dark:text-secondColor text-xl font-semibold">
         Dev &quot;phèn&quot;
@@ -27,7 +27,7 @@ export const IntroBlock = () => {
         Following our tips, tricks and real life experiences.
       </p>
 
-      <SocialMedia />
+      <SocialMedia className="z-10" />
     </Warper>
   );
 };

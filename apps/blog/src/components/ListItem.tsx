@@ -29,6 +29,7 @@ export const ListItem = ({
             loading="lazy"
             placeholder="empty"
             object-fit="cover"
+            sizes="50px"
             fill
           />
         </div>

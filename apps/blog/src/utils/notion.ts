@@ -11,7 +11,7 @@ export const notion = new Client({
   auth: process.env.NOTION_SECRET,
 });
 
-export const fetchPages = cache(async (limit?: number, page?: string) => {
+export const fetchPages = cache(async (limit?: number) => {
   const post = await notion.databases.query({
     database_id: process.env.NOTION_DATABASE,
     filter: {
@@ -20,7 +20,6 @@ export const fetchPages = cache(async (limit?: number, page?: string) => {
         equals: "published",
       },
     },
-    start_cursor: page,
     page_size: limit,
   });
 

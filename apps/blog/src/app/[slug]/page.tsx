@@ -5,12 +5,7 @@ import {
 } from "@9gustin/react-notion-render";
 import { ContentWarper } from "@/components/ContentWarper";
 import BlogOutline from "@/components/Outline";
-import {
-  fetchPageBlocks,
-  fetchPageBySlug,
-  fetchPages,
-  fetchRecommendPage,
-} from "@/utils/notion";
+import { fetchPageBlocks, fetchPageBySlug, fetchPages } from "@/utils/notion";
 import moment from "moment";
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -66,6 +61,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 loading="lazy"
                 placeholder="empty"
                 object-fit="cover"
+                sizes="700px"
                 fill
               />
             </div>

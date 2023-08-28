@@ -20,9 +20,9 @@ export const Card = ({ name, date, imageUrl, slug, summary }: Props) => {
           <Image
             src={imageUrl ?? "/workspace.jpg"}
             alt={name}
-            loading="lazy"
             placeholder="empty"
             object-fit="cover"
+            sizes="384px"
             fill
           />
         </div>
@@ -53,6 +53,7 @@ export const BigCard = ({ name, date, imageUrl, slug, summary }: Props) => {
             loading="lazy"
             object-fit="cover"
             placeholder="empty"
+            sizes="830px"
             fill
           />
         </div>

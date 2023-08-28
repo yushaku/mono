@@ -20,6 +20,7 @@ const ReadMoreSection = async ({ blogPost }: { blogPost: BlogList }) => {
             object-fit="cover"
             loading="lazy"
             placeholder="empty"
+            sizes="260px"
             fill
           />
         </div>

@@ -17,8 +17,8 @@ export const Footer = ({ className }: Props) => {
         <span className="text-primaryColor dark:text-secondColor">
           © 2023 yushaku Code
         </span>
-        <Link href="">Privacy Policy</Link>
-        <Link href="">Terms of Service</Link>
+        <Link href="#">Privacy Policy</Link>
+        <Link href="#">Terms of Service</Link>
       </div>
 
       <div>
