@@ -15,7 +15,7 @@ export const Navbar = () => {
   const pathName = usePathname();
 
   const handleClick = (to: string) => {
-    if (pathName === to) {
+    if (pathName.includes(to)) {
       setIsShow(!isShow);
     } else {
       router.push(to);

@@ -29,21 +29,21 @@ export class QueueService {
     });
   }
 
-  @Process()
-  async sendVerifyEmail(
-    job: Job<{ email: string; name: string; token: string }>,
-  ) {
-    const { email, token, name } = job.data;
-    console.log({ email, token, name });
-
-    const url = `localhost:8005/api/user/confirm?token=${token}`;
-
-    await this.mailerService.sendMail({
-      to: email,
-      from: '"Support Team" <support@example.com>',
-      subject: 'Welcome to Nice App! Verify your Email',
-      template: './templates/Verify',
-      context: { name, email, url },
-    });
-  }
+  // @Process()
+  // async sendVerifyEmail(
+  //   job: Job<{ email: string; name: string; token: string }>,
+  // ) {
+  //   const { email, token, name } = job.data;
+  //   console.log({ email, token, name });
+  //
+  //   const url = `localhost:8005/api/user/confirm?token=${token}`;
+  //
+  //   await this.mailerService.sendMail({
+  //     to: email,
+  //     from: '"Support Team" <support@example.com>',
+  //     subject: 'Welcome to Nice App! Verify your Email',
+  //     template: './templates/Verify',
+  //     context: { name, email, url },
+  //   });
+  // }
 }

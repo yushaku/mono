@@ -18,6 +18,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "db:create": "mikro-orm migration:create",
     "db:init": "mikro-orm migration:fresh --seed",
+    "db:fresh": "mikro-orm migration:fresh",
     "db:test": "NODE_ENV=test mikro-orm migration:fresh --seed",
     "prepare": "ts-patch install"
   },
@@ -64,7 +65,8 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
-    "semver": "^7.5.4"
+    "semver": "^7.5.4",
+    "stripe": "^13.3.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",

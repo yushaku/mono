@@ -1,4 +1,5 @@
 import { SettingLayout } from "@/components/layout";
+import { subcribePayment } from "@/services";
 import { mocPricingData } from "@/utils/constants";
 import { Button } from "ui";
 
@@ -53,6 +54,7 @@ const SettingBilling = () => {
               <article className="block absolute bottom-5 left-1/2 -translate-x-1/2">
                 <Button
                   title="Subscribe"
+                  onClick={() => subcribePayment(priceItem.type)}
                   className="w-[185px] group-hover:bg-primaryColor group-hover:text-white animationShow"
                 />
               </article>

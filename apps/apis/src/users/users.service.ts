@@ -1,8 +1,15 @@
+/* eslint-disable prefer-const */
 import { CreateUserDto } from './dto/createUser.dto';
 import { inviteUserPayload } from './dto/inviteUser.dto';
 import { UpdatePasswordDto, UserDto } from './dto/user.dto';
 import { JWTService } from '@/common/jwt.service';
-import { TeamEntity, UserEntity, UserRole } from '@/databases/entities';
+import StripeService from '@/common/stripe.service';
+import {
+  SubscriptionPlan,
+  TeamEntity,
+  UserEntity,
+  UserRole,
+} from '@/databases/entities';
 import { EntityRepository, wrap } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { InjectQueue } from '@nestjs/bull';
@@ -13,6 +20,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import * as bcrypt from 'bcrypt';
 import { Queue } from 'bull';
 import * as uuid from 'uuid';
@@ -26,6 +34,8 @@ export class UsersService {
     private teamRepo: EntityRepository<TeamEntity>,
     @InjectQueue('email') private emailQueue: Queue,
     private common: JWTService,
+    private stripeService: StripeService,
+    private config: ConfigService,
   ) {}
 
   async login(userDto: Required<UserDto>) {
@@ -93,7 +103,7 @@ export class UsersService {
 
     return this.common.genToken({
       user_id: user.id,
-      team_id: user.team_id!,
+      team_id: String(user.team_id),
     });
   }
 
@@ -213,5 +223,60 @@ export class UsersService {
     wrap(user).assign({ password: hash });
     await this.teamRepo.persistAndFlush(user);
     return { message: 'update password successfully' };
+  }
+
+  async subscribe(team_id: string, type: SubscriptionPlan) {
+    const team = await this.teamRepo.findOne({ id: team_id });
+    if (!team) return;
+
+    let stripeUserId: string;
+    if (team?.stripe_customer_id) {
+      stripeUserId = team.stripe_customer_id;
+    } else {
+      stripeUserId = await this.stripeService.createCustomer(team_id);
+      wrap(team).assign({ stripe_customer_id: stripeUserId });
+      await this.teamRepo.persistAndFlush(team);
+    }
+
+    return this.stripeService.createSession(type, stripeUserId);
+  }
+
+  async paymentConfirm(sig: any, body: any) {
+    const endpointSecret = this.config.get('STRIPE_WEB_HOOK');
+
+    const event = this.stripeService.stripe.webhooks.constructEvent(
+      body,
+      sig,
+      endpointSecret,
+    );
+    console.log(event);
+
+    switch (event.type) {
+      case 'checkout.session.completed':
+        const result = event.data.object;
+        console.log(result);
+        break;
+      default:
+        console.log(`Unhandled event type ${event.type}`);
+    }
+  }
+
+  async subcribeRedirct(team_id: string) {
+    const team = await this.teamRepo.findOne({
+      id: team_id,
+    });
+    if (!team?.stripe_customer_id) return;
+
+    const result = await this.stripeService.checkSubscription();
+
+    const curSub = result.data.filter((sub) => {
+      return sub.customer === team.stripe_customer_id;
+    });
+    console.log(curSub);
+
+    if (curSub) {
+      wrap(team).assign({ vip_plan: 'Basic' });
+      await this.teamRepo.persistAndFlush(team);
+    }
   }
 }

@@ -53,6 +53,7 @@ export class UsersController {
     @Body() userDto: Required<UserDto>,
     @Res({ passthrough: true }) res: Response,
   ) {
+    console.log(userDto);
     const token = await this.usersService.login(userDto);
     this.setToken(res, token);
   }
@@ -76,7 +77,7 @@ export class UsersController {
       secure: this.isDevelopment ? false : true,
       path: '/',
     });
-    res.status(200).json({ message: 'auth successfully' });
+    res.status(200).json({ message: 'auth successfully', access_token });
   }
 
   @Get('confirm')

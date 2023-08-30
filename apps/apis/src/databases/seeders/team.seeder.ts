@@ -9,6 +9,7 @@ export class TeamSeeder extends Seeder {
       id: TEAM_ID,
       name: 'yu_team',
       vip_plan: 'Premium',
+      stripe_customer_id: '',
       created_at: new Date(),
       updated_at: new Date(),
     });

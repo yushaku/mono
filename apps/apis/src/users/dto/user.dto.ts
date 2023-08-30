@@ -1,3 +1,4 @@
+import { SubscriptionPlan } from '@/databases/entities';
 import { IsEmail, IsString } from 'class-validator';
 
 export class UserDto {

@@ -30,7 +30,7 @@ export class HealthService {
     private knowledgeService: KnowledgeService,
     private openaiService: OpenaiService,
   ) {
-    const nestUrl = `${this.cf.get('APP_ENDPOINT')}:8005/api`;
+    const nestUrl = `${this.cf.get('APP_ENDPOINT')}`;
 
     this.listOfThingsToMonitor = [
       new NestjsHealthIndicator(this.http, nestUrl, this.promClientService),

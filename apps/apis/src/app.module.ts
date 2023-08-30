@@ -43,6 +43,9 @@ import * as Joi from 'joi';
         MINIO_ACCESS_KEY: Joi.string().required().default('minio'),
         MINIO_SECRET_KEY: Joi.string().required(),
         MINIO_BUCKET: Joi.string().required().default('doodle'),
+
+        STRIPE_SECRET_KEY: Joi.string(),
+        STRIPE_CURRENCY: Joi.string(),
       }),
     }),
     ThrottlerModule.forRoot({ ttl: 60, limit: 10 }),

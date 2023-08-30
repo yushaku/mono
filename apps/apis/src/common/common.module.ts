@@ -2,6 +2,7 @@ import { JWTService } from './jwt.service';
 import { MinioService } from './minio.service';
 import { QueueService } from './queue.service';
 import { GoogleStrategy, JwtStrategy } from './strategy';
+import StripeService from './stripe.service';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { BullModule } from '@nestjs/bull';
@@ -58,10 +59,11 @@ import { join } from 'path';
   providers: [
     JWTService,
     MinioService,
+    StripeService,
     QueueService,
     JwtStrategy,
     GoogleStrategy,
   ],
-  exports: [JWTService, MinioService, QueueService],
+  exports: [JWTService, MinioService, QueueService, StripeService],
 })
 export class CommonModule {}

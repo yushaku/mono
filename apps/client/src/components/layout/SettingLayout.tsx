@@ -7,12 +7,12 @@ import { useRecoilState } from "recoil";
 export const SettingLayout = ({ children }: { children: React.ReactNode }) => {
   const [isShow, setIsShow] = useRecoilState(isShowPanel);
 
-  const styled = isShow ? "w-0" : "w-[350px] px-4";
+  const styled = isShow ? "w-0" : "w-[350px] px-4 mx-2";
 
   return (
     <section className="flex w-full ml-8">
       <article
-        className={`${styled} overflow-hidden animationShow my-[2dvh] h-[96dvh] bg-white w-1/4 rounded-2xl`}
+        className={`${styled} overflow-hidden animationShow my-[2dvh] h-[96dvh] bg-white rounded-2xl`}
       >
         <SettingItems />
       </article>
