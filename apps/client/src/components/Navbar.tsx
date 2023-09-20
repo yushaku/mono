@@ -26,7 +26,7 @@ export const Navbar = () => {
     <nav
       className={`w-20 rounded-3xl bg-white dark:bg-dark-100 ml-6 my-[2dvh] h-[96dvh] flex flex-col items-center`}
     >
-      <section className="py-4 my-8">
+      <section className="py-4 my-8 flex-1">
         <Link href="/" className="flexCenter">
           <Image
             alt="yushaku"
@@ -37,7 +37,7 @@ export const Navbar = () => {
           />
         </Link>
 
-        <ul className="flex flex-col gap-4 mt-12">
+        <ul className="flex flex-col gap-4 mt-14">
           {topBar.map(({ href, icon: Icon }, index) => {
             const isSelected = pathName?.includes(href);
 
@@ -59,7 +59,7 @@ export const Navbar = () => {
                 <button
                   className={`${selectLink} relative flex items-center p-4 rounded-full`}
                 >
-                  <Icon className={`${selectIcon} stroke-[3px] w-8 h-8`} />
+                  <Icon className={`${selectIcon} w-8 h-8`} />
                 </button>
 
                 {isSelected && pathName !== "/bots" ? (

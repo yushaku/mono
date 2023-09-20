@@ -1,17 +1,14 @@
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import ChatPage from "./chats";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Home() {
-  return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      hello
-    </main>
-  );
+  const router = useRouter();
+  useEffect(() => {
+    router.replace("/chats");
+  }, []);
+
+  return <ChatPage />;
 }
 
-Home.auth = {
-  required: true,
-};
+Home.auth = { required: true };

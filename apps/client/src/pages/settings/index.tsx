@@ -40,7 +40,7 @@ const Settings = () => {
             return (
               <li
                 key={user.id}
-                className="flex text-grayColor items-center justify-between hover:shadow-[-2px_5px_2px_2px_#E2E8F0] px-2 py-2 rounded-lg animationShow"
+                className="flex text-grayColor items-center justify-between px-2 py-2 rounded-lg"
               >
                 <p className="flexCenter gap-4 w-1/5 justify-start">
                   <Image
