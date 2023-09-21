@@ -1,18 +1,48 @@
+import { dropdownFolderItem } from "@/components/ListItem";
+import ConfirmDelete from "@/components/dialog/ConfirmDelete";
+import EditRoleModal from "@/components/dialog/updateRole";
 import { SettingLayout } from "@/components/layout/SettingLayout";
-import { userList } from "@/utils/constants";
+import { useGetTeamInfo } from "@/services/teamServices";
 import moment from "moment";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { IconCopy } from "ui";
+import { Action, Member } from "types";
+import { DropdownMenu, IconCopy } from "ui";
 
+type UpdateNember = Pick<Member, "id" | "role" | "name">;
 const Settings = () => {
-  const path = "sdfsadfsdfsadfsdfsdfsdfsd";
+  const { data } = useGetTeamInfo();
+  const [open, setOpen] = useState({ editDialog: false, deleteDialog: false });
+  const [member, setMember] = useState<UpdateNember>({
+    id: "",
+    role: "Member",
+    name: "",
+  });
+
+  const path = `http://localhost:3000/auth/register?team_id=${data?.team.id}`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(path);
     toast.success("Copyed!!!");
   };
+
+  const handleAction = (type: Action, member: UpdateNember) => {
+    const { id, role, name } = member;
+    setMember({ id, role, name });
+
+    switch (type) {
+      case "delete":
+        setOpen({ ...open, deleteDialog: true });
+        break;
+      case "update":
+        setOpen({ ...open, editDialog: true });
+        break;
+    }
+  };
+
+  const handleUpdateRole = () => {};
+  const handleDelete = () => {};
 
   return (
     <section className="h-[85dvh]">
@@ -34,9 +64,13 @@ const Settings = () => {
       </article>
 
       <article className="mt-8">
-        <h2 className="text-textColor text-xl font-semibold">Users list</h2>
+        <h2 className="text-textColor text-xl font-semibold">
+          Users list in team{" "}
+          <span className="text-primaryColor">{data?.team.name}</span>
+        </h2>
+
         <ul className="mt-4 flex flex-col gap-4">
-          {userList.map((user) => {
+          {data?.members.map((user) => {
             return (
               <li
                 key={user.id}
@@ -44,7 +78,7 @@ const Settings = () => {
               >
                 <p className="flexCenter gap-4 w-1/5 justify-start">
                   <Image
-                    src={user.avata ? user.avata : "/man.png"}
+                    src={user.avatar ? user.avatar : "/man.png"}
                     alt="user avata"
                     width={30}
                     height={30}
@@ -54,12 +88,33 @@ const Settings = () => {
                 <span>{user.role}</span>
                 <time>{moment(user.created_at).format("LL")}</time>
                 <time>{moment(user.updated_at).format("LL")}</time>
-                <div></div>
+
+                <div>
+                  <DropdownMenu
+                    menuFeatures={dropdownFolderItem}
+                    handleAction={(type) => handleAction(type, user)}
+                  />
+                </div>
               </li>
             );
           })}
         </ul>
       </article>
+
+      <EditRoleModal
+        role={member.role}
+        name={member.name}
+        isOpen={open.editDialog}
+        toggleOpen={() => setOpen({ ...open, editDialog: !open.editDialog })}
+      />
+
+      <ConfirmDelete
+        name={member.name}
+        isOpen={open.deleteDialog}
+        toggleOpen={() =>
+          setOpen({ ...open, deleteDialog: !open.deleteDialog })
+        }
+      />
     </section>
   );
 };

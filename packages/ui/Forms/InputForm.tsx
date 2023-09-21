@@ -1,6 +1,4 @@
-"use client";
-
-import { IconEye, IconEyeSlash } from "..";
+import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -49,13 +47,13 @@ export function FormInput<TType>({
 
       {type === "password" && (
         <span
-          className="absolute right-5 top-[50px] z-20 w-7 h-7 cursor-pointer"
+          className="absolute right-5 top-[46px] z-20 w-7 h-7 cursor-pointer"
           onClick={() => setIsShowPassword(!isShowPassword)}
         >
           {isShowPassword ? (
-            <IconEyeSlash color="#234f66" />
+            <EyeSlashIcon color="#234f66" />
           ) : (
-            <IconEye color="#234f66" className="-translate-y-2" />
+            <EyeIcon color="#234f66" />
           )}
         </span>
       )}

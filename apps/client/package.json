@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.18",
     "@tanstack/react-query": "^4.29.12",
     "@tinymce/tinymce-react": "^4.3.0",
     "axios": "^1.4.0",

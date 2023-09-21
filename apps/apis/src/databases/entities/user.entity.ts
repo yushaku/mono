@@ -1,5 +1,6 @@
 import { BaseEntity } from './base.entity';
 import { Entity, Property, Unique, UuidType } from '@mikro-orm/core';
+import { UserRole } from 'types';
 
 @Entity({ tableName: 'users' })
 export class UserEntity extends BaseEntity {
@@ -25,5 +26,3 @@ export class UserEntity extends BaseEntity {
   @Property({ fieldName: 'is_confirm_email', type: Boolean, default: false })
   is_confirm_email?: boolean;
 }
-
-export type UserRole = 'Owner' | 'Member';

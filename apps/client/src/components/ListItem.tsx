@@ -10,12 +10,12 @@ import {
   IconTrash,
 } from "ui";
 
-const dropdownFolderItem: MenuFeatures = [
+export const dropdownFolderItem: MenuFeatures = [
   { title: "delete", icon: <IconTrash /> },
   { title: "update", icon: <IconPen /> },
 ];
 
-const dropdownChatItem: MenuFeatures = [
+export const dropdownChatItem: MenuFeatures = [
   ...dropdownFolderItem,
   { title: "pin", icon: <IconPin /> },
 ];

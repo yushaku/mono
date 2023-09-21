@@ -20,7 +20,7 @@ export const TopPage = ({ title = "header" }: { title: string }) => {
           }}
         >
           <Image
-            src={userInfo?.avata ? userInfo.avata : "/man.png"}
+            src={userInfo?.avata ?? "/man.png"}
             alt="avatar"
             loading="lazy"
             placeholder="empty"

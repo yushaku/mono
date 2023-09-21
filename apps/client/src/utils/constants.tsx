@@ -1,24 +1,21 @@
-import { ActionType, UserProfile } from "@/../../packages/types/src";
 import {
-  IconBot,
-  IconChat,
-  IconKnowledge,
-  IconLink,
-  IconSetting,
-  IconUpload,
-  IconWrite,
-} from "ui";
+  ChatBubbleLeftRightIcon,
+  AcademicCapIcon,
+  Cog6ToothIcon,
+} from "@heroicons/react/24/outline";
+import { ActionType } from "types";
+import { IconBot, IconLink, IconUpload, IconWrite } from "ui";
 
 export const topBar = [
   {
     title: "Chats",
     href: "/chats",
-    icon: IconChat,
+    icon: ChatBubbleLeftRightIcon,
   },
   {
     title: "Knowledge",
     href: "/knowledge",
-    icon: IconKnowledge,
+    icon: AcademicCapIcon,
   },
   {
     title: "Bots",
@@ -28,7 +25,7 @@ export const topBar = [
   {
     title: "Settings",
     href: "/settings",
-    icon: IconSetting,
+    icon: Cog6ToothIcon,
   },
 ];
 
@@ -107,27 +104,5 @@ export const mocPricingData: PriceData[] = [
       "25,000 Documents",
       "Customize Widget Appearance",
     ],
-  },
-];
-
-export const userList: Array<UserProfile & { id: string; role: string }> = [
-  {
-    id: "djfhdsadfasdfsdfsdf",
-    name: "yusaku",
-    email: "yushaku@gmail.com",
-    role: "admin",
-    avata: "",
-    created_at: new Date().toString(),
-    updated_at: new Date().toString(),
-  },
-
-  {
-    id: "sfhsdkfhskdjfhksdfjhskdfhsdf",
-    name: "tigon",
-    email: "tigon@gmail.com",
-    role: "admin",
-    avata: "",
-    created_at: new Date().toString(),
-    updated_at: new Date().toString(),
   },
 ];

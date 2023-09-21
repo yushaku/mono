@@ -4,12 +4,7 @@ import { inviteUserPayload } from './dto/inviteUser.dto';
 import { UpdatePasswordDto, UserDto } from './dto/user.dto';
 import { JWTService } from '@/common/jwt.service';
 import StripeService from '@/common/stripe.service';
-import {
-  SubscriptionPlan,
-  TeamEntity,
-  UserEntity,
-  UserRole,
-} from '@/databases/entities';
+import { SubscriptionPlan, TeamEntity, UserEntity } from '@/databases/entities';
 import { EntityRepository, wrap } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { InjectQueue } from '@nestjs/bull';
@@ -23,6 +18,7 @@ import {
 import { ConfigService } from '@nestjs/config';
 import * as bcrypt from 'bcrypt';
 import { Queue } from 'bull';
+import { UserRole } from 'types';
 import * as uuid from 'uuid';
 
 @Injectable()
@@ -207,10 +203,14 @@ export class UsersService {
   }
 
   async getTeamMember(team_id: string) {
-    return this.usersRepo.find(
-      { team_id },
-      { fields: ['avatar', 'name', 'created_at', 'role', 'updated_at'] },
-    );
+    const [team, members] = await Promise.all([
+      this.teamRepo.findOne({ id: team_id }),
+      this.usersRepo.find(
+        { team_id },
+        { fields: ['avatar', 'name', 'created_at', 'role', 'updated_at'] },
+      ),
+    ]);
+    return { team, members };
   }
 
   async updatePassword(id: string, data: UpdatePasswordDto) {
