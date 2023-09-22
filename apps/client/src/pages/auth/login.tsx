@@ -3,17 +3,36 @@ import { login } from "@/services";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import { UserLoginDto } from "types";
 import { Button, FormInput, IconGoogle } from "ui";
 import * as Yup from "yup";
 
+const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const LoginPage = () => {
   const router = useRouter();
+  let popup: Window | null = null;
+
   const handleGoogleAuth = () => {
-    window.location.href = "https://dev-api.meetstory.ai/auth/google";
+    const authUrl = `${NEXT_PUBLIC_API_URL}/user/google`;
+    popup = window.open(authUrl, "GoogleAuthPopup", "width=600,height=800");
   };
+
+  const handleMessage = (event: MessageEvent) => {
+    if (event.isTrusted) {
+      popup?.close();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("message", handleMessage);
+    return () => {
+      window.removeEventListener("message", handleMessage);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [popup]);
 
   const { handleSubmit, handleChange, isValid, isSubmitting, values, errors } =
     useFormik({

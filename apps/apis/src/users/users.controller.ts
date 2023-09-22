@@ -44,7 +44,13 @@ export class UsersController {
     const token = await this.usersService.googleAuth(user);
 
     this.setToken(res, token);
-    res.redirect(this.config.get('CLIENT_URL') ?? 'http://localhost:3000');
+    // res.redirect(this.config.get('CLIENT_URL') ?? 'http://localhost:3000');
+    res.send(
+      `<script>
+        window.opener.postMessage("googleAuthSuccess", "*");
+        window.close();
+      </script>`,
+    );
   }
 
   @Post('login')
