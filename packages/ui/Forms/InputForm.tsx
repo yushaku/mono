@@ -1,3 +1,5 @@
+"use client";
+
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";

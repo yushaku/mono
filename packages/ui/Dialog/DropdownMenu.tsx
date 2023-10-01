@@ -1,3 +1,5 @@
+"use client";
+
 import { IconMore } from "..";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";

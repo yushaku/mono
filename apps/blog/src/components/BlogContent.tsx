@@ -1,12 +1,4 @@
-import {
-  BlockCode,
-  Heading2,
-  Heading3,
-  Paragraph,
-  callout,
-  numberList,
-  quoteBlock,
-} from "./BlogDetail";
+import { BlockCode } from "./BlogDetail";
 import {
   Render,
   withContentValidation as custom,
@@ -20,14 +12,7 @@ const BlogContent = ({ blocks }: { blocks: any }) => {
       blocks={blocks}
       useStyles
       blockComponentsMapper={{
-        heading_2: custom(Heading2),
-        heading_3: custom(Heading3),
         code: custom(BlockCode),
-        paragraph: custom(Paragraph),
-        callout: custom(callout),
-        numbered_list_item: custom(numberList),
-        // bulleted_list_item: custom(dotList),
-        quote: custom(quoteBlock),
       }}
     />
   );

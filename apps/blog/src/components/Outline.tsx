@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { IconDot, IconArrowRight } from "ui";
 
 const BlogOutline = ({ outline }: { outline: TableOfContent[] }) => {
-  const [active, setActive] = useState(outline[0].href);
+  const [active, setActive] = useState(outline[0]?.href);
 
   const handleClick = (event: any, el: TableOfContent) => {
     event.preventDefault();

@@ -40,12 +40,12 @@ export const BlockCode = ({ plainText, language }: DropedProps) => {
       className={`language-${language} group relative mt-8 overflow-auto rounded-xl`}
       style={{ paddingTop: "2.5rem" }}
     >
-      <div className="absolute left-0 top-0 z-30 flex w-full justify-between p-4">
-        <p className="flex gap-2">
+      <div className="absolute left-0 top-0 h-2 z-30 flex w-full justify-between p-4">
+        <span className="flex gap-2">
           <span className="inline-block h-3 w-3 rounded-full bg-yellow-400"></span>
           <span className="inline-block h-3 w-3 rounded-full bg-green-400"></span>
           <span className="inline-block h-3 w-3 rounded-full bg-red-400"></span>
-        </p>
+        </span>
         <CopyBtn plainText={plainText} />
       </div>
       <code>{plainText}</code>
