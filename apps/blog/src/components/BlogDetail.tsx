@@ -2,7 +2,8 @@ import { CopyBtn } from "./CopyBtn";
 import { rnrSlugify } from "@9gustin/react-notion-render";
 import { DropedProps } from "@9gustin/react-notion-render/dist/hoc/withContentValidation";
 import React from "react";
-import { IconCopy, IconInfo } from "ui";
+import { IconInfo } from "ui";
+import Image from "next/image";
 
 export const Heading2 = ({ plainText }: { plainText: string }) => {
   return (
@@ -31,6 +32,20 @@ export const Paragraph = ({ plainText }: { plainText: string }) => {
     <p className="text-textColor/80 dark:text-strokeColor/90 my-6">
       {plainText}
     </p>
+  );
+};
+
+export const ImageBlog = ({ media }: DropedProps) => {
+  return (
+    <a className="" target="_blank">
+      <Image  
+        placeholder="empty"
+        object-fit="cover"
+        sizes="384px"
+        src={media.href} 
+        alt={media.alt}
+        width={500}/>
+    </a>
   );
 };
 

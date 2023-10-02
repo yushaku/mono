@@ -128,8 +128,8 @@ const MeteorPreview = () => {
               placeholder="empty"
               src="/coder.png"
               alt="coder form"
-              width={500}
-              height={600}
+              width={464}
+              height={464}
             />
           </div>
         </div>

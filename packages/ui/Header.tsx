@@ -14,6 +14,13 @@ type Props = {
   }[];
 };
 
+const delays = [
+  "animate-delay-200",
+  "animate-delay-300",
+  "animate-delay-400",
+  "animate-delay-500",
+];
+
 export const Header = ({
   topItems,
   isAuth = false,
@@ -76,8 +83,9 @@ export const Header = ({
               width={35}
               height={35}
               loading="lazy"
+              className="animate-fade-down"
             />
-            <span className="text-primaryColor dark:text-secondColor text-[24px] font-semibold">
+            <span className="text-primaryColor animate-fade-right animate-duration-500 animate-delay-200 dark:text-secondColor text-[24px] font-semibold">
               Yushaku
             </span>
           </div>
@@ -90,7 +98,7 @@ export const Header = ({
                 <li key={index} className="group">
                   <Link
                     href={href}
-                    className="animationShow hover:text-primaryColor text-grayColor dark:hover:text-secondColor relative cursor-pointer text-lg font-medium"
+                    className={`${delays[index]} animationShow hover:text-primaryColor animate_fade_down text-grayColor dark:hover:text-secondColor relative cursor-pointer text-lg font-medium`}
                   >
                     {title}
                   </Link>

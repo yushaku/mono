@@ -9,7 +9,7 @@ import { IconArrowRight, SocialMedia } from "ui";
 
 export const IntroBlock = () => {
   return (
-    <Warper className="relative">
+    <Warper className="relative animate-fade-down animate-once animate-delay-200">
       <Image
         src="/map-doted.png"
         alt="dot_map_world"
@@ -47,7 +47,7 @@ export const Warper = ({
 
 export const CategoryList = () => {
   return (
-    <Warper className="w-[350px]">
+    <Warper className="w-[350px] animate-fade-down animate-once animate-delay-600">
       <TopicTitle title="Explore Topics" />
 
       <ul className="divide-grayColor/40 w-full divide-y">
@@ -73,7 +73,7 @@ export const CategoryList = () => {
 
 export const RelatePosts = ({ blogList }: { blogList: Result[] }) => {
   return (
-    <Warper>
+    <Warper className="animate-fade-down animate-once animate-delay-400">
       <TopicTitle title="Popular Posts" />
 
       <ul className="divide-y divide-grayColor">

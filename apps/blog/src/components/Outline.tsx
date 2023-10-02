@@ -49,7 +49,7 @@ const BlogOutline = ({ outline }: { outline: TableOfContent[] }) => {
   };
 
   return (
-    <Warper className="sticky top-20">
+    <Warper className="sticky animate-fade-left animate-once animate-delay-200 top-20">
       <TopicTitle title="Table of Contents" />
       <ul className="w-full">
         {outline.map((el) => {
