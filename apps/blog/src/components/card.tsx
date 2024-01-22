@@ -14,7 +14,7 @@ type Props = React.HTMLAttributes<HTMLElement> & {
 
 export const Card = ({ name, date, imageUrl, slug, summary }: Props) => {
   return (
-    <article className="group w-[330px] rounded-lg shadow-lg dark:shadow-card">
+    <article className="group w-[300px] rounded-lg shadow-lg dark:shadow-card">
       <Link href={`/${slug}`}>
         <div className="relative h-[200px] w-full overflow-hidden rounded-t-lg">
           <Image

@@ -50,7 +50,7 @@ const MeteorPreview = () => {
   const animation = "animate-fade-down animate-once animate-duration-1000";
 
   return (
-    <section className="max-w-[1000px]">
+    <section className="max-w-[1000px] mx-auto">
       <article className="relative">
         <div className="absolute hidden dark:block inset-0 h-full w-full bg-gradient-to-r from-blue-500 to-teal-500 transform scale-[0.70] bg-red-500 rounded-full blur-3xl" />
 

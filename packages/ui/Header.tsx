@@ -73,7 +73,7 @@ export const Header = ({
       className={`${dynamicHeaderStyle} ${transparentStyle} animationShow fixed left-0 right-0 z-50 mx-auto`}
     >
       <div
-        className={`mx-auto flex max-w-[1110px] items-center justify-between gap-4 px-6 py-4`}
+        className={`mx-auto flex container items-center justify-between gap-4 px-6 py-4`}
       >
         <Link href="/">
           <div className="flex items-center gap-2">

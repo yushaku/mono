@@ -9,7 +9,7 @@ export default async function Category({
   const blogList = await fetchPagesByCategory(params.slug);
 
   return (
-    <ul className="flex flex-wrap justify-center gap-6">
+    <ul className="flex flex-wrap gap-6">
       {blogList.results.map((el) => {
         return (
           <li key={el.id}>

@@ -29,7 +29,7 @@ const CardSkeleton = () => {
 
 export const LoadingSkeleton = ({ num = 3 }) => {
   return (
-    <div className="h-[80dvh]">
+    <div className="h-[80dvh] container mx-auto">
       <div className="flex flex-wrap justify-between gap-4 items-center">
         {[...Array(num)].map((_it, index) => {
           return <CardSkeleton key={index} />;

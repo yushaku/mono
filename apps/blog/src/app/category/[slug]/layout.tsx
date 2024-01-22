@@ -11,7 +11,7 @@ const layout = ({
   params: { slug: string };
 }) => {
   return (
-    <div className="grid grid-cols-1 gap-x-10 px-6 md:grid-cols-2 md:px-3 lg:grid-cols-3 lg:p-0">
+    <div className="max-w-[1100px] mx-auto grid grid-cols-1 gap-x-10 px-6 md:grid-cols-2 md:px-3 lg:grid-cols-3 lg:p-0">
       <div className="md:col-span-2">
         <div className="flex items-center gap-4">
           {topics.map((el, index) => {
